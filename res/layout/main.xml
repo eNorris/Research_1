@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/mainConfigButton_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/config_str" />
+
+    <Button
+        android:id="@+id/mainExportButton_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/exportLabel_str" />
+
+    <Button
+        android:id="@+id/mainHelpButton_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/helpLabel_str" />
+
+    <LinearLayout
+        android:id="@+id/mainGraphSurfaceView_id"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.88"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/mainDetNameLabelTextView_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detectorNameLabel_str"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/mainDetNameTextView_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detectorName_str"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <SurfaceView
+            android:id="@+id/mainGraphViewSurfaceView_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/mainOnOffSwitch_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/recordLabel_str" />
+
+</LinearLayout>
