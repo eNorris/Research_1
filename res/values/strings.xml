@@ -27,5 +27,6 @@
 		<item>8192 Bins</item>
 		<item>Other</item>
 	</string-array>
+		<string name="mainExitButton_str">Exit</string>
 
 </resources>

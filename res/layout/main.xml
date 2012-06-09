@@ -23,6 +23,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/helpLabel_str" />
+
+    <Button
+        android:id="@+id/mainExitButton_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mainExitButton_str" />
 
     <LinearLayout
         android:id="@+id/mainGraphSurfaceView_id"

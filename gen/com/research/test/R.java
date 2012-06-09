@@ -26,13 +26,14 @@ public final class R {
         public static final int exportDoneButton_id=0x7f060006;
         public static final int helpDoneButton_id=0x7f060007;
         public static final int mainConfigButton_id=0x7f060008;
-        public static final int mainDetNameLabelTextView_id=0x7f06000c;
-        public static final int mainDetNameTextView_id=0x7f06000d;
+        public static final int mainDetNameLabelTextView_id=0x7f06000d;
+        public static final int mainDetNameTextView_id=0x7f06000e;
+        public static final int mainExitButton_id=0x7f06000b;
         public static final int mainExportButton_id=0x7f060009;
-        public static final int mainGraphSurfaceView_id=0x7f06000b;
-        public static final int mainGraphViewSurfaceView_id=0x7f06000e;
+        public static final int mainGraphSurfaceView_id=0x7f06000c;
+        public static final int mainGraphViewSurfaceView_id=0x7f06000f;
         public static final int mainHelpButton_id=0x7f06000a;
-        public static final int mainOnOffSwitch_id=0x7f06000f;
+        public static final int mainOnOffSwitch_id=0x7f060010;
     }
     public static final class layout {
         public static final int config=0x7f030000;
@@ -55,6 +56,7 @@ public final class R {
         public static final int entry512=0x7f04000a;
         public static final int exportLabel_str=0x7f040005;
         public static final int helpLabel_str=0x7f040006;
+        public static final int mainExitButton_str=0x7f040011;
         public static final int manualDetect_str=0x7f04000e;
         public static final int numBins_str=0x7f04000f;
         public static final int recordLabel_str=0x7f040007;
