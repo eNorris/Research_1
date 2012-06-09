@@ -1,6 +1,8 @@
 package com.research.test;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,28 +33,36 @@ public class MainActivity extends Activity {
 		final Button helpButton = (Button) findViewById(R.id.mainHelpButton_id);
 		final TextView currentDetectorTextView = (TextView) findViewById(R.id.mainDetNameTextView_id);
 		
-		// Add configButton OnClickListener
-		configButton.setOnClickListener(new OnClickListener(){
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-			}
-		});
-		
-		// Add exportButton OnClickListener
-		exportButton.setOnClickListener(new OnClickListener(){
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-			}
-		});
-		
-		// Add helpButton OnClickListener
-		helpButton.setOnClickListener(new OnClickListener(){
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-			}
-		});
+		// Add OnClick Listeners
+		configButton.setOnClickListener(new OnClickActivitySwapper(this, ConfigActivity.class));
+		exportButton.setOnClickListener(new OnClickActivitySwapper(this, ExportActivity.class));
+		helpButton.setOnClickListener(new OnClickActivitySwapper(this, helpActivity.class));
 	}
 }
+
+class OnClickActivitySwapper implements OnClickListener{
+
+	private Activity m_callingActivity;
+	private Class<?> m_nextActivityClass;
+	private static final String TAG = "OnClickActivitySwapper";
+	
+	public OnClickActivitySwapper(Activity callingActivity, Class<?> nextActivityClass){
+		m_callingActivity = callingActivity;
+		m_nextActivityClass = nextActivityClass;
+	}
+	public void onClick(View v) {
+		Intent nextIntent = new Intent(m_callingActivity, m_nextActivityClass);
+		
+		try{
+			m_callingActivity.startActivityForResult(nextIntent, 0);
+		}catch(ActivityNotFoundException e){
+			Log.wtf(TAG, "Could not find the requested Activity", new RuntimeException());
+		}
+	}
+}
+
+
+
 
 
 
