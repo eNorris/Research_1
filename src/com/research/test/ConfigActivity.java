@@ -13,8 +13,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ConfigActivity extends Activity {
 	
@@ -29,7 +27,7 @@ public class ConfigActivity extends Activity {
 		// Realize layout
 		final CheckBox autoDetectCheckBox = (CheckBox) findViewById(R.id.configAutoDetectCheckBox_id);
 		final Button manualDetectButton = (Button) findViewById(R.id.configManualDetectButton_id);
-		final TextView NumBinsTextView = (TextView) findViewById(R.id.configNumBinsTextView_id);
+//		final TextView NumBinsTextView = (TextView) findViewById(R.id.configNumBinsTextView_id);
 		final Button doneButton = (Button) findViewById(R.id.configDoneButton_id);
 		final Spinner binSelectSpinner = (Spinner) findViewById(R.id.configBinSelectorSpinner_id);
 		
@@ -41,7 +39,8 @@ public class ConfigActivity extends Activity {
 		// Add OnClick Listeners
 		doneButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){
-				// TODO return to the calling activity
+				setResult(MainActivity.RESULT_CONFIG_OK);
+				finish();
 			}
 		});
 		
@@ -56,8 +55,6 @@ public class ConfigActivity extends Activity {
 				// TODO Auto-generated method stub
 			}
 		});
-		
-		
 		
 		// Implement the spinner listener
         binSelectSpinner.setOnItemSelectedListener(new OnItemSelectedListener(){
