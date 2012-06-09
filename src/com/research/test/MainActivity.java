@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
+//import android.widget.TextView;
 
 /**
  * Main class that runs at startup
@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 		final Button exportButton = (Button) findViewById(R.id.mainExportButton_id);
 		final Button helpButton = (Button) findViewById(R.id.mainHelpButton_id);
 		final Button exitButton = (Button) findViewById(R.id.mainExitButton_id);
-		final TextView currentDetectorTextView = (TextView) findViewById(R.id.mainDetNameTextView_id);
+//		final TextView currentDetectorTextView = (TextView) findViewById(R.id.mainDetNameTextView_id);
 		
 		// Add OnClick Listeners
 		configButton.setOnClickListener(new OnClickActivitySwapper(this, ConfigActivity.class));
