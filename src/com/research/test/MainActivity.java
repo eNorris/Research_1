@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
 	public static final int RESULT_EXPORT_CANCEL = 4;
 	public static final int RESULT_HELP_OK = 5;
 	public static final int RESULT_HELP_CANCEL = 6;
+	public static final int RESULT_SPECTRUM_DONE = 7;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,8 @@ public class MainActivity extends Activity {
 		case RESULT_HELP_OK:
 			break;
 		case RESULT_HELP_CANCEL:
+			break;
+		case RESULT_SPECTRUM_DONE:
 			break;
 		default:
 			Log.e(TAG, "Result code (" + resultCode + ") was not found");

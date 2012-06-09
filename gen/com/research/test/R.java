@@ -23,7 +23,6 @@ public final class R {
         public static final int configDoneButton_id=0x7f060004;
         public static final int configManualDetectButton_id=0x7f060001;
         public static final int configNumBinsTextView_id=0x7f060002;
-        public static final int coreDoneButton_id=0x7f060005;
         public static final int exportDoneButton_id=0x7f060007;
         public static final int helpDoneButton_id=0x7f060008;
         public static final int mainConfigButton_id=0x7f060009;
@@ -35,6 +34,7 @@ public final class R {
         public static final int mainHelpButton_id=0x7f06000b;
         public static final int mainOnOffSwitch_id=0x7f060011;
         public static final int mainSpectrumSurfaceView_id=0x7f060010;
+        public static final int spectrumDoneButton_id=0x7f060005;
         public static final int spectrumSurfaceView_id=0x7f060006;
     }
     public static final class layout {
