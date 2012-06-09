@@ -1,6 +1,8 @@
 package com.research.test;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -11,6 +13,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	
 	private static final String TAG = "GraphView";
 	private SpectrumThread m_graphThread;
+	private Bitmap placeHolderBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.placeholder);
 
 	public SpectrumView(Context context) {
 		super(context);
@@ -63,6 +66,9 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	
 	public void onDraw(Canvas canvas){
 		Log.v(TAG, "Entering draw sequence");
+		if(canvas != null){
+			canvas.drawBitmap(placeHolderBitmap, 0, 0, null);
+		}
 	}
 }
 

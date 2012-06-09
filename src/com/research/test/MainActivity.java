@@ -1,7 +1,6 @@
 package com.research.test;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,7 +46,7 @@ public class MainActivity extends Activity {
 		configButton.setOnClickListener(new OnClickActivitySwapper(this, ConfigActivity.class));
 		exportButton.setOnClickListener(new OnClickActivitySwapper(this, ExportActivity.class));
 		helpButton.setOnClickListener(new OnClickActivitySwapper(this, HelpActivity.class));
-//		smallSpectrumView.setOnClickListener(new OnClickActivitySwapper(this, SpectrumActivity.class));
+		smallSpectrumView.setOnClickListener(new OnClickActivitySwapper(this, SpectrumActivity.class));
 		
 		exitButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
