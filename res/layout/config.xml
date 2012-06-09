@@ -26,12 +26,7 @@
     <Spinner
         android:id="@+id/configBinSelectorSpinner_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@string/entry1024_str"
-        android:prompt="@string/binCount_str" >
-
-        <!-- Preview: listitem=@android:layout/simple_spinner_item -->
-    </Spinner>
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/configDoneButton_id"

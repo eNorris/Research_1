@@ -81,6 +81,11 @@ public class MainActivity extends Activity {
 	}
 }
 
+/**
+ * 
+ * @author Edward Norris (etnc6d@mst.edu)
+ *
+ */
 class OnClickActivitySwapper implements OnClickListener{
 
 	private Activity m_callingActivity;
