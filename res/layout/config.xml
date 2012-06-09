@@ -3,37 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+
     <CheckBox
-        android:id="@+id/checkBox1"
+        android:id="@+id/configAutoDetectCheckBox_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/autoDetectLabel_str" />
-
+
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/configManualDetectButton_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/manualDetect_str" />
-
+
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/configNumBinsTextView_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/numBins_str"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/configBinSelectorSpinner_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@string/entry4096_str"
+        android:entries="@string/entry1024_str"
         android:prompt="@string/binCount_str" >
+
         <!-- Preview: listitem=@android:layout/simple_spinner_item -->
     </Spinner>
-
+
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/configDoneButton_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|right"

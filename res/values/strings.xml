@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Research App #1</string>
-    <string name="detectorNameLabel_str">Currently Connected Detector:</string>
-    <string name="detectorName_str">&lt;Detector Name></string>
-    <string name="config_str">Configuration</string>
-    <string name="startButtonLabel_str">Start</string>
-    <string name="exportLabel_str">Export</string>
-    <string name="helpLabel_str">Help</string>
-    <string name="recordLabel_str">Record</string>
-    <string name="autoDetectLabel_str">Auto Detect Detector</string>
-    <string name="binCount_str">Choose number of bins</string>
-    <string name="entry512">512</string>
-    <string name="entry1024_str">1024</string>
-    <string name="entry2048_str">2048</string>
-    <string name="entry4096_str">4096</string>
-    <string name="manualDetect_str">Manually Detect</string>
-    <string name="numBins_str">Number of Bins</string>
-    <string name="configDone_str">Done</string>
+	<string name="app_name">Research App #1</string>
+	<string name="detectorNameLabel_str">Currently Connected Detector:</string>
+	<string name="detectorName_str">&lt;Detector Name></string>
+	<string name="config_str">Configuration</string>
+	<string name="startButtonLabel_str">Start</string>
+	<string name="exportLabel_str">Export</string>
+	<string name="helpLabel_str">Help</string>
+	<string name="recordLabel_str">Record</string>
+	<string name="autoDetectLabel_str">Auto Detect Detector</string>
+	<string name="binCount_str">Choose number of bins</string>
+	<string name="entry512">512</string>
+	<string name="entry1024_str">1024</string>
+	<string name="entry2048_str">2048</string>
+	<string name="entry4096_str">4096</string>
+	<string name="manualDetect_str">Manually Detect</string>
+	<string name="numBins_str">Number of Bins</string>
+	<string name="configDone_str">Done</string>
+    
+	<string-array name="bins">
+		<item>256 Bins</item>
+		<item>512 Bins</item>
+		<item>1024 Bins</item>
+		<item>2048 Bins</item>
+		<item>4096 Bins</item>
+		<item>8192 Bins</item>
+		<item>Other</item>
+	</string-array>
 
 </resources>

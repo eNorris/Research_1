@@ -50,11 +50,14 @@ class OnClickActivitySwapper implements OnClickListener{
 		m_callingActivity = callingActivity;
 		m_nextActivityClass = nextActivityClass;
 	}
+	
 	public void onClick(View v) {
 		Intent nextIntent = new Intent(m_callingActivity, m_nextActivityClass);
 		
 		try{
+			Log.v(TAG, "Attempting to launch next Activity");
 			m_callingActivity.startActivityForResult(nextIntent, 0);
+			Log.v(TAG, "Launched!");
 		}catch(ActivityNotFoundException e){
 			Log.wtf(TAG, "Could not find the requested Activity", new RuntimeException());
 		}
