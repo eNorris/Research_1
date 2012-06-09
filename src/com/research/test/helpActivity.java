@@ -10,5 +10,4 @@ public class helpActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
 	}
-	
 }
