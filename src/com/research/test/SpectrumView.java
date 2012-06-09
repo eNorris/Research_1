@@ -1,8 +1,6 @@
 package com.research.test;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,7 +13,6 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	
 	private static final String TAG = "GraphView";
 	private SpectrumThread m_graphThread;
-//	private Bitmap placeHolderBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.placeholder);
 	private int[] spectrumData = new int[]{
 		10,12,14,18,19,19,21,22,27,33,
 		37,38,39,40,40,40,41,39,40,41,
@@ -30,6 +27,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		6,8,5,4,4,4,6,7,6,9
 	};
 	private Paint paint = new Paint();
+	
+	public int xMax, xMin, yMin, yMax;
 	
 	public SpectrumView(Context context) {
 		super(context);
@@ -60,6 +59,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			m_graphThread.setRunning(true);
 			m_graphThread.start();
 		}
+		Log.v(TAG, "Created surface");
 	}
 	
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -82,7 +82,6 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	
 	public void onDraw(Canvas canvas){
 		if(canvas != null){
-//			canvas.drawBitmap(placeHolderBitmap, 0, 0, null);
 			drawSpectrum(canvas, spectrumData);
 		}
 	}

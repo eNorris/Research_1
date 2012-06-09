@@ -27,7 +27,15 @@
 		<item>8192 Bins</item>
 		<item>Other</item>
 	</string-array>
-		<string name="mainExitButton_str">Exit</string>
-		<string name="coreDoneButton_str">Done</string>
+	
+	<string-array name="autoResizeValues">
+		<item>Full Auto Resize</item>
+		<item>Auto Resize in X only</item>
+		<item>Auto Resize in Y only</item>
+		<item>Do Not Auto Resize</item>
+	</string-array>
+	
+	<string name="mainExitButton_str">Exit</string>
+	<string name="coreDoneButton_str">Done</string>
 
 </resources>

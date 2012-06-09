@@ -1,8 +1,8 @@
 package com.research.test;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,6 +23,13 @@ public class SpectrumActivity extends Activity {
 				finish();
 			}
 		});
+		
 		// Create onclick listeners for scaling etc.
+		spectrumView.setOnTouchListener(new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
 	}
 }

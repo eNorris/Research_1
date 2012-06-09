@@ -37,7 +37,9 @@ public class EchelonBundle {
 }
 
 class ConfigBundle{
-	public boolean autoDetectOn;
+	public boolean autoDetectOn = false;
+	public boolean autoResizeX = true;
+	public boolean autoResizeY = true;
 }
 
 class ExportBundle{

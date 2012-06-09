@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/manualDetect_str" />
-
+
     <TextView
         android:id="@+id/configNumBinsTextView_id"
         android:layout_width="wrap_content"
@@ -25,6 +25,18 @@
 
     <Spinner
         android:id="@+id/configBinSelectorSpinner_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/configAutoResizeTextView_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/configAutoResizeSpinner_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

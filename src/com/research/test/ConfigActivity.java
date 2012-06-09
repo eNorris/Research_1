@@ -30,11 +30,16 @@ public class ConfigActivity extends Activity {
 //		final TextView NumBinsTextView = (TextView) findViewById(R.id.configNumBinsTextView_id);
 		final Button doneButton = (Button) findViewById(R.id.configDoneButton_id);
 		final Spinner binSelectSpinner = (Spinner) findViewById(R.id.configBinSelectorSpinner_id);
+		final Spinner autoResizeSelectSpinner = (Spinner) findViewById(R.id.configAutoResizeSpinner_id);
 		
 		// Enable the Spinner
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bins, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binSelectSpinner.setAdapter(adapter);
+        
+        ArrayAdapter<CharSequence> autoResizeadapter = ArrayAdapter.createFromResource(this, R.array.autoResizeValues, android.R.layout.simple_spinner_item);
+        autoResizeadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        autoResizeSelectSpinner.setAdapter(autoResizeadapter);
 		
 		// Add OnClick Listeners
 		doneButton.setOnClickListener(new OnClickListener(){
@@ -69,6 +74,34 @@ public class ConfigActivity extends Activity {
 					break;
 				default:
 					// TODO take some defaul action should nothing else work
+				};
+			}
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// DO NOTHING
+			}
+        });
+        
+        autoResizeSelectSpinner.setOnItemSelectedListener(new OnItemSelectedListener(){
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				switch(pos){
+				case 0: // full auto
+					EchelonBundle.configBundle.autoResizeX = true;
+					EchelonBundle.configBundle.autoResizeY = true;
+					break;
+				case 1: // auto x
+					EchelonBundle.configBundle.autoResizeX = true;
+					EchelonBundle.configBundle.autoResizeY = false;
+					break;
+				case 2: // auto y
+					EchelonBundle.configBundle.autoResizeX = false;
+					EchelonBundle.configBundle.autoResizeY = true;
+					break;
+				case 3: // full manual
+					EchelonBundle.configBundle.autoResizeX = false;
+					EchelonBundle.configBundle.autoResizeY = false;
+					break;
+				default:
+					Log.wtf(TAG, "autoResizeSelectSpinner recieved illegal item (" + pos + ")");
 				};
 			}
 			public void onNothingSelected(AdapterView<?> arg0) {
