@@ -39,12 +39,14 @@ public class MainActivity extends Activity {
 		final Button exportButton = (Button) findViewById(R.id.mainExportButton_id);
 		final Button helpButton = (Button) findViewById(R.id.mainHelpButton_id);
 		final Button exitButton = (Button) findViewById(R.id.mainExitButton_id);
+		final SpectrumView smallSpectrumView = (SpectrumView) findViewById(R.id.mainSpectrumSurfaceView_id);
 //		final TextView currentDetectorTextView = (TextView) findViewById(R.id.mainDetNameTextView_id);
 		
 		// Add OnClick Listeners
 		configButton.setOnClickListener(new OnClickActivitySwapper(this, ConfigActivity.class));
 		exportButton.setOnClickListener(new OnClickActivitySwapper(this, ExportActivity.class));
 		helpButton.setOnClickListener(new OnClickActivitySwapper(this, HelpActivity.class));
+//		smallSpectrumView.setOnClickListener(new OnClickActivitySwapper(this, SpectrumActivity.class));
 		
 		exitButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
@@ -81,34 +83,7 @@ public class MainActivity extends Activity {
 	}
 }
 
-/**
- * 
- * @author Edward Norris (etnc6d@mst.edu)
- *
- */
-class OnClickActivitySwapper implements OnClickListener{
 
-	private Activity m_callingActivity;
-	private Class<?> m_nextActivityClass;
-	private static final String TAG = "OnClickActivitySwapper";
-	
-	public OnClickActivitySwapper(Activity callingActivity, Class<?> nextActivityClass){
-		m_callingActivity = callingActivity;
-		m_nextActivityClass = nextActivityClass;
-	}
-	
-	public void onClick(View v) {
-		Intent nextIntent = new Intent(m_callingActivity, m_nextActivityClass);
-		
-		try{
-			Log.v(TAG, "Attempting to launch next Activity");
-			m_callingActivity.startActivityForResult(nextIntent, 0);
-			Log.v(TAG, "Launched!");
-		}catch(ActivityNotFoundException e){
-			Log.wtf(TAG, "Could not find the requested Activity", new RuntimeException());
-		}
-	}
-}
 
 
 

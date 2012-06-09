@@ -3,12 +3,12 @@ package com.research.test;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-public class GraphThread extends Thread{
+public class SpectrumThread extends Thread{
 	SurfaceHolder m_surfaceHolder;
-	GraphView m_graphView;
+	SpectrumView m_graphView;
 	boolean isRunning = false;
 	
-	public GraphThread(SurfaceHolder holder, GraphView game){
+	public SpectrumThread(SurfaceHolder holder, SpectrumView game){
 		m_surfaceHolder = holder;
 		m_graphView = game;
 	}

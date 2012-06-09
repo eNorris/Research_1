@@ -28,5 +28,6 @@
 		<item>Other</item>
 	</string-array>
 		<string name="mainExitButton_str">Exit</string>
+		<string name="coreDoneButton_str">Done</string>
 
 </resources>

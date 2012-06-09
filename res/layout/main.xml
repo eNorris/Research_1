@@ -50,11 +50,18 @@
             android:layout_height="wrap_content"
             android:text="@string/detectorName_str"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
+		<!--
         <SurfaceView
-            android:id="@+id/mainGraphViewSurfaceView_id"
+            android:id="@+id/mainSpectrumSurfaceView_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+        -->
+        
+		<com.research.test.SpectrumView
+			android:id="@+id/mainSpectrumSurfaceView_id"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
     </LinearLayout>
 
     <Switch

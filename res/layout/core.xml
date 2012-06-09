@@ -3,10 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <SurfaceView
-        android:id="@+id/coreSurfaceView"
+
+    <Button
+        android:id="@+id/coreDoneButton_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/coreDoneButton_str" />
+	<!--  
+	<SurfaceView
+        android:id="@+id/spectrumSurfaceView_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+	-->
+    
+    <com.research.test.SpectrumView
+		    android:id="@+id/spectrumSurfaceView_id"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent" />
 
 </LinearLayout>

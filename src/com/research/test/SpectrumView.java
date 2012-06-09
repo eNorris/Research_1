@@ -7,34 +7,34 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class GraphView extends SurfaceView implements SurfaceHolder.Callback{
+public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	
 	private static final String TAG = "GraphView";
-	private GraphThread m_graphThread;
+	private SpectrumThread m_graphThread;
 
-	public GraphView(Context context) {
+	public SpectrumView(Context context) {
 		super(context);
 		init();
 	}
 	
-	public GraphView(Context context, AttributeSet attr){
+	public SpectrumView(Context context, AttributeSet attr){
 		super(context, attr);
 		init();
 	}
-	public GraphView(Context context, AttributeSet attr, int defStyle){
+	public SpectrumView(Context context, AttributeSet attr, int defStyle){
 		super(context, attr, defStyle);
 		init();
 	}
 	
 	public void init(){
 		getHolder().addCallback(this);
-		m_graphThread = new GraphThread(getHolder(), this);
+		m_graphThread = new SpectrumThread(getHolder(), this);
 		setFocusable(true);
 	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
 		if(m_graphThread.getState() == Thread.State.TERMINATED){
-			m_graphThread = new GraphThread(getHolder(), this);
+			m_graphThread = new SpectrumThread(getHolder(), this);
 			m_graphThread.setRunning(true);
 			m_graphThread.start();
 		}else{
