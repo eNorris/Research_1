@@ -112,6 +112,13 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		if(EchelonBundle.configBundle.xAxisOn){
 			canvas.drawLine(0, canvas.getHeight() - 30, canvas.getWidth(), canvas.getHeight() - 30, 
 					EchelonBundle.configBundle.axisPaint);
+			// xMin to xMax by units of xTick
+//			float delta = EchelonBundle.configBundle.xMax - 
+//					EchelonBundle.configBundle.xMin / EchelonBundle.configBundle.xTick;
+			for(float i = EchelonBundle.configBundle.xMin; i < EchelonBundle.configBundle.xMax; i += 
+					EchelonBundle.configBundle.xTick){
+				canvas.drawLine(i, canvas.getHeight(), i, 0, EchelonBundle.configBundle.axisPaint);
+			}
 		}
 		if(EchelonBundle.configBundle.yAxisOn){
 			canvas.drawLine(30, 0, 30, canvas.getHeight(), EchelonBundle.configBundle.axisPaint);
