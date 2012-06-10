@@ -31,6 +31,10 @@ public class ConfigActivity extends Activity {
 		final Button doneButton = (Button) findViewById(R.id.configDoneButton_id);
 		final Spinner binSelectSpinner = (Spinner) findViewById(R.id.configBinSelectorSpinner_id);
 		final Spinner autoResizeSelectSpinner = (Spinner) findViewById(R.id.configAutoResizeSpinner_id);
+		final Spinner recordUntilSpinner = (Spinner) findViewById(R.id.configRecordUntilSpinner_id);
+		
+		// TODO - Someday I'd like to implement a color chooser for the spectrum color and 
+		// axes, maybe even a gradient generator!
 		
 		// Enable the Spinner
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bins, android.R.layout.simple_spinner_item);
@@ -40,6 +44,10 @@ public class ConfigActivity extends Activity {
         ArrayAdapter<CharSequence> autoResizeadapter = ArrayAdapter.createFromResource(this, R.array.autoResizeValues, android.R.layout.simple_spinner_item);
         autoResizeadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         autoResizeSelectSpinner.setAdapter(autoResizeadapter);
+        
+        ArrayAdapter<CharSequence> recroderAdapter = ArrayAdapter.createFromResource(this, R.array.recordUntilValues, android.R.layout.simple_spinner_item);
+        recroderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        autoResizeSelectSpinner.setAdapter(recroderAdapter);
 		
 		// Add OnClick Listeners
 		doneButton.setOnClickListener(new OnClickListener(){

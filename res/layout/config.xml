@@ -27,16 +27,28 @@
         android:id="@+id/configBinSelectorSpinner_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+
     <TextView
         android:id="@+id/configAutoResizeTextView_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Medium Text"
+        android:text="@string/configAutoRescale_str"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
         android:id="@+id/configAutoResizeSpinner_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/configRecordUntil_str"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/configRecordUntilSpinner_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

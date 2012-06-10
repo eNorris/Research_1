@@ -80,12 +80,16 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		}
 	}
 	
+	// TODO get rid of spectrumData - this will eventually be gotten from
+	// EchelonBundle instead
 	public void onDraw(Canvas canvas){
 		if(canvas != null){
 			drawSpectrum(canvas, spectrumData);
+			drawAxisSystem(canvas);
 		}
 	}
 	
+	// TODO data -> EchelonData
 	public void drawSpectrum(Canvas canvas, int[] data){
 		
 		float width = ((float) canvas.getWidth()) / data.length;
@@ -98,6 +102,19 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		
 		for(int i = 0; i < data.length; i++){
 			canvas.drawRect(i*width, canvas.getHeight() - data[i]*heightmod, (i+1)*width, canvas.getHeight(), paint);
+		}
+	}
+	
+	public void drawAxisSystem(Canvas canvas){
+		// TODO - remove the below line later, it should be a user config
+		EchelonBundle.configBundle.axisPaint.setColor(Color.GREEN);
+		
+		if(EchelonBundle.configBundle.xAxisOn){
+			canvas.drawLine(0, canvas.getHeight() - 30, canvas.getWidth(), canvas.getHeight() - 30, 
+					EchelonBundle.configBundle.axisPaint);
+		}
+		if(EchelonBundle.configBundle.yAxisOn){
+			canvas.drawLine(30, 0, 30, canvas.getHeight(), EchelonBundle.configBundle.axisPaint);
 		}
 	}
 }

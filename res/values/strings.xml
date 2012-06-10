@@ -35,7 +35,18 @@
 		<item>Do Not Auto Resize</item>
 	</string-array>
 	
+	<string-array name="recordUntilValues">
+		<item>Time (sec)</item>
+		<item>Time (min)</item>
+		<item>Time (hour)</item>
+		<item>Total Counts</item>
+		<item>Max Count</item>
+		<item>Statistic Point</item>
+	</string-array>
+	
 	<string name="mainExitButton_str">Exit</string>
 	<string name="coreDoneButton_str">Done</string>
+	<string name="configAutoRescale_str">Auto Rescale Options</string>
+	<string name="configRecordUntil_str">Record Until...</string>
 
 </resources>
