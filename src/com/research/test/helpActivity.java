@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class HelpActivity extends Activity {
 	
+	// help -> Help : this comment enables pushing the change
 	private static final String TAG = "HelpActivity";
 	
 	@Override

@@ -47,7 +47,7 @@ public class ConfigActivity extends Activity {
         
         ArrayAdapter<CharSequence> recroderAdapter = ArrayAdapter.createFromResource(this, R.array.recordUntilValues, android.R.layout.simple_spinner_item);
         recroderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        autoResizeSelectSpinner.setAdapter(recroderAdapter);
+        recordUntilSpinner.setAdapter(recroderAdapter);
 		
 		// Add OnClick Listeners
 		doneButton.setOnClickListener(new OnClickListener(){
@@ -110,6 +110,38 @@ public class ConfigActivity extends Activity {
 					break;
 				default:
 					Log.wtf(TAG, "autoResizeSelectSpinner recieved illegal item (" + pos + ")");
+				};
+			}
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// DO NOTHING
+			}
+        });
+        
+     // Implement the spinner listener
+        recordUntilSpinner.setOnItemSelectedListener(new OnItemSelectedListener(){
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				Log.i(TAG + "Selected Item", "pos = " + pos);
+				switch(pos){
+				case 0: // sec
+					// TODO do something
+					break;
+				case 1: // min
+					// TODO do something else
+					break;
+				case 2: // hour
+					// TODO
+					break;
+				case 3: // counts
+					// TODO
+					break;
+				case 4: // max count
+					// TODO
+					break;
+				case 5: // statistic
+					// TODO
+					break;
+				default:
+					// TODO take some defaul action should nothing else work
 				};
 			}
 			public void onNothingSelected(AdapterView<?> arg0) {
