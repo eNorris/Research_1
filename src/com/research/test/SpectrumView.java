@@ -60,6 +60,17 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			m_graphThread.start();
 		}
 		Log.v(TAG, "Created surface");
+		
+		EchelonBundle.screenBundle.xMin = 0;
+//		EchelonBundle.screenBundle.xMax = getWidth();
+		EchelonBundle.screenBundle.yMin = 0;
+//		EchelonBundle.screenBundle.yMax = getHeight();
+		EchelonBundle.screenBundle.height = (float) (EchelonBundle.screenBundle.yMax = getHeight());
+		EchelonBundle.screenBundle.width = (float) (EchelonBundle.screenBundle.xMax = getWidth());
+		
+		// TODO - make sure these are correct and not zero
+		Log.d(TAG, "Caught height = " + EchelonBundle.screenBundle.height);
+		Log.d(TAG, "Caught width = " + EchelonBundle.screenBundle.width);
 	}
 	
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -118,8 +129,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			canvas.drawLine(0, canvas.getHeight() - 30, canvas.getWidth(), canvas.getHeight() - 30, 
 					EchelonBundle.configBundle.axisPaint);
 			// Draw tick marks
-			for(float i = EchelonBundle.configBundle.xMin; i < EchelonBundle.configBundle.xMax; i += 
-					EchelonBundle.configBundle.xTick){
+			for(float i = EchelonBundle.screenBundle.xMin; i < EchelonBundle.screenBundle.xMax; i += 
+					EchelonBundle.configBundle.tickX){
 				canvas.drawLine(i, canvas.getHeight()-30, i, canvas.getHeight()-40, EchelonBundle.configBundle.axisPaint);
 			}
 		}
@@ -127,11 +138,19 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			// Draw the main y-axis
 			canvas.drawLine(30, 0, 30, canvas.getHeight(), EchelonBundle.configBundle.axisPaint);
 			// Draw tick marks
-			for(float i = EchelonBundle.configBundle.yMin; i < EchelonBundle.configBundle.yMax; i += 
-					EchelonBundle.configBundle.yTick){
+			for(float i = EchelonBundle.screenBundle.yMin; i < EchelonBundle.screenBundle.yMax; i += 
+					EchelonBundle.configBundle.tickY){
 				canvas.drawLine(30, i, 40, i, EchelonBundle.configBundle.axisPaint);
 			}
 		}
+	}
+	
+	public float absX(float x){
+		return EchelonBundle.screenBundle.oriX + EchelonBundle.screenBundle.scaleX * x;
+	}
+	
+	public float absY(float y){
+		return EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY - EchelonBundle.screenBundle.scaleY * y;
 	}
 }
 

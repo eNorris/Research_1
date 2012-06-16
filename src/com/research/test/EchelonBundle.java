@@ -6,6 +6,7 @@ public class EchelonBundle {
 	public static ConfigBundle configBundle = new ConfigBundle();
 	public static ExportBundle exportBundle = new ExportBundle();
 	public static ImportBundle importBundle = new ImportBundle();
+	public static ScreenBundle screenBundle = new ScreenBundle();
 	public static int dataBundleCount = 1;
 	public static DataBundle[] dataBundles = new DataBundle[1];
 	
@@ -43,16 +44,20 @@ class ConfigBundle{
 	public boolean autoResizeX = true;
 	public boolean autoResizeY = true;
 	public boolean xAxisOn = true;
-	public float xMin = 0.0f,
-			xMax = 1023.0f,
-			xTick = 100.0f;
-	public float yMin = 0.0f,
-			yMax = 5000.0f,
-			yTick = 100.0f;
+//	public float xMin = 0.0f,
+//			xMax = 1023.0f,
+//			xTick = 100.0f;
+//	public float yMin = 0.0f,
+//			yMax = 5000.0f,
+//			yTick = 100.0f;
 //	public int xMin = 0;
 //	public int xMax = 1023;
 //	public int xTick = 100;
 	public boolean yAxisOn = true;
+	public boolean yAxisLog = false;
+	public boolean xAxisLog = false;
+	public float tickX = 100;
+	public float tickY = 100;
 //	public int yMin = 0;
 //	public int yMax = 1023;
 //	public int yTick = 100;
@@ -93,6 +98,19 @@ class DataBundle{
 	}
 }
 
+class ScreenBundle{
+	public float oriX = 0;
+	public float oriY = 0;
+	public float scaleX = 1;
+	public float scaleY = 1;
+	public float height = 1;
+	public float width = 1;
+	// The virtual coordinates of the min/max values drawable to the screen
+	public float xMin = 1;
+	public float xMax = 1;
+	public float yMin = 1;
+	public float yMax = 1;
+}
 
 
 
