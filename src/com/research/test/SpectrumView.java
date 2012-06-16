@@ -92,14 +92,18 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	// TODO data -> EchelonData
 	public void drawSpectrum(Canvas canvas, int[] data){
 		
+		// Calculate the width of each bar in the graph
 		float width = ((float) canvas.getWidth()) / data.length;
 		float max = 0;
 		for(int i = 0; i < data.length; i++)
 			if(data[i] > max)
 				max = data[i];
 		float heightmod = canvas.getHeight() / max;
+		
+		// Set the spectrum color
 		paint.setColor(Color.BLUE);
 		
+		// Draw the bar graph
 		for(int i = 0; i < data.length; i++){
 			canvas.drawRect(i*width, canvas.getHeight() - data[i]*heightmod, (i+1)*width, canvas.getHeight(), paint);
 		}
@@ -110,11 +114,10 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		EchelonBundle.configBundle.axisPaint.setColor(Color.GREEN);
 		
 		if(EchelonBundle.configBundle.xAxisOn){
+			// Draw the main x-axis
 			canvas.drawLine(0, canvas.getHeight() - 30, canvas.getWidth(), canvas.getHeight() - 30, 
 					EchelonBundle.configBundle.axisPaint);
-			// xMin to xMax by units of xTick
-//			float delta = EchelonBundle.configBundle.xMax - 
-//					EchelonBundle.configBundle.xMin / EchelonBundle.configBundle.xTick;
+			// Draw tick marks
 			for(float i = EchelonBundle.configBundle.xMin; i < EchelonBundle.configBundle.xMax; i += 
 					EchelonBundle.configBundle.xTick){
 				canvas.drawLine(i, canvas.getHeight(), i, 0, EchelonBundle.configBundle.axisPaint);
