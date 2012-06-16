@@ -120,10 +120,11 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			// Draw tick marks
 			for(float i = EchelonBundle.configBundle.xMin; i < EchelonBundle.configBundle.xMax; i += 
 					EchelonBundle.configBundle.xTick){
-				canvas.drawLine(i, canvas.getHeight(), i, 0, EchelonBundle.configBundle.axisPaint);
+				canvas.drawLine(i, canvas.getHeight()-30, i, 0, EchelonBundle.configBundle.axisPaint);
 			}
 		}
 		if(EchelonBundle.configBundle.yAxisOn){
+			// Draw the main y-axis
 			canvas.drawLine(30, 0, 30, canvas.getHeight(), EchelonBundle.configBundle.axisPaint);
 		}
 	}
