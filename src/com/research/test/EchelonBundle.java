@@ -58,6 +58,7 @@ class ConfigBundle{
 	public boolean xAxisLog = false;
 	public float tickX = 100;
 	public float tickY = 100;
+	public float tickHeight = 10;
 //	public int yMin = 0;
 //	public int yMax = 1023;
 //	public int yTick = 100;

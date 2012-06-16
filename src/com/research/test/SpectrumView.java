@@ -218,22 +218,47 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		
 		if(EchelonBundle.configBundle.xAxisOn){
 			// Draw the main x-axis
-			canvas.drawLine(0, canvas.getHeight() - 30, canvas.getWidth(), canvas.getHeight() - 30, 
-					EchelonBundle.configBundle.axisPaint);
+			canvas.drawLine(0, absY(EchelonBundle.screenBundle.oriY), 
+					canvas.getWidth(), absY(EchelonBundle.screenBundle.oriY), EchelonBundle.configBundle.axisPaint);
 			// Draw tick marks
 			for(float i = EchelonBundle.screenBundle.xMin; i < EchelonBundle.screenBundle.xMax; i += 
 					EchelonBundle.configBundle.tickX){
-				canvas.drawLine(i, canvas.getHeight()-30, i, canvas.getHeight()-40, EchelonBundle.configBundle.axisPaint);
+				canvas.drawLine(i, absY(EchelonBundle.screenBundle.oriY), i, 
+						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight,
+						EchelonBundle.configBundle.axisPaint);
 			}
 		}
 		if(EchelonBundle.configBundle.yAxisOn){
 			// Draw the main y-axis
-			canvas.drawLine(30, 0, 30, canvas.getHeight(), EchelonBundle.configBundle.axisPaint);
+			canvas.drawLine(absX(EchelonBundle.screenBundle.oriX), 0, 
+					absX(EchelonBundle.screenBundle.oriX), EchelonBundle.screenBundle.height,
+					EchelonBundle.configBundle.axisPaint);
 			// Draw tick marks
-			for(float i = EchelonBundle.screenBundle.yMin; i < EchelonBundle.screenBundle.yMax; i += 
-					EchelonBundle.configBundle.tickY){
-				canvas.drawLine(30, i, 40, i, EchelonBundle.configBundle.axisPaint);
+			
+			float startPoint = EchelonBundle.screenBundle.oriY;
+			float moveBy = EchelonBundle.configBundle.tickHeight * EchelonBundle.screenBundle.scaleY;
+			float goal = EchelonBundle.screenBundle.height;
+			
+			while(absY(startPoint) > 0)
+				startPoint -= moveBy;
+			
+			while(absY(startPoint) < goal){
+				canvas.drawLine(
+						absX(EchelonBundle.screenBundle.oriX),		// start x
+						absY(startPoint), 						// start y
+						absX(EchelonBundle.screenBundle.oriX) + EchelonBundle.configBundle.tickHeight, 	// stop x
+						absY(startPoint), 						// stop y
+						EchelonBundle.configBundle.axisPaint);	// paint
+				startPoint += moveBy;
 			}
+			
+		/*	for(float i = EchelonBundle.screenBundle.yMin; i < EchelonBundle.screenBundle.yMax; i += 
+					EchelonBundle.configBundle.tickY){
+				canvas.drawLine(absX(EchelonBundle.screenBundle.oriX), i, absX(EchelonBundle.screenBundle.oriX), 
+						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight,
+						EchelonBundle.configBundle.axisPaint);
+			}
+		*/
 		}
 	}
 	
