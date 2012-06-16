@@ -61,6 +61,10 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		}
 		Log.v(TAG, "Created surface");
 		
+		
+	}
+	
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 		EchelonBundle.screenBundle.xMin = 0;
 //		EchelonBundle.screenBundle.xMax = getWidth();
 		EchelonBundle.screenBundle.yMin = 0;
@@ -71,10 +75,6 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		// TODO - make sure these are correct and not zero
 		Log.d(TAG, "Caught height = " + EchelonBundle.screenBundle.height);
 		Log.d(TAG, "Caught width = " + EchelonBundle.screenBundle.width);
-	}
-	
-	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-		// Do Nothing
 	}
 
 	public void surfaceDestroyed(SurfaceHolder holder) {
