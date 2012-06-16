@@ -7,9 +7,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/* For some reason, whenever I update my code, this file is always renamed "helpActivity.java"
+ instead of "HelpActivity.java" as it should be. The easiest way to fix this probelm is to 
+ hover your mouse over the class name "HelpActivity" below, which should be underlined in
+ red, when the context menu pops up, choose "rename compile unit". This will fix the error.
+*/
 public class HelpActivity extends Activity {
 	
-	// help -> Help : this comment enables pushing the change
 	private static final String TAG = "HelpActivity";
 	
 	@Override
