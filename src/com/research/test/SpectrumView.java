@@ -230,15 +230,13 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			// Set the printhead
 			while(absX(startPoint) > 0){
 				startPoint -= moveBy;
-				Log.d(TAG, "backtracking along x...");
+//				Log.d(TAG, "backtracking along x...");
 			}
-			
-			// TODO - Draw ticks.
 			
 			while(absX(startPoint) < goal){
 				
-				Log.d(TAG, "will draw x tick: [spectrum: " + EchelonBundle.screenBundle.oriY + " abs: " + 
-				absY(EchelonBundle.screenBundle.oriY) + "]");
+//				Log.d(TAG, "will draw x tick: [spectrum: " + EchelonBundle.screenBundle.oriY + " abs: " + 
+//				absY(EchelonBundle.screenBundle.oriY) + "]");
 				
 				canvas.drawLine(
 						absX(startPoint),						// start x
@@ -247,7 +245,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight, // stop y
 						EchelonBundle.configBundle.axisPaint);	// paint
 				startPoint += moveBy;
-				Log.d(TAG, "advancing in x...(" + startPoint + ")");
+//				Log.d(TAG, "advancing in x...(" + startPoint + ")");
 			}
 			
 //			for(float i = EchelonBundle.screenBundle.xMin; i < EchelonBundle.screenBundle.xMax; i += 
@@ -270,7 +268,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			
 			while(absY(startPoint) > 0){
 				startPoint += moveBy;
-				Log.d(TAG, "backtracking... (" + startPoint + ")");
+//				Log.d(TAG, "backtracking... (" + startPoint + ")");
 			}
 			
 			while(absY(startPoint) < goal){
@@ -281,7 +279,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						absY(startPoint), 						// stop y
 						EchelonBundle.configBundle.axisPaint);	// paint
 				startPoint -= moveBy;
-				Log.d(TAG, "advancing...(" + startPoint + ")");
+//				Log.d(TAG, "advancing...(" + startPoint + ")");
 			}
 			
 		/*	for(float i = EchelonBundle.screenBundle.yMin; i < EchelonBundle.screenBundle.yMax; i += 
