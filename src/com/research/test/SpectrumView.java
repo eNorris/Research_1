@@ -187,6 +187,13 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	// EchelonBundle instead
 	public void onDraw(Canvas canvas){
 		if(canvas != null){
+			
+			// Reset the canvas to solid black
+			canvas.drawColor(Color.BLACK);
+			
+//			EchelonBundle.screenBundle.oriX += 1;
+//			EchelonBundle.screenBundle.oriY += 1;
+			
 			drawSpectrum(canvas, spectrumData);
 			drawAxisSystem(canvas);
 		}
