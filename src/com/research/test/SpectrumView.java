@@ -254,7 +254,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			float goal = EchelonBundle.screenBundle.height;
 			
 			while(absY(startPoint) > 0){
-				startPoint -= moveBy;
+				startPoint += moveBy;
 				Log.d(TAG, "backtracking... (" + startPoint + ")");
 			}
 			
@@ -265,7 +265,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						absX(EchelonBundle.screenBundle.oriX) + EchelonBundle.configBundle.tickHeight, 	// stop x
 						absY(startPoint), 						// stop y
 						EchelonBundle.configBundle.axisPaint);	// paint
-				startPoint += moveBy;
+				startPoint -= moveBy;
 				Log.d(TAG, "advancing...(" + startPoint + ")");
 			}
 			
