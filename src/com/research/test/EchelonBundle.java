@@ -102,7 +102,8 @@ class DataBundle{
 class ScreenBundle{
 	public float oriX = 0;
 	public float oriY = 0;
-	public float scaleX = 1;
+	// TODO - nRest these back to one when done
+	public float scaleX = 2;
 	public float scaleY = 1;
 	public float height = 1;
 	public float width = 1;

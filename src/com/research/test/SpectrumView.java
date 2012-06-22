@@ -231,7 +231,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	
 			// Draw tick marks
 			float startPoint = EchelonBundle.screenBundle.oriX;
-			float moveBy = EchelonBundle.screenBundle.scaleX * EchelonBundle.configBundle.tickHeight;
+			float moveBy = EchelonBundle.configBundle.tickX / EchelonBundle.screenBundle.scaleX;
 			float goal = EchelonBundle.screenBundle.width;
 			
 			// Set the printhead
@@ -270,7 +270,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			// Draw tick marks
 			
 			float startPoint = EchelonBundle.screenBundle.oriY;
-			float moveBy = EchelonBundle.configBundle.tickHeight * EchelonBundle.screenBundle.scaleY;
+			float moveBy = EchelonBundle.configBundle.tickY / EchelonBundle.screenBundle.scaleY;
 			float goal = EchelonBundle.screenBundle.height;
 			
 			while(absY(startPoint) > 0){

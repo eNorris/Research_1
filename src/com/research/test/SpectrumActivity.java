@@ -42,8 +42,9 @@ public class SpectrumActivity extends Activity {
 					oldYCoord = event.getY();
 					break;
 				case MotionEvent.ACTION_MOVE:
-					EchelonBundle.screenBundle.oriX += (event.getX() - oldXCoord);
-					EchelonBundle.screenBundle.oriY += (event.getY() - oldYCoord);
+					// TODO - I have no idea why dividing by two is necessary... 
+					EchelonBundle.screenBundle.oriX += (event.getX() - oldXCoord)/(2.0f*EchelonBundle.screenBundle.scaleX);
+					EchelonBundle.screenBundle.oriY -= (event.getY() - oldYCoord)/(2.0f*EchelonBundle.screenBundle.scaleY);
 					oldXCoord = event.getX();
 					oldYCoord = event.getY();
 					break;
