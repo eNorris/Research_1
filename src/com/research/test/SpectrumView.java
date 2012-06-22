@@ -219,14 +219,28 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		if(EchelonBundle.configBundle.xAxisOn){
 			// Draw the main x-axis
 			canvas.drawLine(0, absY(EchelonBundle.screenBundle.oriY), 
-					canvas.getWidth(), absY(EchelonBundle.screenBundle.oriY), EchelonBundle.configBundle.axisPaint);
+					canvas.getWidth(), absY(EchelonBundle.screenBundle.oriY), 
+					EchelonBundle.configBundle.axisPaint);
+	
 			// Draw tick marks
-			for(float i = EchelonBundle.screenBundle.xMin; i < EchelonBundle.screenBundle.xMax; i += 
-					EchelonBundle.configBundle.tickX){
-				canvas.drawLine(i, absY(EchelonBundle.screenBundle.oriY), i, 
-						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight,
-						EchelonBundle.configBundle.axisPaint);
+			float startPoint = EchelonBundle.screenBundle.oriX;
+			float moveBy = EchelonBundle.screenBundle.scaleX * EchelonBundle.configBundle.tickHeight;
+			float goal = EchelonBundle.screenBundle.width;
+			
+			// Set the printhead
+			while(absX(startPoint) > 0){
+				startPoint -= moveBy;
+				Log.d(TAG, "backtracking along x...");
 			}
+			
+			// TODO - Draw ticks.
+			
+//			for(float i = EchelonBundle.screenBundle.xMin; i < EchelonBundle.screenBundle.xMax; i += 
+//					EchelonBundle.configBundle.tickX){
+//				canvas.drawLine(i, absY(EchelonBundle.screenBundle.oriY), i, 
+//						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight,
+//						EchelonBundle.configBundle.axisPaint);
+//			}
 		}
 		if(EchelonBundle.configBundle.yAxisOn){
 			// Draw the main y-axis
