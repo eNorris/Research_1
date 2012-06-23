@@ -9,6 +9,16 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 //import android.widget.TextView;
 
+/*
+ * ===== Important Notes =====
+ * 1) Connect the Android-powered device via USB to your computer.
+ *    From your SDK platform-tools/ directory, enter adb tcpip 5555 at the command prompt.
+ *    Enter adb connect <device-ip-address>:5555 You should now be connected to the 
+ *       Android-powered device and can issue the usual adb commands like adb logcat.
+ *    To set your device to listen on USB, enter adb usb.
+*/
+
+
 /**
  * Main class that runs at startup
  * @author Edward
