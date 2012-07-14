@@ -45,9 +45,6 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			m_graphThread = new SpectrumThread(getHolder(), this);
 			m_graphThread.setRunning(true);
 			m_graphThread.start();
-			// TODO - Verify the below line
-//			Log.d(TAG, "calling addData)");
-//			EchelonBundle.addDataBundle();
 		}else{
 			m_graphThread.setRunning(true);
 			m_graphThread.start();
@@ -103,23 +100,23 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		}
 	}
 	
-	// TODO data -> EchelonData
+//	// TODO data -> EchelonData
 	public void drawSpectrum(Canvas canvas){
 		
 		// Calculate the width of each bar in the graph
-		if(EchelonBundle.dataBundles == null){
-			Log.e(TAG, "dataBundles is null!");
-		}else if(EchelonBundle.dataBundles.length == 0){
-			Log.e(TAG, "length is zero!");
-		}else if(EchelonBundle.dataBundles[0] == null){
-			Log.e(TAG, "dataBundle[0] is null!");
-		}else if(EchelonBundle.dataBundles[0].data == null){
-			Log.e(TAG,  "The first dataBundle is empty!");
-		}else if(EchelonBundle.dataBundles[0].data.length == 0){
-			Log.e(TAG, "first data has length = 0");
-		}
+//		if(EchelonBundle.dataBundles == null){
+//			Log.e(TAG, "dataBundles is null!");
+//		}else if(EchelonBundle.dataBundles.length == 0){
+//			Log.e(TAG, "length is zero!");
+//		}else if(EchelonBundle.dataBundles[0] == null){
+//			Log.e(TAG, "dataBundle[0] is null!");
+//		}else if(EchelonBundle.dataBundles[0].data == null){
+//			Log.e(TAG,  "The first dataBundle is empty!");
+//		}else if(EchelonBundle.dataBundles[0].data.length == 0){
+//			Log.e(TAG, "first data has length = 0");
+//		}
 		
-		float width = ((float) canvas.getWidth()) / EchelonBundle.dataBundles[0].data.length;
+		float width = ((float) canvas.getWidth()) / EchelonBundle.dataBundles[0].data.length * EchelonBundle.screenBundle.scaleX;
 		float max = 0;
 		for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++)
 			if(EchelonBundle.dataBundles[0].data[i] > max)
@@ -130,8 +127,15 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		paint.setColor(Color.BLUE);
 		
 		// Draw the bar graph
+		
+		float bottom = canvas.getHeight();
 		for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++){
-			canvas.drawRect(i*width, canvas.getHeight() - EchelonBundle.dataBundles[0].data[i]*heightmod, (i+1)*width, canvas.getHeight(), paint);
+			// TODO updated x, not y yet
+			float left = i*width+EchelonBundle.screenBundle.oriX;
+			float right = (i+1)*width + EchelonBundle.screenBundle.oriX;
+			
+			float top = canvas.getHeight() - EchelonBundle.dataBundles[0].data[i]*heightmod;
+			canvas.drawRect(left, top, right, bottom, paint);
 		}
 	}
 	
@@ -153,14 +157,9 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			// Set the printhead
 			while(absX(startPoint) > 0){
 				startPoint -= moveBy;
-//				Log.d(TAG, "backtracking along x...");
 			}
 			
 			while(absX(startPoint) < goal){
-				
-//				Log.d(TAG, "will draw x tick: [spectrum: " + EchelonBundle.screenBundle.oriY + " abs: " + 
-//				absY(EchelonBundle.screenBundle.oriY) + "]");
-				
 				canvas.drawLine(
 						absX(startPoint),						// start x
 						absY(EchelonBundle.screenBundle.oriY), 	// start y
@@ -168,30 +167,20 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight, // stop y
 						EchelonBundle.configBundle.axisPaint);	// paint
 				startPoint += moveBy;
-//				Log.d(TAG, "advancing in x...(" + startPoint + ")");
 			}
-			
-//			for(float i = EchelonBundle.screenBundle.xMin; i < EchelonBundle.screenBundle.xMax; i += 
-//					EchelonBundle.configBundle.tickX){
-//				canvas.drawLine(i, absY(EchelonBundle.screenBundle.oriY), i, 
-//						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight,
-//						EchelonBundle.configBundle.axisPaint);
-//			}
 		}
 		if(EchelonBundle.configBundle.yAxisOn){
 			// Draw the main y-axis
 			canvas.drawLine(absX(EchelonBundle.screenBundle.oriX), 0, 
 					absX(EchelonBundle.screenBundle.oriX), EchelonBundle.screenBundle.height,
 					EchelonBundle.configBundle.axisPaint);
+Log.d(TAG, "At SpectrumView::[177]: oriX = " + EchelonBundle.screenBundle.oriX);
 			// Draw tick marks
-			
 			float startPoint = EchelonBundle.screenBundle.oriY;
 			float moveBy = EchelonBundle.configBundle.tickY / EchelonBundle.screenBundle.scaleY;
 			float goal = EchelonBundle.screenBundle.height;
-			
 			while(absY(startPoint) > 0){
 				startPoint += moveBy;
-//				Log.d(TAG, "backtracking... (" + startPoint + ")");
 			}
 			
 			while(absY(startPoint) < goal){
@@ -202,16 +191,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						absY(startPoint), 						// stop y
 						EchelonBundle.configBundle.axisPaint);	// paint
 				startPoint -= moveBy;
-//				Log.d(TAG, "advancing...(" + startPoint + ")");
 			}
-			
-		/*	for(float i = EchelonBundle.screenBundle.yMin; i < EchelonBundle.screenBundle.yMax; i += 
-					EchelonBundle.configBundle.tickY){
-				canvas.drawLine(absX(EchelonBundle.screenBundle.oriX), i, absX(EchelonBundle.screenBundle.oriX), 
-						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight,
-						EchelonBundle.configBundle.axisPaint);
-			}
-		*/
 		}
 	}
 	

@@ -1,7 +1,5 @@
 package com.research.test;
 
-import java.util.ArrayList;
-
 import android.graphics.Paint;
 import android.util.Log;
 
@@ -32,6 +30,26 @@ public class EchelonBundle {
 		t[dataBundleCount-1] = new DataBundle();
 		dataBundles = t;
 		Log.v(TAG, "Added new DataBundle object");
+	}
+	
+	/**
+	 * Calculates various statistical values for a given DataBundle
+	 * 
+	 * @param i
+	 * 	Index of the DataBundle that will be calculated
+	 */
+	public static void calculateDataBundle(int i){
+		
+	}
+	
+	/**
+	 * Refreshes all information calculated by calculateDataBundle() for
+	 * each DataBundle
+	 */
+	public static void calcualteAllDataBundles(){
+		for(int i = 0; i < dataBundleCount; i++){
+			calculateDataBundle(i);
+		}
 	}
 	
 	public static void removeDataBundle(int index){
@@ -86,7 +104,7 @@ class ScreenBundle{
 	public float oriX = 0;
 	public float oriY = 0;
 	// TODO - nRest these back to one when done
-	public float scaleX = 2;
+	public float scaleX = 1;
 	public float scaleY = 1;
 	public float height = 1;
 	public float width = 1;

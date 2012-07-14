@@ -2,6 +2,7 @@ package com.research.test;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,6 +13,7 @@ public class SpectrumActivity extends Activity {
 	public static float oldXCoord = 0;
 	public static float oldYCoord = 0;
 	public static boolean oldCoords = false;
+	public static final String TAG = "SpectrumActivity";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,9 +34,6 @@ public class SpectrumActivity extends Activity {
 		// Create onclick listeners for scaling etc.
 		spectrumView.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
-				
-				// TODO - reverse y direction and account for scaling
-				
 				switch(event.getAction()){
 				case MotionEvent.ACTION_DOWN:
 					oldCoords = true;
@@ -43,8 +42,11 @@ public class SpectrumActivity extends Activity {
 					break;
 				case MotionEvent.ACTION_MOVE:
 					// TODO - I have no idea why dividing by two is necessary... 
-					EchelonBundle.screenBundle.oriX += (event.getX() - oldXCoord)/(2.0f*EchelonBundle.screenBundle.scaleX);
-					EchelonBundle.screenBundle.oriY -= (event.getY() - oldYCoord)/(2.0f*EchelonBundle.screenBundle.scaleY);
+					// FIXME - I got rid of the /2 that I didn't even know why it was there....
+					EchelonBundle.screenBundle.oriX += (event.getX() - oldXCoord)/(EchelonBundle.screenBundle.scaleX);
+					EchelonBundle.screenBundle.oriY -= (event.getY() - oldYCoord)/(EchelonBundle.screenBundle.scaleY);
+Log.d(TAG, "oriX = " + EchelonBundle.screenBundle.oriX);
+Log.d(TAG, "scaleX = " + EchelonBundle.screenBundle.scaleX);
 					oldXCoord = event.getX();
 					oldYCoord = event.getY();
 					break;
