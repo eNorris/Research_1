@@ -45,13 +45,19 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			m_graphThread = new SpectrumThread(getHolder(), this);
 			m_graphThread.setRunning(true);
 			m_graphThread.start();
+			// TODO - Verify the below line
+//			Log.d(TAG, "calling addData)");
+//			EchelonBundle.addDataBundle();
 		}else{
 			m_graphThread.setRunning(true);
 			m_graphThread.start();
 		}
 		Log.v(TAG, "Created surface");
 		
-		
+		if(EchelonBundle.dataBundleCount == 0){
+			EchelonBundle.addDataBundle();
+		}
+		Log.v(TAG, "Initialized first DataBundle");
 	}
 	
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -101,6 +107,18 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	public void drawSpectrum(Canvas canvas){
 		
 		// Calculate the width of each bar in the graph
+		if(EchelonBundle.dataBundles == null){
+			Log.e(TAG, "dataBundles is null!");
+		}else if(EchelonBundle.dataBundles.length == 0){
+			Log.e(TAG, "length is zero!");
+		}else if(EchelonBundle.dataBundles[0] == null){
+			Log.e(TAG, "dataBundle[0] is null!");
+		}else if(EchelonBundle.dataBundles[0].data == null){
+			Log.e(TAG,  "The first dataBundle is empty!");
+		}else if(EchelonBundle.dataBundles[0].data.length == 0){
+			Log.e(TAG, "first data has length = 0");
+		}
+		
 		float width = ((float) canvas.getWidth()) / EchelonBundle.dataBundles[0].data.length;
 		float max = 0;
 		for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++)

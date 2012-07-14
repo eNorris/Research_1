@@ -3,26 +3,35 @@ package com.research.test;
 import java.util.ArrayList;
 
 import android.graphics.Paint;
+import android.util.Log;
 
 public class EchelonBundle {
 	public static ConfigBundle configBundle = new ConfigBundle();
 	public static ExportBundle exportBundle = new ExportBundle();
 	public static ImportBundle importBundle = new ImportBundle();
 	public static ScreenBundle screenBundle = new ScreenBundle();
-	public static int dataBundleCount = 1;
-	public static DataBundle[] dataBundles = new DataBundle[1];
+	public static int dataBundleCount = 0;
+	public static DataBundle[] dataBundles = new DataBundle[0]; //TODO - Can you do this? [0]
+	public static final String TAG = "EchelonBundle";
 	
-	public EchelonBundle(){
-		addDataBundle();
+	// You aren't allowed to create an EchelonBundle object
+	private EchelonBundle(){
+//		addDataBundle();
 	}
 	
 	public static void addDataBundle(){
-		DataBundle[] t = new DataBundle[dataBundleCount++];
+		dataBundleCount++;
+		DataBundle[] t = new DataBundle[dataBundleCount];
+//		Log.d(TAG, "Created a new DataBundle of size " + dataBundleCount);
+		// All but the last are copied
 		for(int i = 0; i < dataBundleCount-1; i++){
 			t[i] = dataBundles[i];
 		}
-		dataBundles[dataBundleCount-1] = new DataBundle();
+		// The last element is a new DataBundle
+//		Log.d(TAG, "Before accessing, length = " + t.length);
+		t[dataBundleCount-1] = new DataBundle();
 		dataBundles = t;
+		Log.v(TAG, "Added new DataBundle object");
 	}
 	
 	public static void removeDataBundle(int index){
@@ -50,24 +59,12 @@ class ConfigBundle{
 	public boolean autoResizeX = true;
 	public boolean autoResizeY = true;
 	public boolean xAxisOn = true;
-//	public float xMin = 0.0f,
-//			xMax = 1023.0f,
-//			xTick = 100.0f;
-//	public float yMin = 0.0f,
-//			yMax = 5000.0f,
-//			yTick = 100.0f;
-//	public int xMin = 0;
-//	public int xMax = 1023;
-//	public int xTick = 100;
 	public boolean yAxisOn = true;
 	public boolean yAxisLog = false;
 	public boolean xAxisLog = false;
 	public float tickX = 100;
 	public float tickY = 100;
 	public float tickHeight = 10;
-//	public int yMin = 0;
-//	public int yMax = 1023;
-//	public int yTick = 100;
 	public Paint spectrumPaint = new Paint();
 	public Paint axisPaint = new Paint();
 }
