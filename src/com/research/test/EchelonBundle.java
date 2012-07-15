@@ -113,6 +113,25 @@ class ScreenBundle{
 	public float xMax = 1;
 	public float yMin = 1;
 	public float yMax = 1;
+	
+	// FIXME - Replace with Nu-Ada system:
+	public float oriNu = 0.0f;
+	public float oriAda = 0.0f;
+	public float scaleNu = 1.0f;
+	public float scaleAda = 1.0f;
+	
+	public static float toXAxis(float adaCoord){
+		return 1.0f;
+	}
+	public static float toYAxis(float nuCoord){
+		return 1.0f;
+	}
+	public static float toAdaAxis(float xCoord){
+		return 1.0f;
+	}
+	public static float toNuAxis(float yCoord){
+		return 1.0f;
+	}
 }
 
 class DataBundle{
