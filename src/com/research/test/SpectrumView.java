@@ -145,9 +145,12 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		
 		if(EchelonBundle.configBundle.xAxisOn){
 			// Draw the main x-axis
-			canvas.drawLine(0, absY(EchelonBundle.screenBundle.oriY), 
-					canvas.getWidth(), absY(EchelonBundle.screenBundle.oriY), 
-					EchelonBundle.configBundle.axisPaint);
+			canvas.drawLine(0, 
+					EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY, 
+					canvas.getWidth(), 
+					EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY, 
+					EchelonBundle.configBundle.axisPaint
+			);
 	
 			// Draw tick marks
 			float startPoint = EchelonBundle.screenBundle.oriX;
@@ -155,24 +158,40 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			float goal = EchelonBundle.screenBundle.width;
 			
 			// Set the printhead
-			while(absX(startPoint) > 0){
+			// FIXME - Removed all absX() functions as uncommented version of below commented. - Verify correct.
+//			while(absX(startPoint) > 0){
+//				startPoint -= moveBy;
+//			}
+//			
+//			while(absX(startPoint) < goal){
+//				canvas.drawLine(
+//						absX(startPoint),						// start x
+//						absY(EchelonBundle.screenBundle.oriY), 	// start y
+//						absX(startPoint), 						// stop x
+//						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight, // stop y
+//						EchelonBundle.configBundle.axisPaint);	// paint
+//				startPoint += moveBy;
+//			}
+			
+			while(startPoint > 0){
 				startPoint -= moveBy;
 			}
 			
-			while(absX(startPoint) < goal){
+			while(startPoint < goal){
 				canvas.drawLine(
-						absX(startPoint),						// start x
-						absY(EchelonBundle.screenBundle.oriY), 	// start y
-						absX(startPoint), 						// stop x
-						absY(EchelonBundle.screenBundle.oriY) - EchelonBundle.configBundle.tickHeight, // stop y
+						startPoint,						// start x
+						EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY, 	// start y
+						startPoint, 						// stop x
+						EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY - EchelonBundle.configBundle.tickHeight, // stop y
 						EchelonBundle.configBundle.axisPaint);	// paint
 				startPoint += moveBy;
 			}
 		}
 		if(EchelonBundle.configBundle.yAxisOn){
 			// Draw the main y-axis
-			canvas.drawLine(absX(EchelonBundle.screenBundle.oriX), 0, 
-					absX(EchelonBundle.screenBundle.oriX), EchelonBundle.screenBundle.height,
+			// FIXME - Removed absX() around oriX to fix an issue, verify fixed.
+			canvas.drawLine(EchelonBundle.screenBundle.oriX, 0, 
+					EchelonBundle.screenBundle.oriX, EchelonBundle.screenBundle.height,
 					EchelonBundle.configBundle.axisPaint);
 Log.d(TAG, "At SpectrumView::[177]: oriX = " + EchelonBundle.screenBundle.oriX);
 			// Draw tick marks
@@ -185,9 +204,9 @@ Log.d(TAG, "At SpectrumView::[177]: oriX = " + EchelonBundle.screenBundle.oriX);
 			
 			while(absY(startPoint) < goal){
 				canvas.drawLine(
-						absX(EchelonBundle.screenBundle.oriX),		// start x
+						EchelonBundle.screenBundle.oriX,		// start x
 						absY(startPoint), 						// start y
-						absX(EchelonBundle.screenBundle.oriX) + EchelonBundle.configBundle.tickHeight, 	// stop x
+						EchelonBundle.screenBundle.oriX + EchelonBundle.configBundle.tickHeight, 	// stop x
 						absY(startPoint), 						// stop y
 						EchelonBundle.configBundle.axisPaint);	// paint
 				startPoint -= moveBy;
