@@ -41,12 +41,8 @@ public class SpectrumActivity extends Activity {
 					oldYCoord = event.getY();
 					break;
 				case MotionEvent.ACTION_MOVE:
-					EchelonBundle.screenBundle.oriX += (event.getX() - oldXCoord)/(EchelonBundle.screenBundle.scaleX);
-					EchelonBundle.screenBundle.oriY -= (event.getY() - oldYCoord)/(EchelonBundle.screenBundle.scaleY);
-
-					EchelonBundle.screenBundle.oriNu += (Util.xToNu(event.getX()) - Util.xToNu(oldXCoord));
-					EchelonBundle.screenBundle.oriAda -= (Util.yToAda(event.getY()) - Util.yToAda(oldYCoord));
-					
+					EchelonBundle.screenBundle.oriNu += (event.getX() - oldXCoord);
+					EchelonBundle.screenBundle.oriAda += (event.getY() - oldYCoord);
 					oldXCoord = event.getX();
 					oldYCoord = event.getY();
 					break;

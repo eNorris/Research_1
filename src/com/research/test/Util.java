@@ -1,6 +1,11 @@
 package com.research.test;
 
+import java.util.Random;
+
 public class Util {
+	
+	public static Random rand = new Random();
+	
 	// x-y <-> nu-ada transforms
 	static public float nuToX(float nuCoord){
 		return EchelonBundle.screenBundle.oriNu + nuCoord * EchelonBundle.screenBundle.scaleNu;

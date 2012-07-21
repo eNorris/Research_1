@@ -102,11 +102,11 @@ class ImportBundle{
 
 class ScreenBundle{
 	// FIXME - Commented out the old oriX, oriY and scaleX, scaleY
-	public float oriX = 0;
-	public float oriY = 0;
+//	public float oriX = 0;
+//	public float oriY = 0;
 	// TODO - nRest these back to one when done
-	public float scaleX = 1;
-	public float scaleY = 1;
+//	public float scaleX = 1;
+//	public float scaleY = 1;
 	public float height = 1;
 	public float width = 1;
 	// The virtual coordinates of the min/max values drawable to the screen
