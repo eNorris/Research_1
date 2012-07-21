@@ -101,6 +101,7 @@ class ImportBundle{
 }
 
 class ScreenBundle{
+	// FIXME - Commented out the old oriX, oriY and scaleX, scaleY
 	public float oriX = 0;
 	public float oriY = 0;
 	// TODO - nRest these back to one when done
@@ -115,23 +116,25 @@ class ScreenBundle{
 	public float yMax = 1;
 	
 	// FIXME - Replace with Nu-Ada system:
+	// If I implement this, I should use a Utility class for the functions ie Util.yToAda()
+	// EchelonBundle should hold only the data.
 	public float oriNu = 0.0f;
 	public float oriAda = 0.0f;
 	public float scaleNu = 1.0f;
 	public float scaleAda = 1.0f;
-	
-	public static float toXAxis(float adaCoord){
-		return 1.0f;
-	}
-	public static float toYAxis(float nuCoord){
-		return 1.0f;
-	}
-	public static float toAdaAxis(float xCoord){
-		return 1.0f;
-	}
-	public static float toNuAxis(float yCoord){
-		return 1.0f;
-	}
+//	
+//	public float nuToX(float nuCoord){
+//		return oriNu + nuCoord * scaleNu;
+//	}
+//	public float adaToY(float adaCoord){
+//		return oriAda - adaCoord * oriAda;
+//	}
+//	public float xToNu(float xCoord){
+//		return (xCoord - oriNu)/scaleNu;
+//	}
+//	public float yToAda(float yCoord){
+//		return (oriAda - yCoord)/oriAda;
+//	}
 }
 
 class DataBundle{

@@ -41,12 +41,12 @@ public class SpectrumActivity extends Activity {
 					oldYCoord = event.getY();
 					break;
 				case MotionEvent.ACTION_MOVE:
-					// TODO - I have no idea why dividing by two is necessary... 
-					// FIXME - I got rid of the /2 that I didn't even know why it was there....
 					EchelonBundle.screenBundle.oriX += (event.getX() - oldXCoord)/(EchelonBundle.screenBundle.scaleX);
 					EchelonBundle.screenBundle.oriY -= (event.getY() - oldYCoord)/(EchelonBundle.screenBundle.scaleY);
-Log.d(TAG, "oriX = " + EchelonBundle.screenBundle.oriX);
-Log.d(TAG, "scaleX = " + EchelonBundle.screenBundle.scaleX);
+
+					EchelonBundle.screenBundle.oriNu += (Util.xToNu(event.getX()) - Util.xToNu(oldXCoord));
+					EchelonBundle.screenBundle.oriAda -= (Util.yToAda(event.getY()) - Util.yToAda(oldYCoord));
+					
 					oldXCoord = event.getX();
 					oldYCoord = event.getY();
 					break;

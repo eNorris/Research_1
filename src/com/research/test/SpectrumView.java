@@ -13,9 +13,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	
 	private static final String TAG = "GraphView";
 	private SpectrumThread m_graphThread;
-//	private int[] spectrumData = new int[]{
-//			
-//	};
+
 	private Paint paint = new Paint();
 	
 	public int xMax, xMin, yMin, yMax;
@@ -64,6 +62,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 //		EchelonBundle.screenBundle.yMax = getHeight();
 		EchelonBundle.screenBundle.height = (float) (EchelonBundle.screenBundle.yMax = getHeight());
 		EchelonBundle.screenBundle.width = (float) (EchelonBundle.screenBundle.xMax = getWidth());
+		// TODO - Added - verify
+		EchelonBundle.screenBundle.oriAda = EchelonBundle.screenBundle.height;
 		
 		// TODO - make sure these are correct and not zero
 		Log.d(TAG, "Caught height = " + EchelonBundle.screenBundle.height);
@@ -91,31 +91,12 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			
 			// Reset the canvas to solid black
 			canvas.drawColor(Color.BLACK);
-			
-//			EchelonBundle.screenBundle.oriX += 1;
-//			EchelonBundle.screenBundle.oriY += 1;
-			
 			drawSpectrum(canvas);
 			drawAxisSystem(canvas);
 		}
 	}
 	
-//	// TODO data -> EchelonData
 	public void drawSpectrum(Canvas canvas){
-		
-		// Calculate the width of each bar in the graph
-//		if(EchelonBundle.dataBundles == null){
-//			Log.e(TAG, "dataBundles is null!");
-//		}else if(EchelonBundle.dataBundles.length == 0){
-//			Log.e(TAG, "length is zero!");
-//		}else if(EchelonBundle.dataBundles[0] == null){
-//			Log.e(TAG, "dataBundle[0] is null!");
-//		}else if(EchelonBundle.dataBundles[0].data == null){
-//			Log.e(TAG,  "The first dataBundle is empty!");
-//		}else if(EchelonBundle.dataBundles[0].data.length == 0){
-//			Log.e(TAG, "first data has length = 0");
-//		}
-		
 		float width = ((float) canvas.getWidth()) / EchelonBundle.dataBundles[0].data.length * EchelonBundle.screenBundle.scaleX;
 		float max = 0;
 		for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++)
@@ -127,13 +108,10 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		paint.setColor(Color.BLUE);
 		
 		// Draw the bar graph
-		
 		float bottom = EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY;//canvas.getHeight();
 		for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++){
-			// TODO updated x, not y yet
 			float left = i*width+EchelonBundle.screenBundle.oriX;
 			float right = (i+1)*width + EchelonBundle.screenBundle.oriX;
-//			float top = canvas.getHeight() - EchelonBundle.dataBundles[0].data[i]*heightmod;
 			float top = EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY - EchelonBundle.dataBundles[0].data[i]*heightmod;
 			canvas.drawRect(left, top, right, bottom, paint);
 		}
@@ -144,58 +122,149 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		EchelonBundle.configBundle.axisPaint.setColor(Color.GREEN);
 		
 		if(EchelonBundle.configBundle.xAxisOn){
+			
 			// Draw the main x-axis
-			canvas.drawLine(0, 
-					EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY, 
-					canvas.getWidth(), 
-					EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY, 
+//			canvas.drawLine(0, 
+//					EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY, 
+//					canvas.getWidth(), 
+//					EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY, 
+//					EchelonBundle.configBundle.axisPaint
+//			);
+//Log.d(TAG, "yToAda(0) = " + Util.adaToY(0));
+//Log.d(TAG, "oriAda = " + EchelonBundle.screenBundle.oriAda);
+			canvas.drawLine(
+					0, Util.adaToY(0),
+					EchelonBundle.screenBundle.width, Util.adaToY(0),
 					EchelonBundle.configBundle.axisPaint
 			);
-	
+			
 			// Draw tick marks
-			float startPoint = EchelonBundle.screenBundle.oriX;
-			float moveBy = EchelonBundle.configBundle.tickX / EchelonBundle.screenBundle.scaleX;
-			float goal = EchelonBundle.screenBundle.width;
+//			float tickXLength = EchelonBundle.configBundle.tickX * EchelonBundle.screenBundle.scaleX;
+//			float indexer = EchelonBundle.screenBundle.oriNu / EchelonBundle.configBundle.tickX - 
+//					(float) Math.floor((double) (EchelonBundle.screenBundle.oriNu / EchelonBundle.configBundle.tickX));
 			
-			// Set the printhead
-			while(startPoint > 0){
-				startPoint -= moveBy;
-			}
-			
-			while(startPoint < goal){
+			// Draw tick marks to left of origin
+			float drawingPoint = EchelonBundle.screenBundle.oriNu;
+			while(Util.nuToX(drawingPoint) > 0){
 				canvas.drawLine(
-						startPoint,						// start x
-						EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY, 	// start y
-						startPoint, 						// stop x
-						EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY - EchelonBundle.configBundle.tickHeight, // stop y
-						EchelonBundle.configBundle.axisPaint);	// paint
-				startPoint += moveBy;
+						drawingPoint, Util.adaToY(0), 
+						drawingPoint, Util.adaToY(0) - EchelonBundle.configBundle.tickHeight, 
+						EchelonBundle.configBundle.axisPaint
+				);
+				drawingPoint -= EchelonBundle.configBundle.tickX;
 			}
+			// Draw tick marks to right of origin
+			drawingPoint = EchelonBundle.screenBundle.oriNu;
+//Log.d(TAG, "width = " + EchelonBundle.screenBundle.width);
+			while(Util.nuToX(drawingPoint) < EchelonBundle.screenBundle.width){
+				canvas.drawLine(
+						drawingPoint, Util.adaToY(0), 
+						drawingPoint, Util.adaToY(0) - EchelonBundle.configBundle.tickHeight, 
+						EchelonBundle.configBundle.axisPaint
+				);
+				drawingPoint += EchelonBundle.configBundle.tickX;
+			}
+			
+//			// Draw tick marks
+//			float startPoint = EchelonBundle.screenBundle.oriX;
+//			float moveBy = EchelonBundle.configBundle.tickX / EchelonBundle.screenBundle.scaleX;
+//			float goal = EchelonBundle.screenBundle.width;
+//			
+//			// Set the printhead
+//			while(startPoint > 0){
+//				startPoint -= moveBy;
+//			}
+//			
+//			while(startPoint < goal){
+//				canvas.drawLine(
+//						startPoint,						// start x
+//						EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY, 	// start y
+//						startPoint, 						// stop x
+//						EchelonBundle.screenBundle.height - EchelonBundle.screenBundle.oriY - EchelonBundle.configBundle.tickHeight, // stop y
+//						EchelonBundle.configBundle.axisPaint);	// paint
+//				startPoint += moveBy;
+//			}
 		}
+		
+		
 		if(EchelonBundle.configBundle.yAxisOn){
 			// Draw the main y-axis
-			canvas.drawLine(EchelonBundle.screenBundle.oriX, 0, 
-					EchelonBundle.screenBundle.oriX, EchelonBundle.screenBundle.height,
-					EchelonBundle.configBundle.axisPaint);
-			// Draw tick marks
-			float startPoint = EchelonBundle.screenBundle.oriY;
-			float moveBy = EchelonBundle.configBundle.tickY / EchelonBundle.screenBundle.scaleY;
-			float goal = EchelonBundle.screenBundle.height;
+//			canvas.drawLine(EchelonBundle.screenBundle.oriX, 0, 
+//					EchelonBundle.screenBundle.oriX, EchelonBundle.screenBundle.height,
+//					EchelonBundle.configBundle.axisPaint);
+			canvas.drawLine(
+					Util.nuToX(0), 0,
+					Util.nuToX(0), EchelonBundle.screenBundle.height,
+					EchelonBundle.configBundle.axisPaint
+			);
 			
-			///////////////////////////////////
-			while(startPoint < EchelonBundle.screenBundle.height){
-				startPoint += moveBy;
-			}
-			
-			while(startPoint > 0){
+			float drawingPoint = EchelonBundle.screenBundle.oriAda;
+			while(Util.adaToY(drawingPoint) > 0){
 				canvas.drawLine(
-						EchelonBundle.screenBundle.oriX,		// start x
-						startPoint, 						// start y
-						EchelonBundle.screenBundle.oriX + EchelonBundle.configBundle.tickHeight, 	// stop x
-						startPoint, 						// stop y
-						EchelonBundle.configBundle.axisPaint);	// paint
-				startPoint -= moveBy;
+						Util.nuToX(0), drawingPoint,
+						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, drawingPoint, 
+						EchelonBundle.configBundle.axisPaint
+				);
+				drawingPoint += EchelonBundle.configBundle.tickY;
 			}
+			
+			// Draw tick marks to right of origin
+			drawingPoint = EchelonBundle.screenBundle.oriAda;
+			while(Util.adaToY(drawingPoint) < EchelonBundle.screenBundle.height){
+				canvas.drawLine(
+						Util.nuToX(0), drawingPoint,
+						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, drawingPoint, 
+						EchelonBundle.configBundle.axisPaint
+				);
+				drawingPoint -= EchelonBundle.configBundle.tickX;
+			}
+			
+			////////???????????????????????
+
+			// Draw tick marks
+//			float startPoint = EchelonBundle.screenBundle.oriY;
+//			float moveBy = EchelonBundle.configBundle.tickY / EchelonBundle.screenBundle.scaleY;
+//			float goal = EchelonBundle.screenBundle.height;
+//			
+////Log.d(TAG, "start = " + startPoint);
+////Log.d(TAG, "goal = " + goal);
+////Log.d(TAG, "move = " + moveBy);
+//			
+//			float starter = EchelonBundle.screenBundle.oriY;
+//			while(starter > 0){
+//				starter -= moveBy;
+//				canvas.drawLine(
+//						EchelonBundle.screenBundle.oriX,		// start x
+//						startPoint, 						// start y
+//						EchelonBundle.screenBundle.oriX + EchelonBundle.configBundle.tickHeight, 	// stop x
+//						startPoint, 						// stop y
+//						EchelonBundle.configBundle.axisPaint);	// paint
+//			}
+//			starter = EchelonBundle.screenBundle.oriY;
+//			while(starter < goal){
+//				starter += moveBy;
+//				canvas.drawLine(
+//						EchelonBundle.screenBundle.oriX,		// start x
+//						startPoint, 						// start y
+//						EchelonBundle.screenBundle.oriX + EchelonBundle.configBundle.tickHeight, 	// stop x
+//						startPoint, 						// stop y
+//						EchelonBundle.configBundle.axisPaint);	// paint
+//			}
+			
+
+//			while(startPoint < EchelonBundle.screenBundle.height){
+//				startPoint += moveBy;
+//			}
+//			
+//			while(startPoint > 0){
+//				canvas.drawLine(
+//						EchelonBundle.screenBundle.oriX,		// start x
+//						startPoint, 						// start y
+//						EchelonBundle.screenBundle.oriX + EchelonBundle.configBundle.tickHeight, 	// stop x
+//						startPoint, 						// stop y
+//						EchelonBundle.configBundle.axisPaint);	// paint
+//				startPoint -= moveBy;
+//			}
 			///////////////////////////////////
 		}
 	}
