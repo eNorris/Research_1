@@ -16,6 +16,10 @@ import android.widget.Button;
  *    Enter adb connect <device-ip-address>:5555 You should now be connected to the 
  *       Android-powered device and can issue the usual adb commands like adb logcat.
  *    To set your device to listen on USB, enter adb usb.
+ *    
+ * 2) Things to add:
+ *    Add in the config menu:
+ *    	Diplay values in channel no or Energy val
 */
 
 

@@ -1,7 +1,5 @@
 package com.research.test;
 
-import java.util.Random;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -16,7 +14,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	private static final String TAG = "GraphView";
 	private SpectrumThread m_graphThread;
 
-	private Paint paint = new Paint();
+	private Paint spectrumPaint = new Paint();
+	private Paint spectrumLinePaint = new Paint();
 	
 	public int xMax, xMin, yMin, yMax;
 	
@@ -64,6 +63,12 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		EchelonBundle.screenBundle.width = (float) (EchelonBundle.screenBundle.xMax = getWidth());
 		EchelonBundle.screenBundle.oriAda = EchelonBundle.screenBundle.height;
 		
+		// Set the spectrum color
+		// TODO - This should be user set
+		spectrumPaint.setColor(Color.BLUE);
+		spectrumLinePaint.setColor(Color.YELLOW);
+		EchelonBundle.configBundle.axisPaint.setColor(Color.GREEN);
+		
 		Log.d(TAG, "Caught height = " + EchelonBundle.screenBundle.height);
 		Log.d(TAG, "Caught width = " + EchelonBundle.screenBundle.width);
 	}
@@ -84,19 +89,18 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	
 	public void onDraw(Canvas canvas){
 		
-		// FIXME - Delete later
-		EchelonBundle.screenBundle.scaleNu += Util.rand.nextFloat()/100.0f * (Util.rand.nextBoolean() == true ? 1 : -1);
-		EchelonBundle.screenBundle.scaleAda += Util.rand.nextFloat()/100.0f * (Util.rand.nextBoolean() == true ? 1 : -1);
-//		EchelonBundle.screenBundle.scaleNu =5;
-//		EchelonBundle.screenBundle.scaleAda =5;
-//Log.d(TAG, "Analyst: " + Analyst.averageOfData(0));
+		// Uncomment to test random scaling
+//		EchelonBundle.screenBundle.scaleNu += Util.rand.nextFloat()/100.0f * (Util.rand.nextBoolean() == true ? 1 : -1);
+//		EchelonBundle.screenBundle.scaleAda += Util.rand.nextFloat()/100.0f * (Util.rand.nextBoolean() == true ? 1 : -1);
 		
 		if(canvas != null){
-			
-			// Reset the canvas to solid black
+				// Reset the canvas to solid black
 			canvas.drawColor(Color.BLACK);
-			drawSpectrum(canvas);
-			drawLineSpectrum(canvas);
+				// If there is nothin to draw, skip this phase
+			if(EchelonBundle.dataBundles != null && EchelonBundle.dataBundles.length != 0){
+				drawSpectrum(canvas);
+				drawLineSpectrum(canvas);
+			}
 			drawAxisSystem(canvas);
 		}
 	}
@@ -109,17 +113,13 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				max = EchelonBundle.dataBundles[0].data[i];
 		float heightmod = canvas.getHeight() / max;
 		
-		// Set the spectrum color
-		// TODO - This should be user set
-		paint.setColor(Color.BLUE);
-		
-		// Draw the bar graph
+			// Draw the bar graph
 		float bottom = Util.adaToY(0);
 		for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++){
 			float left = i*width+EchelonBundle.screenBundle.oriNu;
 			float right = (i+1)*width + EchelonBundle.screenBundle.oriNu;
 			float top = Util.adaToY(EchelonBundle.dataBundles[0].data[i]*heightmod);
-			canvas.drawRect(left, top, right, bottom, paint);
+			canvas.drawRect(left, top, right, bottom, spectrumPaint);
 		}
 	}
 	
@@ -131,35 +131,29 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				max = EchelonBundle.dataBundles[0].data[i];
 		float heightmod = canvas.getHeight() / max;
 		
-		// Set the spectrum color
-		// TODO - This should be user set
-		paint.setColor(Color.YELLOW);
-		
-		// Draw the bar graph
+		// Draw the line graph
 		for(int i = 0; i < EchelonBundle.dataBundles[0].data.length - 1; i++){
 			float left = i*width+EchelonBundle.screenBundle.oriNu;
 			float right = (i+1)*width + EchelonBundle.screenBundle.oriNu;
 			canvas.drawLine(left, Util.adaToY(EchelonBundle.dataBundles[0].data[i]*heightmod),
 					right, Util.adaToY(EchelonBundle.dataBundles[0].data[i+1]*heightmod), 
-					paint
+					spectrumLinePaint
 			);
 		}
 	}
 	
 	public void drawAxisSystem(Canvas canvas){
-		// TODO - remove the below line later, it should be a user config
-		EchelonBundle.configBundle.axisPaint.setColor(Color.GREEN);
-		
 		if(EchelonBundle.configBundle.xAxisOn){
-			// Draw the main x-axis
+				// Draw the main x-axis
 			canvas.drawLine(
 					0, Util.adaToY(0),
 					EchelonBundle.screenBundle.width, Util.adaToY(0),
 					EchelonBundle.configBundle.axisPaint
 			);
 			
-			// Draw tick marks to left of origin
+				// Draw tick marks to left of origin
 			float drawingPoint = EchelonBundle.screenBundle.oriNu;
+			int tickValue = 1;
 			while(Util.nuToX(drawingPoint) > 0){
 				canvas.drawLine(
 						drawingPoint, Util.adaToY(0), 
@@ -167,10 +161,18 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						EchelonBundle.configBundle.axisPaint
 				);
 				drawingPoint -= EchelonBundle.configBundle.tickX * EchelonBundle.screenBundle.scaleNu;
+				
+					// Draw the values on the axis
+				canvas.drawText("" + -1 * tickValue * EchelonBundle.configBundle.tickX, 	// Text
+						drawingPoint, Util.adaToY(0) + 20, 							// (x,y)
+						EchelonBundle.configBundle.axisPaint						// paint
+				);
+				tickValue += 1;
 			}
 			
-			// Draw tick marks to right of origin
+				// Draw tick marks to right of origin
 			drawingPoint = EchelonBundle.screenBundle.oriNu;
+			tickValue = 1;
 			while(Util.nuToX(drawingPoint) < EchelonBundle.screenBundle.width){
 				canvas.drawLine(
 						drawingPoint, Util.adaToY(0), 
@@ -178,10 +180,16 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						EchelonBundle.configBundle.axisPaint
 				);
 				drawingPoint += EchelonBundle.configBundle.tickX * EchelonBundle.screenBundle.scaleNu;
+				
+				canvas.drawText("" + tickValue * EchelonBundle.configBundle.tickX, 	// Text
+						drawingPoint, Util.adaToY(0) + 20, 							// (x,y)
+						EchelonBundle.configBundle.axisPaint						// paint
+				);
+				tickValue += 1;
 			}
 		}
 		
-		// Draw main Y axis
+			// Draw main Y axis
 		if(EchelonBundle.configBundle.yAxisOn){
 			canvas.drawLine(
 					Util.nuToX(0), 0,
@@ -189,28 +197,25 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 					EchelonBundle.configBundle.axisPaint
 			);
 			
-			// Draw tick marks above the origin
-Log.d(TAG, "starting...");
+				// Draw tick marks above the origin
 			float drawingPoint = 0;//EchelonBundle.screenBundle.oriAda;
 			while(Util.adaToY(drawingPoint) > 0){
-				Log.d(TAG, "drawing top");
 				canvas.drawLine(
-						Util.nuToX(0), drawingPoint,
-						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, drawingPoint, 
+						Util.nuToX(0), Util.adaToY(drawingPoint),
+						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, Util.adaToY(drawingPoint), 
 						EchelonBundle.configBundle.axisPaint
 				);
 				drawingPoint += EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
 			}
 			
-			// Draw tick marks below the origin
+				// Draw tick marks below the origin
 			drawingPoint = 0;//EchelonBundle.screenBundle.oriAda;
 			while(Util.adaToY(drawingPoint) < EchelonBundle.screenBundle.height){
-//Log.d(TAG, "drawing bottom");
-	//			canvas.drawLine(
-		//				Util.nuToX(0), drawingPoint,
-			//			Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, drawingPoint, 
-				//		EchelonBundle.configBundle.axisPaint
-				//);
+				canvas.drawLine(
+						Util.nuToX(0), Util.adaToY(drawingPoint),
+						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, Util.adaToY(drawingPoint), 
+						EchelonBundle.configBundle.axisPaint
+				);
 				drawingPoint -= EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
 			}
 		}

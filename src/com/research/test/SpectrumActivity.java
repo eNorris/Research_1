@@ -17,6 +17,7 @@ public class SpectrumActivity extends Activity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.v(TAG, "calling onCreate()");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.core);
 		
