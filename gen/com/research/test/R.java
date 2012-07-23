@@ -34,19 +34,20 @@ public final class R {
         public static final int configManualDetectButton_id=0x7f060001;
         public static final int configNumBinsTextView_id=0x7f060002;
         public static final int configRecordUntilSpinner_id=0x7f060007;
-        public static final int exportDoneButton_id=0x7f06000b;
-        public static final int helpDoneButton_id=0x7f06000c;
-        public static final int mainConfigButton_id=0x7f06000d;
-        public static final int mainDetNameLabelTextView_id=0x7f060012;
-        public static final int mainDetNameTextView_id=0x7f060013;
-        public static final int mainExitButton_id=0x7f060010;
-        public static final int mainExportButton_id=0x7f06000e;
-        public static final int mainGraphSurfaceView_id=0x7f060011;
-        public static final int mainHelpButton_id=0x7f06000f;
-        public static final int mainOnOffSwitch_id=0x7f060015;
-        public static final int mainSpectrumSurfaceView_id=0x7f060014;
+        public static final int exportDoneButton_id=0x7f06000c;
+        public static final int helpDoneButton_id=0x7f06000d;
+        public static final int mainConfigButton_id=0x7f06000e;
+        public static final int mainDetNameLabelTextView_id=0x7f060013;
+        public static final int mainDetNameTextView_id=0x7f060014;
+        public static final int mainExitButton_id=0x7f060011;
+        public static final int mainExportButton_id=0x7f06000f;
+        public static final int mainGraphSurfaceView_id=0x7f060012;
+        public static final int mainHelpButton_id=0x7f060010;
+        public static final int mainOnOffSwitch_id=0x7f060016;
+        public static final int mainSpectrumSurfaceView_id=0x7f060015;
         public static final int spectrumDoneButton_id=0x7f060009;
-        public static final int spectrumSurfaceView_id=0x7f06000a;
+        public static final int spectrumHorizSeekBar_id=0x7f06000a;
+        public static final int spectrumSurfaceView_id=0x7f06000b;
         public static final int textView1=0x7f060006;
     }
     public static final class layout {
