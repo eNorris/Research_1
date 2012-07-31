@@ -43,7 +43,6 @@ public final class R {
         public static final int mainExportButton_id=0x7f06000f;
         public static final int mainGraphSurfaceView_id=0x7f060012;
         public static final int mainHelpButton_id=0x7f060010;
-        public static final int mainOnOffSwitch_id=0x7f060016;
         public static final int mainSpectrumSurfaceView_id=0x7f060015;
         public static final int spectrumDoneButton_id=0x7f060009;
         public static final int spectrumHorizSeekBar_id=0x7f06000a;

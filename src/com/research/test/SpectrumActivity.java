@@ -3,11 +3,13 @@ package com.research.test;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+//import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+//import android.view.View.OnDragListener;
 import android.widget.Button;
-import android.widget.SeekBar;
+//import android.widget.SeekBar;
 
 public class SpectrumActivity extends Activity {
 	
@@ -24,7 +26,7 @@ public class SpectrumActivity extends Activity {
 		
 		final SpectrumView spectrumView = (SpectrumView) findViewById(R.id.spectrumSurfaceView_id);
 		final Button doneButton = (Button) findViewById(R.id.spectrumDoneButton_id);
-		final SeekBar seekBar = (SeekBar) findViewById(R.id.spectrumHorizSeekBar_id);
+//		final SeekBar seekBar = (SeekBar) findViewById(R.id.spectrumHorizSeekBar_id);
 //		spectrumView.setOnClickListener(new OnClickActivitySwapper(this, SpectrumActivity.class));
 		
 		doneButton.setOnClickListener(new OnClickListener(){
@@ -58,5 +60,43 @@ public class SpectrumActivity extends Activity {
 				return true;
 			}
 		});
+		
+		// Create the scaling for the seek bar
+//		seekBar.setOnDragListener(new OnDragListener(){
+//			private float dragLoc = 0.0f;
+//			public boolean onDrag(View v, DragEvent event) {
+//				if(event.getAction() == DragEvent.ACTION_DRAG_STARTED){
+//					Log.d(TAG, "Drag started");
+//					dragLoc = event.getX();
+//				}else if(event.getAction() == DragEvent.ACTION_DRAG_LOCATION){
+//					EchelonBundle.screenBundle.scaleNu = event.getX()/dragLoc;
+//				}else if(event.getAction() == DragEvent.ACTION_DRAG_ENDED){
+//					Log.d(TAG, "Drag ended");
+//				}else{
+//					Log.v(TAG, "Recieved unknown event action:" + event.toString());
+//				}
+//	Log.d(TAG, "event.x = " + event.getX());
+//				return false;
+//			}
+//			
+//		});
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,7 +20,7 @@
 		*This solution did NOT work for me.
 	-->
 
-    <uses-sdk android:minSdkVersion="15" />
+    <uses-sdk android:minSdkVersion="10" />
 
     <application
         android:icon="@drawable/logo1"
