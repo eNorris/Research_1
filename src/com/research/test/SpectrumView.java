@@ -173,7 +173,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				// Draw tick marks to right of origin
 			drawingPoint = EchelonBundle.screenBundle.oriNu;
 			tickValue = 1;
-			while(Util.nuToX(drawingPoint) < EchelonBundle.screenBundle.width){
+			
+			while(drawingPoint < EchelonBundle.screenBundle.width){	
 				canvas.drawLine(
 						drawingPoint, Util.adaToY(0), 
 						drawingPoint, Util.adaToY(0) - EchelonBundle.configBundle.tickHeight, 
