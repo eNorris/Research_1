@@ -61,7 +61,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		EchelonBundle.screenBundle.yMin = 0;
 		EchelonBundle.screenBundle.height = (float) (EchelonBundle.screenBundle.yMax = getHeight());
 		EchelonBundle.screenBundle.width = (float) (EchelonBundle.screenBundle.xMax = getWidth());
-		EchelonBundle.screenBundle.oriAda = EchelonBundle.screenBundle.height;
+		EchelonBundle.screenBundle.oriAda = EchelonBundle.screenBundle.height - 30;
+		EchelonBundle.screenBundle.oriNu = 60;
 		
 		// Set the spectrum color
 		// TODO - This should be user set
@@ -151,6 +152,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 					EchelonBundle.configBundle.axisPaint
 			);
 			
+			float dataPointWidth = EchelonBundle.screenBundle.width * EchelonBundle.screenBundle.scaleNu / (float) EchelonBundle.dataBundles[0].data.length;
+			
 				// Draw tick marks to left of origin
 			float drawingPoint = EchelonBundle.screenBundle.oriNu;
 			int tickValue = 1;
@@ -160,7 +163,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						drawingPoint, Util.adaToY(0) - EchelonBundle.configBundle.tickHeight, 
 						EchelonBundle.configBundle.axisPaint
 				);
-				drawingPoint -= EchelonBundle.configBundle.tickX * EchelonBundle.screenBundle.scaleNu;
+//				drawingPoint -= EchelonBundle.configBundle.tickX * EchelonBundle.screenBundle.scaleNu;
+				drawingPoint -= EchelonBundle.configBundle.tickX * dataPointWidth;
 				
 					// Draw the values on the axis
 				canvas.drawText("" + -1 * tickValue * EchelonBundle.configBundle.tickX, 	// Text
@@ -180,7 +184,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						drawingPoint, Util.adaToY(0) - EchelonBundle.configBundle.tickHeight, 
 						EchelonBundle.configBundle.axisPaint
 				);
-				drawingPoint += EchelonBundle.configBundle.tickX * EchelonBundle.screenBundle.scaleNu;
+//				drawingPoint += EchelonBundle.configBundle.tickX * EchelonBundle.screenBundle.scaleNu;
+				drawingPoint += EchelonBundle.configBundle.tickX * dataPointWidth;
 				
 				canvas.drawText("" + tickValue * EchelonBundle.configBundle.tickX, 	// Text
 						drawingPoint, Util.adaToY(0) + 20, 							// (x,y)
@@ -198,6 +203,14 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 					EchelonBundle.configBundle.axisPaint
 			);
 			
+// FIXME = do this somewhere else where it is more efficient!
+			int mymax = 5000;
+//			for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++){
+//				if(EchelonBundle.dataBundles[0].data[i] > mymax)
+//					mymax = EchelonBundle.dataBundles[0].data[i];
+//			}
+			float distBetweenYTicks = EchelonBundle.screenBundle.height * EchelonBundle.screenBundle.scaleAda / (float) mymax;
+			
 				// Draw tick marks above the origin
 			float drawingPoint = 0;//EchelonBundle.screenBundle.oriAda;
 			while(Util.adaToY(drawingPoint) > 0){
@@ -206,7 +219,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, Util.adaToY(drawingPoint), 
 						EchelonBundle.configBundle.axisPaint
 				);
-				drawingPoint += EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
+//				drawingPoint += EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
+				drawingPoint += EchelonBundle.configBundle.tickY * distBetweenYTicks;
 			}
 			
 				// Draw tick marks below the origin
@@ -217,7 +231,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, Util.adaToY(drawingPoint), 
 						EchelonBundle.configBundle.axisPaint
 				);
-				drawingPoint -= EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
+//				drawingPoint -= EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
+				drawingPoint -= EchelonBundle.configBundle.tickY * distBetweenYTicks;
 			}
 		}
 	}

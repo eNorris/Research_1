@@ -80,8 +80,8 @@ class ConfigBundle{
 	public boolean yAxisOn = true;
 	public boolean yAxisLog = false;
 	public boolean xAxisLog = false;
-	public float tickX = 100;
-	public float tickY = 100;
+	public float tickX = 500;
+	public float tickY = 500;
 	public float tickHeight = 10;
 	public Paint spectrumPaint = new Paint();
 	public Paint axisPaint = new Paint();
