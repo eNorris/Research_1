@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.Time;
@@ -64,25 +65,30 @@ public class ExportActivity extends Activity{
 					String baseDirectoryName = Environment.getExternalStorageDirectory().toString() + "/SpectrumAnalysis";
 					File baseDirectory = new File(baseDirectoryName);
 //					File directory = new File(Environment.getExternalStoragePublicDirectory(STORAGE_SERVICE).toString() + "/SpectrumAnalysis");
-	//				if(baseDirectory.mkdir()){
-	//					Log.v(TAG, "Created directory: " + baseDirectoryName);
-	//				}else{
-	//					Log.v(TAG, "Did not create directory: " + baseDirectoryName);
-	//				}
 					
 						// Create a new filename with a time/date stamp in the name
 					boolean successCreatingFile = false;
 					String newFilename = baseDirectory.getAbsolutePath() + "/spectrumdata_" + exportTimeStamp + ".sdata";
+					
+// FIXME - check for file existance first
 					Log.v(TAG, "Creating file: " + newFilename);
 					File newFile = new File(newFilename);
-					if(newFile.mkdirs()){
-						Log.v(TAG, "Created file successfully");
-						successCreatingFile = true;
-					}else{
-						Log.d(TAG, "Did not create the file...");
-						Toast.makeText(ExportActivity.this, "Failed to created Folders and/or new file!!!", Toast.LENGTH_LONG).show();
+					if(!newFile.getParentFile().mkdirs()){
+						Log.d(TAG, "Did not create the parent folder");
 					}
 					
+					// If the parent already exists, failure will be returned, so try making the file anyway
+					Log.v(TAG, "Created parent folder(s) successfully");
+					try {
+						newFile.createNewFile();
+						successCreatingFile = true;
+					} catch (IOException e) {
+						Toast.makeText(ExportActivity.this, "Failed to created Folders and/or new file!!!", Toast.LENGTH_LONG).show();
+						Log.d(TAG, "File creation failed");
+						e.printStackTrace();
+					}
+					
+			
 					if(successCreatingFile){
 							// Get the contents that will be written to the file
 						String logput = exportString();
