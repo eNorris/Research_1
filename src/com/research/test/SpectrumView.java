@@ -127,6 +127,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	}
 	
 	public void drawLineSpectrum(Canvas canvas){
+Log.d(TAG, "drawing Line spectrum");
 		float width = EchelonBundle.screenBundle.width / EchelonBundle.dataBundles[0].data.length * EchelonBundle.screenBundle.scaleNu;
 		float max = 0;
 		for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++)

@@ -27,9 +27,12 @@ public class ExportActivity extends Activity{
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+Log.d(TAG, "Got here!");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.export);
 		self = this;
+		
+		Log.v(TAG, "Created ExportActivity");
 		
 		// Realize Layout
 		final Button doneButton = (Button) findViewById(R.id.exportDoneButton_id);
@@ -46,6 +49,7 @@ public class ExportActivity extends Activity{
 		
 		exportButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
+Log.v(TAG, "clicked!");
 				int storageState = externalStorage();
 				switch(storageState){
 				case EXTERNAL_STORAGE_OK:
@@ -82,15 +86,6 @@ public class ExportActivity extends Activity{
 				}
 			}
 		});
-		
-		
-
-		
-//		listView.setOnClickListener(new AdapterView.OnItemClickListener() {
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3){
-//				
-//			}
-//		});
 	}
 	
 	
