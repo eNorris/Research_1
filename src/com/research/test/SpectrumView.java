@@ -127,7 +127,6 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	}
 	
 	public void drawLineSpectrum(Canvas canvas){
-Log.d(TAG, "drawing Line spectrum");
 		float width = EchelonBundle.screenBundle.width / EchelonBundle.dataBundles[0].data.length * EchelonBundle.screenBundle.scaleNu;
 		float max = 0;
 		for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++)
@@ -166,13 +165,12 @@ Log.d(TAG, "drawing Line spectrum");
 						drawingPoint, Util.adaToY(0) - EchelonBundle.configBundle.tickHeight, 
 						EchelonBundle.configBundle.axisPaint
 				);
-//				drawingPoint -= EchelonBundle.configBundle.tickX * EchelonBundle.screenBundle.scaleNu;
 				drawingPoint -= EchelonBundle.configBundle.tickX * dataPointWidth;
 				
 					// Draw the values on the axis
 				canvas.drawText("" + -1 * tickValue * EchelonBundle.configBundle.tickX, 	// Text
-						drawingPoint, Util.adaToY(0) + 20, 							// (x,y)
-						EchelonBundle.configBundle.axisPaint						// paint
+						drawingPoint, Util.adaToY(0) + 20, 									// (x,y)
+						EchelonBundle.configBundle.axisPaint								// paint
 				);
 				tickValue += 1;
 			}
@@ -187,7 +185,6 @@ Log.d(TAG, "drawing Line spectrum");
 						drawingPoint, Util.adaToY(0) - EchelonBundle.configBundle.tickHeight, 
 						EchelonBundle.configBundle.axisPaint
 				);
-//				drawingPoint += EchelonBundle.configBundle.tickX * EchelonBundle.screenBundle.scaleNu;
 				drawingPoint += EchelonBundle.configBundle.tickX * dataPointWidth;
 				
 				canvas.drawText("" + tickValue * EchelonBundle.configBundle.tickX, 	// Text
@@ -214,7 +211,6 @@ Log.d(TAG, "drawing Line spectrum");
 			
 // FIXME - What about divide by zero error?
 			float yTickDistance = EchelonBundle.screenBundle.height / ((float) maxYValue / EchelonBundle.configBundle.tickY);
-Log.d(TAG, "yTickDist = " + yTickDistance);
 			float currentTick = 1;
 			float lowerAdaBound = -1*yTickDistance;
 			float upperAdaBound = yTickDistance;
@@ -226,8 +222,8 @@ Log.d(TAG, "yTickDist = " + yTickDistance);
 						EchelonBundle.configBundle.axisPaint
 				);
 				canvas.drawText("" + currentTick * EchelonBundle.configBundle.tickY, 	// Text
-						Util.nuToX(0) - 50, Util.adaToY(upperAdaBound), 							// (x,y)
-						EchelonBundle.configBundle.axisPaint						// paint
+						Util.nuToX(0) - 50, Util.adaToY(upperAdaBound), 				// (x,y)
+						EchelonBundle.configBundle.axisPaint							// paint
 				);
 				
 				canvas.drawLine(
@@ -236,75 +232,13 @@ Log.d(TAG, "yTickDist = " + yTickDistance);
 						EchelonBundle.configBundle.axisPaint
 				);
 				canvas.drawText("" + -1* currentTick * EchelonBundle.configBundle.tickY, 	// Text
-						Util.nuToX(0) - 50, Util.adaToY(lowerAdaBound), 							// (x,y)
-						EchelonBundle.configBundle.axisPaint						// paint
+						Util.nuToX(0) - 50, Util.adaToY(lowerAdaBound), 					// (x,y)
+						EchelonBundle.configBundle.axisPaint								// paint
 				);
 				currentTick++;
 				upperAdaBound += yTickDistance;
 				lowerAdaBound -= yTickDistance;
 			}
-			
-			
-			
-			
-			
-			
-			
-/*// FIXME = do this somewhere else where it is more efficient!
-			int mymax = 5000;
-//			for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++){
-//				if(EchelonBundle.dataBundles[0].data[i] > mymax)
-//					mymax = EchelonBundle.dataBundles[0].data[i];
-//			}
-			float distBetweenYTicks = EchelonBundle.screenBundle.height * EchelonBundle.screenBundle.scaleAda / (float) mymax;
-			
-				// Draw tick marks above the origin
-			float drawingPoint = 0;//EchelonBundle.screenBundle.oriAda;
-			int tickValue = 1;
-			while(Util.adaToY(drawingPoint) > 0){
-				canvas.drawLine(
-						Util.nuToX(0), Util.adaToY(drawingPoint),
-						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, Util.adaToY(drawingPoint), 
-						EchelonBundle.configBundle.axisPaint
-				);
-//				drawingPoint += EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
-				drawingPoint += EchelonBundle.configBundle.tickY * distBetweenYTicks;
-				
-// FIXME - Correct offset to be dynamic
-				canvas.drawText("" + tickValue * EchelonBundle.configBundle.tickY, 	// Text
-						Util.nuToX(0) - 50, drawingPoint, 							// (x,y)
-						EchelonBundle.configBundle.axisPaint						// paint
-				);
-				tickValue++;
-			}
-			
-				// Draw tick marks below the origin
-			tickValue = -1;
-			drawingPoint = 0;//EchelonBundle.screenBundle.oriAda;
-			while(Util.adaToY(drawingPoint) < EchelonBundle.screenBundle.height){
-				canvas.drawLine(
-						Util.nuToX(0), Util.adaToY(drawingPoint),
-						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, Util.adaToY(drawingPoint), 
-						EchelonBundle.configBundle.axisPaint
-				);
-//				drawingPoint -= EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
-				drawingPoint -= EchelonBundle.configBundle.tickY * distBetweenYTicks;
-				
-				canvas.drawText("" + tickValue * EchelonBundle.configBundle.tickY, 	// Text
-						Util.nuToX(0) - 50, drawingPoint, 							// (x,y)
-						EchelonBundle.configBundle.axisPaint						// paint
-				);
-				tickValue--;
-			}*/
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		}
 	}
 }
