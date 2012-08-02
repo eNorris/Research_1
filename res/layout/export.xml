@@ -3,6 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/exportExportButton_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exportExport_str" />
+
+    <ListView
+        android:id="@+id/listView_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    </ListView>
 
     <Button
         android:id="@+id/exportDoneButton_id"

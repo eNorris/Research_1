@@ -48,5 +48,6 @@
 	<string name="coreDoneButton_str">Done</string>
 	<string name="configAutoRescale_str">Auto Rescale Options</string>
 	<string name="configRecordUntil_str">Record Until...</string>
+	<string name="exportExport_str">Export</string>
 
 </resources>
