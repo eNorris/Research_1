@@ -3,12 +3,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/exportExportButton_id"
+        <TextView
+            android:id="@+id/exportFileNameTextView_idn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/exportFilename_str"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/exportFilenameEditText_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/exportFilenameFullTextView_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/exportExport_str" />
+        android:layout_gravity="center"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/exportTimeStampCheckBox_id"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="100"
+            android:text="@string/exportTimeStamp_str" />
+        
+        <Button
+            android:id="@+id/exportExportButton_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/exportExport_str" />
+        
+    </LinearLayout>
+
+    
 
     <ListView
         android:id="@+id/listView_id"

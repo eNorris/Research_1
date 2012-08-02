@@ -49,5 +49,7 @@
 	<string name="configAutoRescale_str">Auto Rescale Options</string>
 	<string name="configRecordUntil_str">Record Until...</string>
 	<string name="exportExport_str">Export</string>
+	<string name="exportFilename_str">Filename:</string>
+	<string name="exportTimeStamp_str">Time Stamp</string>
 
 </resources>
