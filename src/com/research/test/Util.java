@@ -20,6 +20,22 @@ public class Util {
 		return (EchelonBundle.screenBundle.oriAda - yCoord)/EchelonBundle.screenBundle.scaleAda;
 	}
 	
+	static public float nuLeft(){
+		return xToNu(0);
+	}
+	
+	static public float nuRight(){
+		return xToNu(EchelonBundle.screenBundle.width);
+	}
+	
+	static public float adaTop(){
+		return yToAda(0);
+	}
+	
+	static public float adaBottom(){
+		return yToAda(EchelonBundle.screenBundle.height);
+	}
+	
 	// shortcuts to nu and ada
 //	static public float nu(){
 //		return EchelonBundle.screenBundle.oriNu;

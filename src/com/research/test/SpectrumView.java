@@ -57,10 +57,12 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	}
 	
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-		EchelonBundle.screenBundle.xMin = 0;
-		EchelonBundle.screenBundle.yMin = 0;
-		EchelonBundle.screenBundle.height = (float) (EchelonBundle.screenBundle.yMax = getHeight());
-		EchelonBundle.screenBundle.width = (float) (EchelonBundle.screenBundle.xMax = getWidth());
+//		EchelonBundle.screenBundle.xMin = 0;
+//		EchelonBundle.screenBundle.yMin = 0;
+//		EchelonBundle.screenBundle.height = (float) (EchelonBundle.screenBundle.yMax = getHeight());
+//		EchelonBundle.screenBundle.width = (float) (EchelonBundle.screenBundle.xMax = getWidth());
+		EchelonBundle.screenBundle.height = getHeight();
+		EchelonBundle.screenBundle.width = getWidth();
 		EchelonBundle.screenBundle.oriAda = EchelonBundle.screenBundle.height - 30;
 		EchelonBundle.screenBundle.oriNu = 60;
 		
@@ -203,7 +205,51 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 					EchelonBundle.configBundle.axisPaint
 			);
 			
-// FIXME = do this somewhere else where it is more efficient!
+			int maxYValue = 0;
+			for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++){
+				if(EchelonBundle.dataBundles[0].data[i] > maxYValue)
+					maxYValue = EchelonBundle.dataBundles[0].data[i];
+			}
+			
+// FIXME - What about divide by zero error?
+			float yTickDistance = EchelonBundle.screenBundle.height / ((float) maxYValue / EchelonBundle.configBundle.tickY);
+Log.d(TAG, "yTickDist = " + yTickDistance);
+			float currentTick = 1;
+			float lowerAdaBound = -1*yTickDistance;
+			float upperAdaBound = yTickDistance;
+			
+			while(upperAdaBound < Util.adaTop() || lowerAdaBound > Util.adaBottom()){
+				canvas.drawLine(
+						Util.nuToX(0), Util.adaToY(upperAdaBound),
+						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, Util.adaToY(upperAdaBound), 
+						EchelonBundle.configBundle.axisPaint
+				);
+				canvas.drawText("" + currentTick * EchelonBundle.configBundle.tickY, 	// Text
+						Util.nuToX(0) - 50, Util.adaToY(upperAdaBound), 							// (x,y)
+						EchelonBundle.configBundle.axisPaint						// paint
+				);
+				
+				canvas.drawLine(
+						Util.nuToX(0), Util.adaToY(lowerAdaBound),
+						Util.nuToX(0) + EchelonBundle.configBundle.tickHeight, Util.adaToY(lowerAdaBound), 
+						EchelonBundle.configBundle.axisPaint
+				);
+				canvas.drawText("" + -1* currentTick * EchelonBundle.configBundle.tickY, 	// Text
+						Util.nuToX(0) - 50, Util.adaToY(lowerAdaBound), 							// (x,y)
+						EchelonBundle.configBundle.axisPaint						// paint
+				);
+				currentTick++;
+				upperAdaBound += yTickDistance;
+				lowerAdaBound -= yTickDistance;
+			}
+			
+			
+			
+			
+			
+			
+			
+/*// FIXME = do this somewhere else where it is more efficient!
 			int mymax = 5000;
 //			for(int i = 0; i < EchelonBundle.dataBundles[0].data.length; i++){
 //				if(EchelonBundle.dataBundles[0].data[i] > mymax)
@@ -213,6 +259,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			
 				// Draw tick marks above the origin
 			float drawingPoint = 0;//EchelonBundle.screenBundle.oriAda;
+			int tickValue = 1;
 			while(Util.adaToY(drawingPoint) > 0){
 				canvas.drawLine(
 						Util.nuToX(0), Util.adaToY(drawingPoint),
@@ -221,9 +268,17 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				);
 //				drawingPoint += EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
 				drawingPoint += EchelonBundle.configBundle.tickY * distBetweenYTicks;
+				
+// FIXME - Correct offset to be dynamic
+				canvas.drawText("" + tickValue * EchelonBundle.configBundle.tickY, 	// Text
+						Util.nuToX(0) - 50, drawingPoint, 							// (x,y)
+						EchelonBundle.configBundle.axisPaint						// paint
+				);
+				tickValue++;
 			}
 			
 				// Draw tick marks below the origin
+			tickValue = -1;
 			drawingPoint = 0;//EchelonBundle.screenBundle.oriAda;
 			while(Util.adaToY(drawingPoint) < EchelonBundle.screenBundle.height){
 				canvas.drawLine(
@@ -233,7 +288,22 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				);
 //				drawingPoint -= EchelonBundle.configBundle.tickY * EchelonBundle.screenBundle.scaleAda;
 				drawingPoint -= EchelonBundle.configBundle.tickY * distBetweenYTicks;
-			}
+				
+				canvas.drawText("" + tickValue * EchelonBundle.configBundle.tickY, 	// Text
+						Util.nuToX(0) - 50, drawingPoint, 							// (x,y)
+						EchelonBundle.configBundle.axisPaint						// paint
+				);
+				tickValue--;
+			}*/
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 	}
 }

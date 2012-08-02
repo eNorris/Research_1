@@ -4,6 +4,8 @@
 	android:versionCode="1"
 	android:versionName="1.0" 
 	android:installLocation="preferExternal">
+	<uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
 	<!-- 
 		FIXME - Remove The above Line, this is just a band-aid solution for now.
 		The issue seems to be that the emulator may think it is out of memory when it 

@@ -110,10 +110,10 @@ class ScreenBundle{
 	public float height = 1;
 	public float width = 1;
 	// The virtual coordinates of the min/max values drawable to the screen
-	public float xMin = 1;
-	public float xMax = 1;
-	public float yMin = 1;
-	public float yMax = 1;
+//	public float xMin = 1;
+//	public float xMax = 1;
+//	public float yMin = 1;
+//	public float yMax = 1;
 	
 	// FIXME - Replace with Nu-Ada system:
 	// If I implement this, I should use a Utility class for the functions ie Util.yToAda()
