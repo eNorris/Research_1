@@ -154,6 +154,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 					EchelonBundle.configBundle.axisPaint
 			);
 			
+			if(EchelonBundle.dataBundles.length == 0 || EchelonBundle.dataBundles[0].data == null || EchelonBundle.dataBundles[0].data.length == 0)
+				return;
 			float dataPointWidth = EchelonBundle.screenBundle.width * EchelonBundle.screenBundle.scaleNu / (float) EchelonBundle.dataBundles[0].data.length;
 			
 				// Draw tick marks to left of origin

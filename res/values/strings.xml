@@ -5,7 +5,7 @@
 	<string name="detectorName_str">&lt;Detector Name></string>
 	<string name="config_str">Configuration</string>
 	<string name="startButtonLabel_str">Start</string>
-	<string name="exportLabel_str">Export</string>
+	<string name="exportLabel_str">Import/Export</string>
 	<string name="helpLabel_str">Help</string>
 	<string name="recordLabel_str">Record</string>
 	<string name="autoDetectLabel_str">Auto Detect Detector</string>

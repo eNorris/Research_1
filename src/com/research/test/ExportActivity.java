@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.research.test.ExportBundle.FileExtension;
 import com.research.test.ExportBundle.NewLineCode;
 
 import android.app.Activity;
@@ -88,18 +89,7 @@ public class ExportActivity extends Activity{
 				updateFilenames();
 			}
 		});
-		
-//		userFilenameEditText.setOnEditorActionListener(new OnEditorActionListener(){
-//
-//			public boolean onEditorAction(TextView arg0, int arg1, KeyEvent arg2) {
-//				// TODO Auto-generated method stub
-//				return false;
-//			}
-//			
-//		});
-		
-		
-		
+	
 		exportButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				exportTimeStamp = timeDateStamp();
@@ -114,7 +104,7 @@ public class ExportActivity extends Activity{
 					
 						// Create a new filename with a time/date stamp in the name
 					boolean successCreatingFile = false;
-					String newFilename = baseDirectory.getAbsolutePath() + EchelonBundle.exportBundle.outFile;
+					String newFilename = baseDirectory.getAbsolutePath() + "/" + EchelonBundle.exportBundle.outFile;
 							//"/spectrumdata_" + exportTimeStamp + ".sdata";
 					
 // FIXME - check for file existance first
@@ -183,6 +173,9 @@ public class ExportActivity extends Activity{
 				}
 			}
 		});
+		
+		filenameTextView.setText(EchelonBundle.exportBundle.outFile);
+		userFilenameEditText.setText(EchelonBundle.exportBundle.userInput);
 	}
 	
 	
@@ -201,16 +194,28 @@ public class ExportActivity extends Activity{
 	public static String exportString(){
 		String toReturn = "";
 	
-		toReturn += "#   =====  Spectrum Analysis Software  =====   " + endl();
-		toReturn += "# Authors: Dr. Xin Liu and Edward Norris" + endl();
-		toReturn += "# Missouri University of Science and Technology" + endl();
-		toReturn += "# " + exportTimeStamp + endl() + endl();
-		for(int i = 0; i < EchelonBundle.dataBundles.length; i++){
-			toReturn += "DATASET=" + i + endl();
-			toReturn += "CHANNELCOUNT=" + EchelonBundle.dataBundles[0].data.length + endl();
-			for(int j = 0; j < EchelonBundle.dataBundles[i].data.length; j++){
-				toReturn += (EchelonBundle.dataBundles[i].data[j] + ",");
+		if(EchelonBundle.exportBundle.fileExtension == FileExtension.SDATA){
+			toReturn += "#   =====  Spectrum Analysis Software  =====   " + endl();
+			toReturn += "# Authors: Dr. Xin Liu and Edward Norris" + endl();
+			toReturn += "# Missouri University of Science and Technology" + endl();
+			toReturn += "# " + exportTimeStamp + endl() + endl();
+			for(int i = 0; i < EchelonBundle.dataBundles.length; i++){
+				toReturn += "DATASET=" + i + endl();
+				toReturn += "CHANNELCOUNT=" + EchelonBundle.dataBundles[0].data.length + endl();
+				for(int j = 0; j < EchelonBundle.dataBundles[i].data.length; j++){
+					toReturn += (EchelonBundle.dataBundles[i].data[j] + ",");
+				}
 			}
+		}else if(EchelonBundle.exportBundle.fileExtension == FileExtension.CSV){
+			for(int i = 0; i < EchelonBundle.dataBundles.length; i++){
+				toReturn += "DATASET=" + i + endl();
+				toReturn += "CHANNELCOUNT=" + EchelonBundle.dataBundles[0].data.length + endl();
+				for(int j = 0; j < EchelonBundle.dataBundles[i].data.length; j++){
+					toReturn += (EchelonBundle.dataBundles[i].data[j] + ",");
+				}
+			}
+		}else{
+			Log.d(TAG, "Unknown file extension requested(" + EchelonBundle.exportBundle.fileExtension.toString() + ")");
 		}
 		
 		return toReturn;
