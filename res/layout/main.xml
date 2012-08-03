@@ -23,29 +23,55 @@
             android:layout_height="wrap_content"
             android:text="@string/config_str" />
             -->
-
+
         <Button
             android:id="@+id/mainExportButton_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".5"
+            android:layout_weight=".45"
             android:text="@string/exportLabel_str" />
 
     </LinearLayout>
-	   
-
-
-    <Button
-        android:id="@+id/mainHelpButton_id"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/helpLabel_str" />
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/mainAnalysisButton_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".85"
+            android:text="@string/mainAnalysisButton_str" />
+
+        <Button
+            android:id="@+id/mainDataManagementButton_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".35"
+            android:text="@string/mainDataManagementButton_str" />
 
-    <Button
-        android:id="@+id/mainExitButton_id"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mainExitButton_str" />
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/mainHelpButton_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="@string/helpLabel_str" />
+
+        <Button
+            android:id="@+id/mainExitButton_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="@string/mainExitButton_str" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/mainGraphSurfaceView_id"
@@ -60,13 +86,14 @@
             android:layout_height="wrap_content"
             android:text="@string/detectorNameLabel_str"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
         <TextView
             android:id="@+id/mainDetNameTextView_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/detectorName_str"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
 		<!--
         <SurfaceView
             android:id="@+id/mainSpectrumSurfaceView_id"

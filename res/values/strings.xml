@@ -2,7 +2,7 @@
 <resources>
 	<string name="app_name">Research App #1</string>
 	<string name="detectorNameLabel_str">Currently Connected Detector:</string>
-	<string name="detectorName_str">&lt;Detector Name></string>
+	<string name="detectorName_str">&lt;Simulation&gt;</string>
 	<string name="config_str">Configuration</string>
 	<string name="startButtonLabel_str">Start</string>
 	<string name="exportLabel_str">Import/Export</string>
@@ -51,5 +51,7 @@
 	<string name="exportExport_str">Export</string>
 	<string name="exportFilename_str">Filename:</string>
 	<string name="exportTimeStamp_str">Time Stamp</string>
+	<string name="mainAnalysisButton_str">Analysis Tools</string>
+	<string name="mainDataManagementButton_str">Data Management</string>
 
 </resources>
