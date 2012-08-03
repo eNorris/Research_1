@@ -20,6 +20,8 @@ import android.widget.Button;
  * 2) Things to add:
  *    Add in the config menu:
  *    	Diplay values in channel no or Energy val
+ *    Change the manifest so each page has its own unique name ie Research App - Export
+ *    Prevent reset of scaling and translation when changing SurfaceView, only on creation
 */
 
 
@@ -51,6 +53,7 @@ public class MainActivity extends Activity {
 		// Realize the Layout
 		final Button configButton = (Button) findViewById(R.id.mainConfigButton_id);
 		final Button exportButton = (Button) findViewById(R.id.mainExportButton_id);
+// FIXME - Add analysis and DataMan buttons here after creating the activity
 		final Button helpButton = (Button) findViewById(R.id.mainHelpButton_id);
 		final Button exitButton = (Button) findViewById(R.id.mainExitButton_id);
 		final SpectrumView smallSpectrumView = (SpectrumView) findViewById(R.id.mainSpectrumSurfaceView_id);
