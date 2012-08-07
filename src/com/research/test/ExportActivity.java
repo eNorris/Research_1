@@ -199,19 +199,19 @@ public class ExportActivity extends Activity{
 			toReturn += "# Authors: Dr. Xin Liu and Edward Norris" + endl();
 			toReturn += "# Missouri University of Science and Technology" + endl();
 			toReturn += "# " + exportTimeStamp + endl() + endl();
-			for(int i = 0; i < EchelonBundle.dataBundles.length; i++){
+			for(int i = 0; i < EchelonBundle.dataBundles.size(); i++){
 				toReturn += "DATASET=" + i + endl();
-				toReturn += "CHANNELCOUNT=" + EchelonBundle.dataBundles[0].data.length + endl();
-				for(int j = 0; j < EchelonBundle.dataBundles[i].data.length; j++){
-					toReturn += (EchelonBundle.dataBundles[i].data[j] + ",");
+				toReturn += "CHANNELCOUNT=" + EchelonBundle.dataBundles.get(i).data.length + endl();
+				for(int j = 0; j < EchelonBundle.dataBundles.get(i).data.length; j++){
+					toReturn += (EchelonBundle.dataBundles.get(i).data[j] + ",");
 				}
 			}
 		}else if(EchelonBundle.exportBundle.fileExtension == FileExtension.CSV){
-			for(int i = 0; i < EchelonBundle.dataBundles.length; i++){
+			for(int i = 0; i < EchelonBundle.dataBundles.size(); i++){
 				toReturn += "DATASET=" + i + endl();
-				toReturn += "CHANNELCOUNT=" + EchelonBundle.dataBundles[0].data.length + endl();
-				for(int j = 0; j < EchelonBundle.dataBundles[i].data.length; j++){
-					toReturn += (EchelonBundle.dataBundles[i].data[j] + ",");
+				toReturn += "CHANNELCOUNT=" + EchelonBundle.dataBundles.get(i).data.length + endl();
+				for(int j = 0; j < EchelonBundle.dataBundles.get(i).data.length; j++){
+					toReturn += (EchelonBundle.dataBundles.get(i).data[j] + ",");
 				}
 			}
 		}else{

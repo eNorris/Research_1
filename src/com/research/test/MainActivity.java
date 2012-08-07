@@ -22,6 +22,10 @@ import android.widget.Button;
  *    	Diplay values in channel no or Energy val
  *    Change the manifest so each page has its own unique name ie Research App - Export
  *    Prevent reset of scaling and translation when changing SurfaceView, only on creation
+ *    Implement e-mailing spectrum data
+ *    Multiple spectrums viewed simultaneously - choose spectrum
+ *    autofit algorithm
+ *    Always show axes
 */
 
 

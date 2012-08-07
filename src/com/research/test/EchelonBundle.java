@@ -1,5 +1,7 @@
 package com.research.test;
 
+import java.util.ArrayList;
+
 import android.graphics.Paint;
 import android.util.Log;
 
@@ -9,66 +11,52 @@ public class EchelonBundle {
 	public static ImportBundle importBundle = new ImportBundle();
 	public static ScreenBundle screenBundle = new ScreenBundle();
 	public static int dataBundleCount = 0;
-	public static DataBundle[] dataBundles = new DataBundle[0]; //TODO - Can you do this? [0]
+	
+	
+	
+	
+	// Used to use a static array, I don't really know why. this is updated
+	// to use an ArrayList object
+	//public static DataBundle[] dataBundles = new DataBundle[0]; //TODO - Can you do this? [0]
+	public static ArrayList<DataBundle> dataBundles = new ArrayList<DataBundle>();
+	
+	
 	public static final String TAG = "EchelonBundle";
 	
 	// You aren't allowed to create an EchelonBundle object
-	private EchelonBundle(){
-//		addDataBundle();
-	}
+	private EchelonBundle(){}
 	
-	public static void addDataBundle(){
-		dataBundleCount++;
-		DataBundle[] t = new DataBundle[dataBundleCount];
-//		Log.d(TAG, "Created a new DataBundle of size " + dataBundleCount);
-		// All but the last are copied
-		for(int i = 0; i < dataBundleCount-1; i++){
-			t[i] = dataBundles[i];
-		}
-		// The last element is a new DataBundle
-//		Log.d(TAG, "Before accessing, length = " + t.length);
-		t[dataBundleCount-1] = new DataBundle();
-		dataBundles = t;
-		Log.v(TAG, "Added new DataBundle object");
-	}
-	
-//	/**
-//	 * Calculates various statistical values for a given DataBundle
-//	 * 
-//	 * @param i
-//	 * 	Index of the DataBundle that will be calculated
-//	 */
-//	public static void calculateDataBundle(int i){
-//		
-//	}
-//	
-//	/**
-//	 * Refreshes all information calculated by calculateDataBundle() for
-//	 * each DataBundle
-//	 */
-//	public static void calcualteAllDataBundles(){
-//		for(int i = 0; i < dataBundleCount; i++){
-//			calculateDataBundle(i);
+//	public static void addDataBundle(){
+//		dataBundleCount++;
+//		DataBundle[] t = new DataBundle[dataBundleCount];
+//			// All but the last are copied
+//		for(int i = 0; i < dataBundleCount-1; i++){
+//			t[i] = dataBundles[i];
 //		}
+//		// The last element is a new DataBundle
+//		t[dataBundleCount-1] = new DataBundle();
+//		dataBundles = t;
+//		Log.v(TAG, "Added new DataBundle object");
 //	}
 	
-	public static void removeDataBundle(int index){
-		DataBundle[] t = new DataBundle[dataBundleCount--];
-		for(int i = 0; i < index; i++){
-			t[i] = dataBundles[i];
-		}
-		for(int i = index; i < dataBundleCount+1; i++){
-			t[i-1] = dataBundles[i];
-		}
-		dataBundles = t;
-	}
+//	public static void removeDataBundle(int index){
+//		DataBundle[] t = new DataBundle[dataBundleCount--];
+//		for(int i = 0; i < index; i++){
+//			t[i] = dataBundles[i];
+//		}
+//		for(int i = index; i < dataBundleCount+1; i++){
+//			t[i-1] = dataBundles[i];
+//		}
+//		dataBundles = t;
+//	}
 	
 	public static void clearAll(){
 		configBundle = new ConfigBundle();
 		exportBundle = new ExportBundle();
 		importBundle = new ImportBundle();
 		dataBundleCount = 1;
-		dataBundles = new DataBundle[1];
+//		dataBundles = new DataBundle[1];
+		dataBundles.clear();
 	}
 }
 
@@ -124,6 +112,7 @@ class ScreenBundle{
 class DataBundle{
 	public int bins = 1024;
 	public int[] data = new int[bins];
+	public float energyCalibration = 1.0f;
 	
 //	public ArrayList<int[]> data = new ArrayList<int[]>();
 	

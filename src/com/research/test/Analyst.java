@@ -9,13 +9,13 @@ public class Analyst {
 	}
 
 	public static float averageOfData(int index){
-		if(index >= EchelonBundle.dataBundles.length)
+		if(index >= EchelonBundle.dataBundles.size())
 			return Float.NaN;
 		float toReturn = 0.0f;
-		for(int i = 0; i < EchelonBundle.dataBundles[index].data.length; i++){
-			toReturn += EchelonBundle.dataBundles[index].data[i];
+		for(int i = 0; i < EchelonBundle.dataBundles.get(index).data.length; i++){
+			toReturn += EchelonBundle.dataBundles.get(index).data[i];
 		}
-		return toReturn/EchelonBundle.dataBundles[index].data.length;
+		return toReturn/EchelonBundle.dataBundles.get(index).data.length;
 	}
 	
 	public static float devBetweenSpectrums(int dataset1, int dataset2){
@@ -25,14 +25,14 @@ public class Analyst {
 	public static ArrayList<Integer> autoPeakDetect(int dataset){
 		ArrayList<Integer> toReturn = new ArrayList<Integer>();
 		
-		if(dataset >= EchelonBundle.dataBundles.length)
+		if(dataset >= EchelonBundle.dataBundles.size())
 			return null;
 		
-		if(EchelonBundle.dataBundles[dataset] == null)
+		if(EchelonBundle.dataBundles.get(dataset) == null)
 			return null;
 		
-		for(int i = 5; i < EchelonBundle.dataBundles[dataset].data.length; i++){
-			if(EchelonBundle.dataBundles[dataset].data[i] > EchelonBundle.dataBundles[dataset].data[i-5] + 50){
+		for(int i = 5; i < EchelonBundle.dataBundles.get(dataset).data.length; i++){
+			if(EchelonBundle.dataBundles.get(dataset).data[i] > EchelonBundle.dataBundles.get(dataset).data[i-5] + 50){
 				toReturn.add(i);
 				toReturn.remove(i-5);
 			}
@@ -46,7 +46,7 @@ public class Analyst {
 		float toReturn = 1.0f;
 		
 		if(peaks.size() == 1){
-			toReturn = EchelonBundle.dataBundles[dataset].data[peaks.get(0)] / 662;
+			toReturn = EchelonBundle.dataBundles.get(dataset).data[peaks.get(0)] / 662;
 		}
 		
 		return toReturn;
