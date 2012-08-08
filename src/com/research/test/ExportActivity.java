@@ -11,6 +11,7 @@ import com.research.test.ExportBundle.NewLineCode;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
@@ -301,6 +302,7 @@ public class ExportActivity extends Activity{	//ListActivity{
 		
 		
 		importListView.setAdapter(fileList);
+		importListView.setBackgroundColor(Color.RED);
 
 	
 //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,android.R.id.text1, mylist);   
