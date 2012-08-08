@@ -1,6 +1,7 @@
 package com.research.test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.graphics.Paint;
 import android.util.Log;
@@ -96,7 +97,11 @@ class ExportBundle{
 }
 
 class ImportBundle{
-	public String inFile = "spectrumData";
+	public String inFile = "/";
+	
+	public List<String> items = new ArrayList<String>();
+	public List<String> importFilePath = new ArrayList<String>();
+	
 }
 
 class ScreenBundle{
