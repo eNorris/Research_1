@@ -45,6 +45,8 @@ public class MainActivity extends Activity {
 	public static final int RESULT_HELP_OK = 5;
 	public static final int RESULT_HELP_CANCEL = 6;
 	public static final int RESULT_SPECTRUM_DONE = 7;
+	public static final int RESULT_IMPORT_OK = 8;
+	public static final int RESULT_ANALYSIS_OK = 9;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,18 +58,25 @@ public class MainActivity extends Activity {
 		
 		// Realize the Layout
 		final Button configButton = (Button) findViewById(R.id.mainConfigButton_id);
+		final Button analysisButton = (Button) findViewById(R.id.mainAnalysisButton_id);
 		final Button exportButton = (Button) findViewById(R.id.mainExportButton_id);
-// FIXME - Add analysis and DataMan buttons here after creating the activity
+		final Button importButton = (Button) findViewById(R.id.mainImportButton_id);
 		final Button helpButton = (Button) findViewById(R.id.mainHelpButton_id);
 		final Button exitButton = (Button) findViewById(R.id.mainExitButton_id);
 		final SpectrumView smallSpectrumView = (SpectrumView) findViewById(R.id.mainSpectrumSurfaceView_id);
-//		final TextView currentDetectorTextView = (TextView) findViewById(R.id.mainDetNameTextView_id);
 		
 		// Add OnClick Listeners
-		configButton.setOnClickListener(new OnClickActivitySwapper(this, ConfigActivity.class));
-		exportButton.setOnClickListener(new OnClickActivitySwapper(this, ExportActivity.class));
-		helpButton.setOnClickListener(new OnClickActivitySwapper(this, HelpActivity.class));
-		smallSpectrumView.setOnClickListener(new OnClickActivitySwapper(this, SpectrumActivity.class));
+		try {
+			configButton.setOnClickListener(new OnClickActivitySwapper(this, ConfigActivity.class));
+			analysisButton.setOnClickListener(new OnClickActivitySwapper(this, AnalysisActivity.class));
+			importButton.setOnClickListener(new OnClickActivitySwapper(this, ImportActivity.class));
+			exportButton.setOnClickListener(new OnClickActivitySwapper(this, ExportActivity.class));
+			helpButton.setOnClickListener(new OnClickActivitySwapper(this, HelpActivity.class));
+			smallSpectrumView.setOnClickListener(new OnClickActivitySwapper(this, SpectrumActivity.class));
+		} catch (Exception e) {
+			Log.e(TAG, "Failed to link all activities!");
+			e.printStackTrace();
+		}
 		
 		exitButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
@@ -97,6 +106,10 @@ public class MainActivity extends Activity {
 		case RESULT_HELP_CANCEL:
 			break;
 		case RESULT_SPECTRUM_DONE:
+			break;
+		case RESULT_IMPORT_OK:
+			break;
+		case RESULT_ANALYSIS_OK:
 			break;
 		default:
 			Log.e(TAG, "Result code (" + resultCode + ") was not found");
