@@ -165,13 +165,13 @@ public class ExportActivity extends Activity{	//ListActivity{
 		
 		////////////////////////////////////////////////////////////////////////////////////////
 		
-		
-		getDir(EchelonBundle.importBundle.inFile);
-		
-		
-		
+		// Build the list
 		filenameTextView.setText(EchelonBundle.exportBundle.outFile);
 		userFilenameEditText.setText(EchelonBundle.exportBundle.userInput);
+		
+		// Set the directory
+		loadDirectory(EchelonBundle.importBundle.inFile);
+				
 	}// END - onCreate()
 	
 	
@@ -260,7 +260,7 @@ public class ExportActivity extends Activity{	//ListActivity{
 		filenameTextView.setText(EchelonBundle.exportBundle.outFile);
 	}
 	
-	private void getDir(String dirPath)
+	private void loadDirectory(String dirPath)
 	{
 		importFilePath.setText("Location: " + dirPath);
 		EchelonBundle.importBundle.items = new ArrayList<String>();
@@ -296,13 +296,14 @@ public class ExportActivity extends Activity{	//ListActivity{
 
 		ArrayAdapter<String> fileList = new ArrayAdapter<String>(
 				this, 
-				android.R.layout.simple_list_item_1,android.R.id.text1, 
+				android.R.layout.simple_list_item_1,
+				android.R.id.text1, 
 				EchelonBundle.importBundle.items);
-		
-		
 		
 		importListView.setAdapter(fileList);
 		importListView.setBackgroundColor(Color.RED);
+		
+		Log.d(TAG, "list size: "+ importListView.getCount());
 
 	
 //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,android.R.id.text1, mylist);   
