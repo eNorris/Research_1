@@ -5,7 +5,7 @@
 	<string name="detectorName_str">&lt;Simulation&gt;</string>
 	<string name="config_str">Configuration</string>
 	<string name="startButtonLabel_str">Start</string>
-	<string name="exportLabel_str">Import/Export</string>
+	<string name="exportLabel_str">Export</string>
 	<string name="helpLabel_str">Help</string>
 	<string name="recordLabel_str">Record</string>
 	<string name="autoDetectLabel_str">Auto Detect Detector</string>
@@ -45,6 +45,7 @@
 	</string-array>
 	
 	<string name="mainExitButton_str">Exit</string>
+	<string name="mainImportButton_str">Import</string>
 	<string name="coreDoneButton_str">Done</string>
 	<string name="configAutoRescale_str">Auto Rescale Options</string>
 	<string name="configRecordUntil_str">Record Until...</string>
