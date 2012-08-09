@@ -16,14 +16,16 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int logo1=0x7f020001;
-        public static final int logo1med=0x7f020002;
-        public static final int logo2=0x7f020003;
-        public static final int logo2med=0x7f020004;
-        public static final int logo3=0x7f020005;
-        public static final int logo3med=0x7f020006;
-        public static final int placeholder=0x7f020007;
+        public static final int broken=0x7f020000;
+        public static final int brokenmed=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int logo1=0x7f020003;
+        public static final int logo1med=0x7f020004;
+        public static final int logo2=0x7f020005;
+        public static final int logo2med=0x7f020006;
+        public static final int logo3=0x7f020007;
+        public static final int logo3med=0x7f020008;
+        public static final int placeholder=0x7f020009;
     }
     public static final class id {
         public static final int analysisDoneButton_id=0x7f060000;
@@ -35,17 +37,17 @@ public final class R {
         public static final int configManualDetectButton_id=0x7f060002;
         public static final int configNumBinsTextView_id=0x7f060003;
         public static final int configRecordUntilSpinner_id=0x7f060008;
-        public static final int exportDoneButton_id=0x7f060015;
+        public static final int exportDoneButton_id=0x7f060012;
         public static final int exportExportButton_id=0x7f060011;
         public static final int exportFileNameTextView_idn=0x7f06000d;
         public static final int exportFilenameEditText_id=0x7f06000e;
         public static final int exportFilenameFullTextView_id=0x7f06000f;
         public static final int exportTimeStampCheckBox_id=0x7f060010;
-        public static final int helpDoneButton_id=0x7f060016;
-        public static final int importCurrentDirPathTextView_id=0x7f060012;
+        public static final int helpDoneButton_id=0x7f060013;
+        public static final int importCurrentDirPathTextView_id=0x7f060014;
         public static final int importDoneButton_id=0x7f060017;
-        public static final int importListTextView_id=0x7f060014;
-        public static final int importListView_id=0x7f060013;
+        public static final int importListTextView_id=0x7f060016;
+        public static final int importListView_id=0x7f060015;
         public static final int mainAnalysisButton_id=0x7f060019;
         public static final int mainConfigButton_id=0x7f060018;
         public static final int mainDetNameLabelTextView_id=0x7f06001f;
