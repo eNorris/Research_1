@@ -11,7 +11,7 @@ public class EchelonBundle {
 	public static ExportBundle exportBundle = new ExportBundle();
 	public static ImportBundle importBundle = new ImportBundle();
 	public static ScreenBundle screenBundle = new ScreenBundle();
-	public static int dataBundleCount = 0;
+//	public static int dataBundleCount = 0;
 	
 	
 	
@@ -55,7 +55,7 @@ public class EchelonBundle {
 		configBundle = new ConfigBundle();
 		exportBundle = new ExportBundle();
 		importBundle = new ImportBundle();
-		dataBundleCount = 1;
+//		dataBundleCount = 1;
 //		dataBundles = new DataBundle[1];
 		dataBundles.clear();
 	}

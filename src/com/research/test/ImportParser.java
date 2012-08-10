@@ -25,6 +25,7 @@ public class ImportParser {
 	};
 	
 	public static ParseReturnCode parse(File file){
+		Log.v(TAG, "Begin parse");
 		
 		try {
 			if(!file.exists())
@@ -34,18 +35,59 @@ public class ImportParser {
 			if(!file.canRead())
 				return ParseReturnCode.FILE_NOT_READABLE;
 			
+			Log.v(TAG, "first checks passed");
+			
 			BufferedReader reader = new BufferedReader(new FileReader(file.toString()));
 			String nextLine = null;
+			Integer[] correspondingInts = null;
 			
+			Log.v(TAG, "Begin linebylineparsing");
 			while((nextLine = reader.readLine()) != null){
+				Log.v(TAG, "accepted a line");
 				nextLine = nextLine.trim();
-				if(nextLine.length() == 0)
+				if(nextLine.length() == 0){
+					Log.v(TAG, "Empty line - skip");
 					continue;
-				if(nextLine.charAt(0) == '#')
+				}
+				if(nextLine.charAt(0) == '#'){
+					Log.v(TAG, "Comment - skip");
 					continue;
+				}
+				
+				Log.v(TAG, "splitting");
+				String[] splitLine = nextLine.split(",");
+				
+				if(splitLine.length == 0){
+					Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
+					continue;
+				}else{
+					correspondingInts = new Integer[splitLine.length];
+					for(int i = 0; i < splitLine.length; i++){
+						try {
+							Integer nextInt = Integer.valueOf(splitLine[i]);
+							correspondingInts[i] = nextInt;
+						} catch (NumberFormatException e) {
+							Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
+							e.printStackTrace();
+						}
+					}
+				}
+				Log.v(TAG, "finished parsing");
 			}
-
+			
+			if(correspondingInts.length == 0){
+				Log.d(TAG, "corresponding data set has length 0!");
+			}else{
+				DataBundle newBundle = new DataBundle();
+				newBundle.bins = correspondingInts.length;
+				newBundle.data = new int[correspondingInts.length];
+				for(int i = 0; i < newBundle.data.length; i++)
+					newBundle.data[i] = correspondingInts[i].intValue();
+				EchelonBundle.dataBundles.add(newBundle);
+			}
+			
 			reader.close();
+			
 		} catch (FileNotFoundException e) {
 			Log.e(TAG, "Exception: FileNotFound");
 			e.printStackTrace();

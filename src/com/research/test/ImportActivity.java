@@ -57,25 +57,62 @@ public class ImportActivity extends Activity {
 					if(newFile.canRead()){
 						loadDirectory(EchelonBundle.importBundle.importFilePath.get(pos));
 					}else{
+						// If the directory is not readable
 						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("[" + newFile.getName() + "] folder can't be read!").setPositiveButton("OK", 
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int which) {}
 							}).show();
 					}
-				}else{
-					
-					// FIXME - this is where I actually do something
-					
-					new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.logo1).setTitle("[" + newFile.getName() + "]").setPositiveButton("OK", 
-							new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {}
-					}).show();
+				}else{ // Handle selecting a file	
+					switch(ImportParser.parse(newFile)){
+					case OK:
+						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.logo1).setTitle("Import Succeeded").
+								setMessage("Imported: " + newFile.getName() + " successfully").setPositiveButton("OK", 
+										new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {}
+						}).show();
+						break;
+					case FILE_NOT_A_FILE:
+						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("Import Failed").
+								setMessage("Failed to import: " + newFile.getName() + ": FILE_NOT_A_FILE error (Did you select a directory?)").setPositiveButton("OK", 
+										new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {}
+						}).show();
+						break;
+					case FILE_NOT_FOUND:
+						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("Import Failed").
+								setMessage("Failed to import: " + newFile.getName() + ": FILE_NOT_FOUND error (Go create it!)").setPositiveButton("OK", 
+										new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {}
+						}).show();
+						break;
+					case FILE_NOT_READABLE:
+						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("Import Failed").
+								setMessage("Failed to import: " + newFile.getName() + ": FILE_NOT_READABLE error (Is locked by something else?)").setPositiveButton("OK", 
+										new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {}
+						}).show();
+						break;
+					case UNKNOWN_ERROR:
+						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("Import Failed").
+								setMessage("Failed to import: " + newFile.getName() + ": UNKNOWN_ERROR error (No clue what happened.)").setPositiveButton("OK", 
+										new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {}
+						}).show();
+						break;
+					default:
+						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("Import Failed").
+								setMessage("Failed to import: " + newFile.getName() + ": Uncaught Error. This is the developer's fault. Sorry.").setPositiveButton("OK", 
+										new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {}
+						}).show();
+					}
 				}
 			}
 		});
 		
 		// Set the directory
-				loadDirectory(EchelonBundle.importBundle.inFile);
+		loadDirectory(EchelonBundle.importBundle.inFile);
 	}
 	
 	
