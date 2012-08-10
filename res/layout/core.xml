@@ -4,29 +4,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/coreSelectSpinner_id"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:prompt="@string/coreSelectSpinnerDefault" />
+        
+        <Button
         android:id="@+id/spectrumDoneButton_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="@string/coreDoneButton_str" />
-	<!--  
-	<SurfaceView
-        android:id="@+id/spectrumSurfaceView_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-	-->
-	
-	<SeekBar
-		android:id="@+id/spectrumHorizSeekBar_id"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content" />
+        
+    </LinearLayout>
+
+    
     
     <com.research.test.SpectrumView
-		    android:id="@+id/spectrumSurfaceView_id"
+		   android:id="@+id/spectrumSurfaceView_id"
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent" />
-
-
 
 </LinearLayout>
