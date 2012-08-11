@@ -35,45 +35,17 @@ public class ImportParser {
 			if(!file.canRead())
 				return ParseReturnCode.FILE_NOT_READABLE;
 			
-			Log.v(TAG, "first checks passed");
+			Log.v(TAG, "first checks passed");wedfrtghyujkilo;p[/'']
+					
 			
-			BufferedReader reader = new BufferedReader(new FileReader(file.toString()));
-			String nextLine = null;
-			Integer[] correspondingInts = null;
+			DataBundle newDataBundle = parseSDATA(file);
 			
-			Log.v(TAG, "Begin linebylineparsing");
-			while((nextLine = reader.readLine()) != null){
-				Log.v(TAG, "accepted a line");
-				nextLine = nextLine.trim();
-				if(nextLine.length() == 0){
-					Log.v(TAG, "Empty line - skip");
-					continue;
-				}
-				if(nextLine.charAt(0) == '#'){
-					Log.v(TAG, "Comment - skip");
-					continue;
-				}
-				
-				Log.v(TAG, "splitting");
-				String[] splitLine = nextLine.split(",");
-				
-				if(splitLine.length == 0){
-					Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
-					continue;
-				}else{
-					correspondingInts = new Integer[splitLine.length];
-					for(int i = 0; i < splitLine.length; i++){
-						try {
-							Integer nextInt = Integer.valueOf(splitLine[i]);
-							correspondingInts[i] = nextInt;
-						} catch (NumberFormatException e) {
-							Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
-							e.printStackTrace();
-						}
-					}
-				}
-				Log.v(TAG, "finished parsing");
-			}
+			//
+			
+			if(file.getName().)
+			
+			
+			
 			
 			if(correspondingInts.length == 0){
 				Log.d(TAG, "corresponding data set has length 0!");
@@ -101,4 +73,84 @@ public class ImportParser {
 		return ParseReturnCode.OK;
 	}
 	
+	boolean parseCSV(BufferedReader reader){
+		
+		
+		
+		
+		
+		
+		return true;
+	}
+	
+	static DataBundle parseSDATA(File file){
+		BufferedReader reader = new BufferedReader(new FileReader(file.toString()));
+		
+		String nextLine = null;
+		Integer[] correspondingInts = null;
+		
+		Log.v(TAG, "Begin line by line parsing");
+		while((nextLine = reader.readLine()) != null){
+			Log.v(TAG, "accepted a line");
+			nextLine = nextLine.trim();
+			if(nextLine.length() == 0){
+				Log.v(TAG, "Empty line - skip");
+				continue;
+			}
+			if(nextLine.charAt(0) == '#'){
+				Log.v(TAG, "Comment - skip");
+				continue;
+			}
+			
+			Log.v(TAG, "splitting");
+			String[] splitLine = nextLine.split(",");
+			
+			if(splitLine.length == 0){
+				Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
+				continue;
+			}else{
+				correspondingInts = new Integer[splitLine.length];
+				for(int i = 0; i < splitLine.length; i++){
+					try {
+						Integer nextInt = Integer.valueOf(splitLine[i]);
+						correspondingInts[i] = nextInt;
+					} catch (NumberFormatException e) {
+						Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
+						e.printStackTrace();
+					}
+				}
+			}
+			Log.v(TAG, "finished parsing");
+		
+		
+		
+		return new DataBundle();
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
