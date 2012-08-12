@@ -46,17 +46,28 @@ public class ImportParser {
 			newDataBundle = parseSDATA(file);
 		}else if(ext == "csv"){
 			Log.v(TAG, "Parsing CSV file");
+			newDataBundle = parseCSV(file);
 		}else{
 			Log.d(TAG, "Unknown filetype");
 		}
+		
+		if(newDataBundle.data.length == 0){
+			Log.d(TAG, "No data was collected!");
+		}
+		
+		Log.v(TAG, "Got " + newDataBundle.data.length + " data points from file " + file.getName());
 		
 		return ParseReturnCode.OK;
 	}
 	
 	
-	boolean parseCSV(BufferedReader reader){
+	static DataBundle parseCSV(File file){
+		BufferedReader reader = null;
+		DataBundle toReturn = new DataBundle();
+		
 		// FIXME - WRITE THIS CODE
-		return true;
+		
+		return toReturn;
 	}
 	
 	

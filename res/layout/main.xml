@@ -12,14 +12,14 @@
 
         <Button
             android:id="@+id/mainConfigButton_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/config_str" />
         
         <Button
             android:id="@+id/mainAnalysisButton_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/mainAnalysisButton_str" />
@@ -33,14 +33,14 @@
 
         <Button
             android:id="@+id/mainImportButton_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/mainImportButton_str" />
         
         <Button
             android:id="@+id/mainExportButton_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/exportLabel_str" />
@@ -54,14 +54,14 @@
 
         <Button
             android:id="@+id/mainHelpButton_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/helpLabel_str" />
 
         <Button
             android:id="@+id/mainExitButton_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/mainExitButton_str" />
