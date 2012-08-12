@@ -27,104 +27,91 @@ public class ImportParser {
 	public static ParseReturnCode parse(File file){
 		Log.v(TAG, "Begin parse");
 		
-		try {
-			if(!file.exists())
-				return ParseReturnCode.FILE_NOT_FOUND;
-			if(!file.isFile())
-				return ParseReturnCode.FILE_NOT_A_FILE;
-			if(!file.canRead())
-				return ParseReturnCode.FILE_NOT_READABLE;
-			
-			Log.v(TAG, "first checks passed");wedfrtghyujkilo;p[/'']
-					
-			
-			DataBundle newDataBundle = parseSDATA(file);
-			
-			//
-			
-			if(file.getName().)
-			
-			
-			
-			
-			if(correspondingInts.length == 0){
-				Log.d(TAG, "corresponding data set has length 0!");
-			}else{
-				DataBundle newBundle = new DataBundle();
-				newBundle.bins = correspondingInts.length;
-				newBundle.data = new int[correspondingInts.length];
-				for(int i = 0; i < newBundle.data.length; i++)
-					newBundle.data[i] = correspondingInts[i].intValue();
-				EchelonBundle.dataBundles.add(newBundle);
-			}
-			
-			reader.close();
-			
-		} catch (FileNotFoundException e) {
-			Log.e(TAG, "Exception: FileNotFound");
-			e.printStackTrace();
+		if(!file.exists())
 			return ParseReturnCode.FILE_NOT_FOUND;
-		} catch (IOException e) {
-			Log.e(TAG, "Exception: I/O Exception");
-			e.printStackTrace();
-			return ParseReturnCode.UNKNOWN_ERROR;
+		if(!file.isFile())
+			return ParseReturnCode.FILE_NOT_A_FILE;
+		if(!file.canRead())
+			return ParseReturnCode.FILE_NOT_READABLE;
+		
+		Log.v(TAG, "first checks passed");
+				
+		
+		DataBundle newDataBundle = parseSDATA(file);
+		
+		String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1).toLowerCase();
+		
+		if(ext == "sdata"){
+			Log.v(TAG, "Parsing SDATA file");
+			newDataBundle = parseSDATA(file);
+		}else if(ext == "csv"){
+			Log.v(TAG, "Parsing CSV file");
+		}else{
+			Log.d(TAG, "Unknown filetype");
 		}
 		
 		return ParseReturnCode.OK;
 	}
 	
+	
 	boolean parseCSV(BufferedReader reader){
-		
-		
-		
-		
-		
-		
+		// FIXME - WRITE THIS CODE
 		return true;
 	}
 	
+	
 	static DataBundle parseSDATA(File file){
-		BufferedReader reader = new BufferedReader(new FileReader(file.toString()));
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(file.toString()));
+		} catch (FileNotFoundException e1) {
+			Log.d(TAG, "@ImportParser::parseSDATA(): Failed to created BufferedReader for file \"" + file.toString() + "\"");
+			e1.printStackTrace();
+		}
+		DataBundle toReturn = new DataBundle();
 		
 		String nextLine = null;
 		Integer[] correspondingInts = null;
 		
 		Log.v(TAG, "Begin line by line parsing");
-		while((nextLine = reader.readLine()) != null){
-			Log.v(TAG, "accepted a line");
-			nextLine = nextLine.trim();
-			if(nextLine.length() == 0){
-				Log.v(TAG, "Empty line - skip");
-				continue;
-			}
-			if(nextLine.charAt(0) == '#'){
-				Log.v(TAG, "Comment - skip");
-				continue;
-			}
-			
-			Log.v(TAG, "splitting");
-			String[] splitLine = nextLine.split(",");
-			
-			if(splitLine.length == 0){
-				Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
-				continue;
-			}else{
-				correspondingInts = new Integer[splitLine.length];
-				for(int i = 0; i < splitLine.length; i++){
-					try {
-						Integer nextInt = Integer.valueOf(splitLine[i]);
-						correspondingInts[i] = nextInt;
-					} catch (NumberFormatException e) {
-						Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
-						e.printStackTrace();
+		try {
+			while((nextLine = reader.readLine()) != null){
+				Log.v(TAG, "accepted a line");
+				nextLine = nextLine.trim();
+				if(nextLine.length() == 0){
+					Log.v(TAG, "Empty line - skip");
+					continue;
+				}
+				if(nextLine.charAt(0) == '#'){
+					Log.v(TAG, "Comment - skip");
+					continue;
+				}
+				
+				Log.v(TAG, "splitting");
+				String[] splitLine = nextLine.split(",");
+				
+				if(splitLine.length == 0){
+					Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
+					continue;
+				}else{
+					correspondingInts = new Integer[splitLine.length];
+					for(int i = 0; i < splitLine.length; i++){
+						try {
+							Integer nextInt = Integer.valueOf(splitLine[i]);
+							correspondingInts[i] = nextInt;
+						} catch (NumberFormatException e) {
+							Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
+							e.printStackTrace();
+						}
 					}
 				}
 			}
+		} catch (IOException e) {
+			Log.d(TAG, "Caught an IO exception in ImportParser::parseSDATA()");
+			e.printStackTrace();
+		}
 			Log.v(TAG, "finished parsing");
-		
-		
-		
-		return new DataBundle();
+		return toReturn;
 	}
 	
 }
