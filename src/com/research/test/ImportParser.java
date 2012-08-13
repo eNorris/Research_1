@@ -57,6 +57,8 @@ public class ImportParser {
 		
 		Log.v(TAG, "Got " + newDataBundle.data.length + " data points from file " + file.getName());
 		
+		EchelonBundle.dataBundles.add(newDataBundle);
+		
 		return ParseReturnCode.OK;
 	}
 	

@@ -18,14 +18,18 @@ public final class R {
     public static final class drawable {
         public static final int broken=0x7f020000;
         public static final int brokenmed=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int logo1=0x7f020003;
-        public static final int logo1med=0x7f020004;
-        public static final int logo2=0x7f020005;
-        public static final int logo2med=0x7f020006;
-        public static final int logo3=0x7f020007;
-        public static final int logo3med=0x7f020008;
-        public static final int placeholder=0x7f020009;
+        public static final int csvfiletype=0x7f020002;
+        public static final int folder=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int logo1=0x7f020005;
+        public static final int logo1med=0x7f020006;
+        public static final int logo2=0x7f020007;
+        public static final int logo2med=0x7f020008;
+        public static final int logo3=0x7f020009;
+        public static final int logo3med=0x7f02000a;
+        public static final int placeholder=0x7f02000b;
+        public static final int sdatafiletype=0x7f02000c;
+        public static final int unknownfiletype=0x7f02000d;
     }
     public static final class id {
         public static final int analysisDoneButton_id=0x7f060000;
@@ -47,17 +51,19 @@ public final class R {
         public static final int helpDoneButton_id=0x7f060013;
         public static final int importCurrentDirPathTextView_id=0x7f060014;
         public static final int importDoneButton_id=0x7f060016;
+        public static final int importIconImageView=0x7f060017;
+        public static final int importIconTextView=0x7f060018;
         public static final int importListView_id=0x7f060015;
-        public static final int mainAnalysisButton_id=0x7f060018;
-        public static final int mainConfigButton_id=0x7f060017;
-        public static final int mainDetNameLabelTextView_id=0x7f06001e;
-        public static final int mainDetNameTextView_id=0x7f06001f;
-        public static final int mainExitButton_id=0x7f06001c;
-        public static final int mainExportButton_id=0x7f06001a;
-        public static final int mainGraphSurfaceView_id=0x7f06001d;
-        public static final int mainHelpButton_id=0x7f06001b;
-        public static final int mainImportButton_id=0x7f060019;
-        public static final int mainSpectrumSurfaceView_id=0x7f060020;
+        public static final int mainAnalysisButton_id=0x7f06001a;
+        public static final int mainConfigButton_id=0x7f060019;
+        public static final int mainDetNameLabelTextView_id=0x7f060020;
+        public static final int mainDetNameTextView_id=0x7f060021;
+        public static final int mainExitButton_id=0x7f06001e;
+        public static final int mainExportButton_id=0x7f06001c;
+        public static final int mainGraphSurfaceView_id=0x7f06001f;
+        public static final int mainHelpButton_id=0x7f06001d;
+        public static final int mainImportButton_id=0x7f06001b;
+        public static final int mainSpectrumSurfaceView_id=0x7f060022;
         public static final int spectrumDoneButton_id=0x7f06000b;
         public static final int spectrumSurfaceView_id=0x7f06000c;
         public static final int textView1=0x7f060007;
@@ -69,7 +75,8 @@ public final class R {
         public static final int export=0x7f030003;
         public static final int help=0x7f030004;
         public static final int import_layout=0x7f030005;
-        public static final int main=0x7f030006;
+        public static final int importlistitems=0x7f030006;
+        public static final int main=0x7f030007;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

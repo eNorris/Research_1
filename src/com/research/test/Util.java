@@ -1,5 +1,6 @@
 package com.research.test;
 
+import java.io.File;
 import java.util.Random;
 
 public class Util {
@@ -34,6 +35,10 @@ public class Util {
 	
 	static public float adaBottom(){
 		return yToAda(EchelonBundle.screenBundle.height);
+	}
+	
+	static public String getFileExtension(File file){
+		return file.getName().substring(file.getName().lastIndexOf('.') + 1).toLowerCase();
 	}
 	
 	// shortcuts to nu and ada

@@ -1,5 +1,6 @@
 package com.research.test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,6 +102,7 @@ class ImportBundle{
 	
 	public List<String> items = new ArrayList<String>();
 	public List<String> importFilePath = new ArrayList<String>();
+	public List<File> files = new ArrayList<File>();
 	
 }
 

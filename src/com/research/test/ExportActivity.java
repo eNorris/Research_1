@@ -223,8 +223,9 @@ public class ExportActivity extends Activity{	//ListActivity{
 		toReturn += String.format("%02d", today.hour);
 		toReturn += String.format("%02d", today.minute);
 		toReturn += String.format("%02d", today.second);
-		toReturn += today.timezone;
-		String.format("%05d", 54);
+//		toReturn += today.timezone;
+		// TODO - What is the line below doing?
+//		String.format("%05d", 54);
 		
 		return toReturn;
 	}
