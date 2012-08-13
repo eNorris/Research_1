@@ -26,10 +26,10 @@
 
     <application
         android:icon="@drawable/logo1"
-        android:label="@string/app_name" >
+        android:label="@string/globalAppName" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/globalAppName" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -38,27 +38,27 @@
         
         <activity
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
+            android:label="@string/globalAppName"
             android:name=".SpectrumActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
+            android:label="@string/globalAppName"
             android:name=".ConfigActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
+            android:label="@string/globalAppName"
             android:name=".AnalysisActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
+            android:label="@string/globalAppName"
             android:name=".ImportActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
+            android:label="@string/globalAppName"
             android:name=".ExportActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
+            android:label="@string/globalAppName"
             android:name=".HelpActivity" />
     </application>
 

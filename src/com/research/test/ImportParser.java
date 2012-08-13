@@ -83,7 +83,12 @@ public class ImportParser {
 		}
 		DataBundle toReturn = new DataBundle();
 		
+		// FIXME - This should be set via the importer
+		toReturn.isDrawable = true;
+		
 		String nextLine = null;
+		// TODO - Don't use this intermediate array, just cram everything into toReturn.data since I know
+		// after parsing how long it is.
 		Integer[] correspondingInts = null;
 		
 		Log.v(TAG, "Begin line by line parsing");
@@ -123,7 +128,13 @@ public class ImportParser {
 			Log.d(TAG, "Caught an IO exception in ImportParser::parseSDATA()");
 			e.printStackTrace();
 		}
-			Log.v(TAG, "finished parsing");
+		Log.v(TAG, "finished parsing");
+		
+		toReturn.data = new int[correspondingInts.length];
+		for(int i = 0; i < correspondingInts.length; i++){
+			toReturn.data[i] = correspondingInts[i].intValue();
+		}
+			
 		return toReturn;
 	}
 	

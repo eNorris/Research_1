@@ -49,18 +49,9 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			m_graphThread.start();
 		}
 		Log.v(TAG, "Created surface");
-		
-//		if(EchelonBundle.dataBundleCount == 0){
-//			EchelonBundle.addDataBundle();
-//		}
-//		Log.v(TAG, "Initialized first DataBundle");
 	}
 	
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-//		EchelonBundle.screenBundle.xMin = 0;
-//		EchelonBundle.screenBundle.yMin = 0;
-//		EchelonBundle.screenBundle.height = (float) (EchelonBundle.screenBundle.yMax = getHeight());
-//		EchelonBundle.screenBundle.width = (float) (EchelonBundle.screenBundle.xMax = getWidth());
 		EchelonBundle.screenBundle.height = getHeight();
 		EchelonBundle.screenBundle.width = getWidth();
 		EchelonBundle.screenBundle.oriAda = EchelonBundle.screenBundle.height - 30;
@@ -100,46 +91,54 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				// Reset the canvas to solid black
 			canvas.drawColor(Color.BLACK);
 				// If there is nothin to draw, skip this phase
-			if(EchelonBundle.dataBundles != null && EchelonBundle.dataBundles.size() != 0){
-				drawSpectrum(canvas);
-				drawLineSpectrum(canvas);
+//			if(EchelonBundle.dataBundles != null && EchelonBundle.dataBundles.size() != 0){
+//				drawSpectrum(canvas);
+//				drawLineSpectrum(canvas);
+//			}
+			if(EchelonBundle.dataBundles != null){
+				for(int i = 0; i < EchelonBundle.dataBundles.size(); i++){
+					if(EchelonBundle.dataBundles.get(i).isDrawable){
+						drawSpectrum(canvas, EchelonBundle.dataBundles.get(i));
+						drawLineSpectrum(canvas, EchelonBundle.dataBundles.get(i));
+					}
+				}
 			}
 			drawAxisSystem(canvas);
 		}
 	}
 	
-	public void drawSpectrum(Canvas canvas){
-		float width = EchelonBundle.screenBundle.width / EchelonBundle.dataBundles.get(0).data.length * EchelonBundle.screenBundle.scaleNu;
+	public void drawSpectrum(Canvas canvas, DataBundle bundle){
+		float width = EchelonBundle.screenBundle.width / bundle.data.length * EchelonBundle.screenBundle.scaleNu;
 		float max = 0;
-		for(int i = 0; i < EchelonBundle.dataBundles.get(0).data.length; i++)
-			if(EchelonBundle.dataBundles.get(0).data[i] > max)
-				max = EchelonBundle.dataBundles.get(0).data[i];
+		for(int i = 0; i < bundle.data.length; i++)
+			if(bundle.data[i] > max)
+				max = bundle.data[i];
 		float heightmod = canvas.getHeight() / max;
 		
 			// Draw the bar graph
 		float bottom = Util.adaToY(0);
-		for(int i = 0; i < EchelonBundle.dataBundles.get(0).data.length; i++){
+		for(int i = 0; i < bundle.data.length; i++){
 			float left = i*width+EchelonBundle.screenBundle.oriNu;
 			float right = (i+1)*width + EchelonBundle.screenBundle.oriNu;
-			float top = Util.adaToY(EchelonBundle.dataBundles.get(0).data[i]*heightmod);
+			float top = Util.adaToY(bundle.data[i]*heightmod);
 			canvas.drawRect(left, top, right, bottom, spectrumPaint);
 		}
 	}
 	
-	public void drawLineSpectrum(Canvas canvas){
-		float width = EchelonBundle.screenBundle.width / EchelonBundle.dataBundles.get(0).data.length * EchelonBundle.screenBundle.scaleNu;
+	public void drawLineSpectrum(Canvas canvas, DataBundle bundle){
+		float width = EchelonBundle.screenBundle.width / bundle.data.length * EchelonBundle.screenBundle.scaleNu;
 		float max = 0;
-		for(int i = 0; i < EchelonBundle.dataBundles.get(0).data.length; i++)
-			if(EchelonBundle.dataBundles.get(0).data[i] > max)
-				max = EchelonBundle.dataBundles.get(0).data[i];
+		for(int i = 0; i < bundle.data.length; i++)
+			if(bundle.data[i] > max)
+				max = bundle.data[i];
 		float heightmod = canvas.getHeight() / max;
 		
 		// Draw the line graph
-		for(int i = 0; i < EchelonBundle.dataBundles.get(0).data.length - 1; i++){
+		for(int i = 0; i < bundle.data.length - 1; i++){
 			float left = i*width+EchelonBundle.screenBundle.oriNu;
 			float right = (i+1)*width + EchelonBundle.screenBundle.oriNu;
-			canvas.drawLine(left, Util.adaToY(EchelonBundle.dataBundles.get(0).data[i]*heightmod),
-					right, Util.adaToY(EchelonBundle.dataBundles.get(0).data[i+1]*heightmod), 
+			canvas.drawLine(left, Util.adaToY(bundle.data[i]*heightmod),
+					right, Util.adaToY(bundle.data[i+1]*heightmod), 
 					spectrumLinePaint
 			);
 		}

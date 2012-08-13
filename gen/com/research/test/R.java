@@ -79,33 +79,50 @@ public final class R {
         public static final int main=0x7f030007;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int autoDetectLabel_str=0x7f040008;
-        public static final int binCount_str=0x7f040009;
-        public static final int configAutoRescale_str=0x7f040015;
-        public static final int configDone_str=0x7f040010;
-        public static final int configRecordUntil_str=0x7f040016;
-        public static final int config_str=0x7f040003;
-        public static final int coreDoneButton_str=0x7f040013;
-        public static final int coreSelectSpinnerDefault=0x7f040014;
-        public static final int detectorNameLabel_str=0x7f040001;
-        public static final int detectorName_str=0x7f040002;
-        public static final int entry1024_str=0x7f04000b;
-        public static final int entry2048_str=0x7f04000c;
-        public static final int entry4096_str=0x7f04000d;
-        public static final int entry512=0x7f04000a;
-        public static final int exportExport_str=0x7f040017;
-        public static final int exportFilename_str=0x7f040018;
-        public static final int exportLabel_str=0x7f040005;
-        public static final int exportTimeStamp_str=0x7f040019;
-        public static final int helpLabel_str=0x7f040006;
-        public static final int mainAnalysisButton_str=0x7f04001a;
-        public static final int mainDataManagementButton_str=0x7f04001b;
-        public static final int mainExitButton_str=0x7f040011;
-        public static final int mainImportButton_str=0x7f040012;
-        public static final int manualDetect_str=0x7f04000e;
-        public static final int numBins_str=0x7f04000f;
-        public static final int recordLabel_str=0x7f040007;
-        public static final int startButtonLabel_str=0x7f040004;
+        public static final int autoDetectLabel_str=0x7f04000c;
+        public static final int binCount_str=0x7f040015;
+        /**  Config Resources 
+         */
+        public static final int configAutoRescale_str=0x7f040013;
+        public static final int configDone_str=0x7f04001b;
+        public static final int configRecordUntil_str=0x7f040014;
+        public static final int config_str=0x7f040009;
+        /**  Help Resources 
+         */
+        public static final int coreDoneButton_str=0x7f04001f;
+        public static final int coreSelectSpinnerDefault=0x7f040020;
+        /**  Main Resources 
+         */
+        public static final int detectorNameLabel_str=0x7f040005;
+        public static final int detectorName_str=0x7f040006;
+        public static final int entry1024_str=0x7f040017;
+        public static final int entry2048_str=0x7f040018;
+        public static final int entry4096_str=0x7f040019;
+        public static final int entry512=0x7f040016;
+        public static final int exportExport_str=0x7f04000d;
+        /**  Export Resources 
+         */
+        public static final int exportFilename_str=0x7f04001d;
+        public static final int exportLabel_str=0x7f04000a;
+        public static final int exportTimeStamp_str=0x7f04001e;
+        /**  Global Resources 
+         */
+        public static final int globalAppName=0x7f040000;
+        public static final int globalDone_str=0x7f040001;
+        public static final int globalExit_str=0x7f040003;
+        public static final int globalStart_str=0x7f040002;
+        public static final int globalTemp_str=0x7f040004;
+        public static final int helpLabel_str=0x7f04000b;
+        /**  ImportResources 
+         */
+        public static final int importListIconDesc_str=0x7f04001c;
+        public static final int mainAnalysisButton_str=0x7f04000e;
+        public static final int mainDataManagementButton_str=0x7f04000f;
+        public static final int mainExitButton_str=0x7f040007;
+        public static final int mainImportButton_str=0x7f040008;
+        public static final int manualDetect_str=0x7f040012;
+        public static final int numBins_str=0x7f04001a;
+        public static final int recordLabel_str=0x7f040011;
+        public static final int startButtonLabel_str=0x7f040010;
     }
 }
