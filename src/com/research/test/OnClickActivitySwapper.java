@@ -65,7 +65,13 @@ class OnBoolClickActivitySwapper extends OnClickActivitySwapper{
 	}
 	
 	public void onClick(View v) {
-		if(m_bool){
+		
+Log.d(TAG, "Recieved click: Echelon = " + EchelonBundle.dataLoaded.toString() + "     bool = " + m_bool.toString());
+		
+		
+		
+		
+		if(m_bool.booleanValue()){
 			super.onClick(v);
 		}else{
 			Log.v(TAG, "Bool decision averted launching activity");

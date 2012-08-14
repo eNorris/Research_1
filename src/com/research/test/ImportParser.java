@@ -149,7 +149,6 @@ public class ImportParser {
 		}
 		DataBundle toReturn = new DataBundle();
 		
-		// FIXME - This should be set via the importer
 		toReturn.isDrawable = true;
 		
 		String thisLine = null;
