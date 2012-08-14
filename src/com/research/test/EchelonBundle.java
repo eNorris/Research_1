@@ -14,6 +14,7 @@ public class EchelonBundle {
 	public static ScreenBundle screenBundle = new ScreenBundle();
 	public static ArrayList<DataBundle> dataBundles = new ArrayList<DataBundle>();
 	public static DataBundle activeDataBundle = null;
+	public static Boolean dataLoaded = Boolean.FALSE;
 	
 	public static final String TAG = "EchelonBundle";
 	
@@ -89,6 +90,7 @@ class DataBundle{
 	public double energyCalibration = 1.0;
 	public double resolution = 1.0;
 	public boolean isDrawable = false;
+	public String name = "Data Set Name";
 	
 	public DataBundle(){
 //		tempSetup();

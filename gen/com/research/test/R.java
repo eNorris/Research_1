@@ -88,6 +88,7 @@ public final class R {
         public static final int configRecordUntil_str=0x7f040014;
         public static final int config_str=0x7f040009;
         /**  Help Resources 
+ Core Resources 
          */
         public static final int coreDoneButton_str=0x7f04001f;
         public static final int coreSelectSpinnerDefault=0x7f040020;

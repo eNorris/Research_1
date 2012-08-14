@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 			importButton.setOnClickListener(new OnClickActivitySwapper(this, ImportActivity.class));
 			exportButton.setOnClickListener(new OnClickActivitySwapper(this, ExportActivity.class));
 			helpButton.setOnClickListener(new OnClickActivitySwapper(this, HelpActivity.class));
-			smallSpectrumView.setOnClickListener(new OnClickActivitySwapper(this, SpectrumActivity.class));
+			smallSpectrumView.setOnClickListener(new OnBoolClickActivitySwapper(this, SpectrumActivity.class, EchelonBundle.dataLoaded));
 		} catch (Exception e) {
 			Log.e(TAG, "Failed to link all activities!");
 			e.printStackTrace();

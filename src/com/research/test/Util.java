@@ -37,6 +37,14 @@ public class Util {
 		return yToAda(EchelonBundle.screenBundle.height);
 	}
 	
+	static public float nuOrigin(){
+		return nuToX(0);
+	}
+	
+	static public float adaOrigin(){
+		return adaToY(0);
+	}
+	
 	static public String getFileExtension(File file){
 		return file.getName().substring(file.getName().lastIndexOf('.') + 1).toLowerCase();
 	}

@@ -47,6 +47,9 @@ public class ImportParser {
 		}else if(ext == "csv"){
 			Log.v(TAG, "Parsing CSV file");
 			newDataBundle = parseCSV(file);
+		}else if(ext == "tka"){
+			Log.v(TAG, "Parsing TKA file");
+			newDataBundle = parseTKA(file);
 		}else{
 			Log.d(TAG, "Unknown filetype");
 		}
@@ -62,13 +65,72 @@ public class ImportParser {
 		return ParseReturnCode.OK;
 	}
 	
+	static DataBundle parseTKA(File file){
+		
+		// FIXME - Write this
+		
+		return new DataBundle();
+	}
+	
 	
 	static DataBundle parseCSV(File file){
 		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(file.toString()));
+		} catch (FileNotFoundException e1) {
+			Log.d(TAG, "@ImportParser::parseSDATA(): Failed to created BufferedReader for file \"" + file.toString() + "\"");
+			e1.printStackTrace();
+		}
 		DataBundle toReturn = new DataBundle();
 		
-		// FIXME - WRITE THIS CODE
+		// FIXME - This should be set via the importer
+		toReturn.isDrawable = true;
 		
+		String nextLine = null;
+		// TODO - Don't use this intermediate array, just cram everything into toReturn.data since I know
+		// after parsing how long it is.
+		Integer[] correspondingInts = null;
+		
+		Log.v(TAG, "Begin line by line parsing");
+		try {
+			while((nextLine = reader.readLine()) != null){
+				Log.v(TAG, "accepted a line");
+				nextLine = nextLine.trim();
+				if(nextLine.length() == 0){
+					Log.v(TAG, "Empty line - skip");
+					continue;
+				}
+				
+				Log.v(TAG, "splitting");
+				String[] splitLine = nextLine.split(",");
+				
+				if(splitLine.length == 0){
+					Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
+					continue;
+				}else{
+					correspondingInts = new Integer[splitLine.length];
+					for(int i = 0; i < splitLine.length; i++){
+						try {
+							Integer nextInt = Integer.valueOf(splitLine[i]);
+							correspondingInts[i] = nextInt;
+						} catch (NumberFormatException e) {
+							Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		} catch (IOException e) {
+			Log.d(TAG, "Caught an IO exception in ImportParser::parseSDATA()");
+			e.printStackTrace();
+		}
+		Log.v(TAG, "finished parsing");
+		
+		toReturn.data = new int[correspondingInts.length];
+		for(int i = 0; i < correspondingInts.length; i++){
+			toReturn.data[i] = correspondingInts[i].intValue();
+		}
+			
 		return toReturn;
 	}
 	
