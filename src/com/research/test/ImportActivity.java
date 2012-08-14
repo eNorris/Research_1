@@ -99,6 +99,13 @@ public class ImportActivity extends Activity {
 							public void onClick(DialogInterface dialog, int which) {}
 						}).show();
 						break;
+					case FILE_NOT_PARSABLE:
+						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("Import Failed").
+								setMessage("Failed to import: " + newFile.getName() + ": FILE_NOT_PARSABLE error (Is this the right type of file?)").setPositiveButton("OK", 
+										new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {}
+						}).show();
+						break;
 					case UNKNOWN_ERROR:
 						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("Import Failed").
 								setMessage("Failed to import: " + newFile.getName() + ": UNKNOWN_ERROR error (No clue what happened.)").setPositiveButton("OK", 
@@ -155,12 +162,12 @@ public class ImportActivity extends Activity {
 			}
 	 	}
 		
-		for(int i = 0; i < EchelonBundle.importBundle.items.size(); i++){
-			if(EchelonBundle.importBundle.items.get(i) == null)
-				Log.d(TAG, "item " + i + " is null!");
-			else
-				Log.v(TAG, "Got: " + EchelonBundle.importBundle.items.get(i));
-		}
+//		for(int i = 0; i < EchelonBundle.importBundle.items.size(); i++){
+//			if(EchelonBundle.importBundle.items.get(i) == null)
+//				Log.d(TAG, "item " + i + " is null!");
+//			else
+//				Log.v(TAG, "Got: " + EchelonBundle.importBundle.items.get(i));
+//		}
 
 		
 		// Commented out for testing
@@ -186,7 +193,7 @@ public class ImportActivity extends Activity {
 		importListView.setAdapter(fileList);
 		importListView.setBackgroundColor(Color.BLACK);
 		
-		Log.d(TAG, "list size: "+ importListView.getCount());
+//		Log.d(TAG, "list size: "+ importListView.getCount());
 	}
 }
 
@@ -203,7 +210,7 @@ class FileAdapter extends ArrayAdapter<String>{
 	}
 	
 	public View getView(int pos, View view, ViewGroup parent){
-		Log.v(TAG, "Building FileAdapter View");
+//		Log.v(TAG, "Building FileAdapter View");
 		
 		View toReturn = view;
 		

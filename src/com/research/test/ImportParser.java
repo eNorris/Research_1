@@ -21,11 +21,12 @@ public class ImportParser {
 		FILE_NOT_FOUND,
 		FILE_NOT_A_FILE,
 		FILE_NOT_READABLE,
+		FILE_NOT_PARSABLE,
 		UNKNOWN_ERROR
 	};
 	
 	public static ParseReturnCode parse(File file){
-		Log.v(TAG, "Begin parse");
+		Log.v(TAG, "Begin parse()");
 		
 		if(!file.exists())
 			return ParseReturnCode.FILE_NOT_FOUND;
@@ -37,31 +38,54 @@ public class ImportParser {
 		Log.v(TAG, "first checks passed");
 				
 		
-		DataBundle newDataBundle = parseSDATA(file);
+		DataBundle newDataBundle = null;
 		
+		// Check indexing incase the name ends in a '.'
 		String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1).toLowerCase();
+Log.d(TAG, "extension = " + ext);
 		
-		if(ext == "sdata"){
+		if(ext.equals("sdata")){
 			Log.v(TAG, "Parsing SDATA file");
 			newDataBundle = parseSDATA(file);
-		}else if(ext == "csv"){
+		}else if(ext.equals("csv")){
 			Log.v(TAG, "Parsing CSV file");
 			newDataBundle = parseCSV(file);
-		}else if(ext == "tka"){
+		}else if(ext.equals("tka")){
 			Log.v(TAG, "Parsing TKA file");
 			newDataBundle = parseTKA(file);
 		}else{
 			Log.d(TAG, "Unknown filetype");
+			return ParseReturnCode.FILE_NOT_PARSABLE;
 		}
 		
-		if(newDataBundle.data.length == 0){
-			Log.d(TAG, "No data was collected!");
+		// Report errors
+		if(newDataBundle == null){
+			Log.d(TAG, "Could not parse - DataBundle was null");
+			return ParseReturnCode.FILE_NOT_PARSABLE;
+		}else if(newDataBundle.data == null){
+			Log.d(TAG, "Could not parse - DataBundle.data was null");
+			return ParseReturnCode.FILE_NOT_PARSABLE;
+		}else if(newDataBundle.data.length == 0){
+			Log.d(TAG, "Could not parse - DataBundle.data is empty");
+			return ParseReturnCode.FILE_NOT_PARSABLE;
 		}
+		
+		// TODO - check to ensure not null first
+//		if(newDataBundle.data.length == 0){
+//			Log.d(TAG, "No data was collected!");
+//			return ParseReturnCode.FILE_NOT_PARSABLE;
+//		}else{
 		
 		Log.v(TAG, "Got " + newDataBundle.data.length + " data points from file " + file.getName());
+		Log.v(TAG, "Enabling spectrum view");
+		EchelonBundle.dataLoaded = Boolean.TRUE;
+//		}
 		
+		
+		// Add the data
 		EchelonBundle.dataBundles.add(newDataBundle);
 		
+		// return success
 		return ParseReturnCode.OK;
 	}
 	
@@ -72,14 +96,14 @@ public class ImportParser {
 		return new DataBundle();
 	}
 	
-	
+	// TODO - Based on SDATA - needs some stuff taken out should blindly seek out commas for splitting
 	static DataBundle parseCSV(File file){
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file.toString()));
-		} catch (FileNotFoundException e1) {
+		} catch (FileNotFoundException e) {
 			Log.d(TAG, "@ImportParser::parseSDATA(): Failed to created BufferedReader for file \"" + file.toString() + "\"");
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 		DataBundle toReturn = new DataBundle();
 		
@@ -148,27 +172,52 @@ public class ImportParser {
 		// FIXME - This should be set via the importer
 		toReturn.isDrawable = true;
 		
-		String nextLine = null;
+		String thisLine = null;
 		// TODO - Don't use this intermediate array, just cram everything into toReturn.data since I know
 		// after parsing how long it is.
 		Integer[] correspondingInts = null;
+		int channelcheck = 0;
+		boolean channelchecked = false;
 		
 		Log.v(TAG, "Begin line by line parsing");
 		try {
-			while((nextLine = reader.readLine()) != null){
+			while((thisLine = reader.readLine()) != null){
 				Log.v(TAG, "accepted a line");
-				nextLine = nextLine.trim();
-				if(nextLine.length() == 0){
+				thisLine = thisLine.trim();
+				if(thisLine.length() == 0){
 					Log.v(TAG, "Empty line - skip");
 					continue;
 				}
-				if(nextLine.charAt(0) == '#'){
+				if(thisLine.charAt(0) == '#'){
 					Log.v(TAG, "Comment - skip");
 					continue;
 				}
+				if(thisLine.contains("=")){
+					if(thisLine.subSequence(0, thisLine.lastIndexOf('=')).equals("DATASET")){
+						// Do nothing with the DATASET number
+						Log.v(TAG, "Parsed DATASET");
+						continue;
+					}else if(thisLine.subSequence(0, thisLine.lastIndexOf('=')).equals("DATASETNAME")){
+						Log.v(TAG, "Parsed DATASETNAME");
+						toReturn.name = (String) thisLine.subSequence(thisLine.lastIndexOf('=')+1, thisLine.length());
+						continue;
+					}else if(thisLine.subSequence(0, thisLine.lastIndexOf('=')).equals("CHANNELCOUNT")){
+						channelcheck = Integer.parseInt((String) thisLine.subSequence(thisLine.lastIndexOf('=')+1, thisLine.length()));
+						channelchecked = true;
+						Log.v(TAG, "Parsed CHANNELCOUNT");
+						continue;
+					}else if(thisLine.subSequence(0, thisLine.lastIndexOf('=')).equals("DRAWABLE")){
+						if(thisLine.subSequence(thisLine.lastIndexOf('=')+1, thisLine.length()).equals('1'))
+							toReturn.isDrawable = true;
+						else
+							toReturn.isDrawable = false;
+						Log.v(TAG, "Parsed DRAWABLE");
+						continue;
+					}
+				}
 				
 				Log.v(TAG, "splitting");
-				String[] splitLine = nextLine.split(",");
+				String[] splitLine = thisLine.split(",");
 				
 				if(splitLine.length == 0){
 					Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
@@ -195,6 +244,14 @@ public class ImportParser {
 		toReturn.data = new int[correspondingInts.length];
 		for(int i = 0; i < correspondingInts.length; i++){
 			toReturn.data[i] = correspondingInts[i].intValue();
+		}
+		
+		if(channelchecked){
+			Log.v(TAG, "Running channel check");
+			if(toReturn.data.length != channelcheck)
+				Log.d(TAG, "Channel check failed: length = " + toReturn.data.length + "  check = " + channelcheck);
+			else
+				Log.v(TAG, "Channel check passed");
 		}
 			
 		return toReturn;
