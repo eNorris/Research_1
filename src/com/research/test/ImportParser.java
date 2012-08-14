@@ -37,22 +37,21 @@ public class ImportParser {
 		
 		Log.v(TAG, "first checks passed");
 				
-		
 		DataBundle newDataBundle = null;
 		
-		// Check indexing incase the name ends in a '.'
+		// TODO - Check indexing incase the name ends in a '.'
 		String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1).toLowerCase();
-Log.d(TAG, "extension = " + ext);
 		
 		if(ext.equals("sdata")){
 			Log.v(TAG, "Parsing SDATA file");
 			newDataBundle = parseSDATA(file);
 		}else if(ext.equals("csv")){
 			Log.v(TAG, "Parsing CSV file");
-			newDataBundle = parseCSV(file);
+			newDataBundle = parseCSVTKA(file);
 		}else if(ext.equals("tka")){
 			Log.v(TAG, "Parsing TKA file");
-			newDataBundle = parseTKA(file);
+			newDataBundle = parseCSVTKA(file);
+//			newDataBundle = parseTKA(file);
 		}else{
 			Log.d(TAG, "Unknown filetype");
 			return ParseReturnCode.FILE_NOT_PARSABLE;
@@ -70,17 +69,9 @@ Log.d(TAG, "extension = " + ext);
 			return ParseReturnCode.FILE_NOT_PARSABLE;
 		}
 		
-		// TODO - check to ensure not null first
-//		if(newDataBundle.data.length == 0){
-//			Log.d(TAG, "No data was collected!");
-//			return ParseReturnCode.FILE_NOT_PARSABLE;
-//		}else{
-		
 		Log.v(TAG, "Got " + newDataBundle.data.length + " data points from file " + file.getName());
 		Log.v(TAG, "Enabling spectrum view");
 		EchelonBundle.dataLoaded = Boolean.TRUE;
-//		}
-		
 		
 		// Add the data
 		EchelonBundle.dataBundles.add(newDataBundle);
@@ -89,54 +80,48 @@ Log.d(TAG, "extension = " + ext);
 		return ParseReturnCode.OK;
 	}
 	
-	static DataBundle parseTKA(File file){
-		
-		// FIXME - Write this
-		
-		return new DataBundle();
-	}
+//	static DataBundle parseTKA(File file){
+//		
+//		// FIXME - Write this
+//		
+//		return new DataBundle();
+//	}
 	
 	// TODO - Based on SDATA - needs some stuff taken out should blindly seek out commas for splitting
-	static DataBundle parseCSV(File file){
+	static DataBundle parseCSVTKA(File file){
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file.toString()));
 		} catch (FileNotFoundException e) {
-			Log.d(TAG, "@ImportParser::parseSDATA(): Failed to created BufferedReader for file \"" + file.toString() + "\"");
+			Log.d(TAG, "@ImportParser::parseCSVTKA(): Failed to created BufferedReader for file \"" + file.toString() + "\"");
 			e.printStackTrace();
 		}
+		
 		DataBundle toReturn = new DataBundle();
-		
-		// FIXME - This should be set via the importer
 		toReturn.isDrawable = true;
-		
-		String nextLine = null;
-		// TODO - Don't use this intermediate array, just cram everything into toReturn.data since I know
-		// after parsing how long it is.
-		Integer[] correspondingInts = null;
+		String thisLine = null;
 		
 		Log.v(TAG, "Begin line by line parsing");
 		try {
-			while((nextLine = reader.readLine()) != null){
+			while((thisLine = reader.readLine()) != null){
 				Log.v(TAG, "accepted a line");
-				nextLine = nextLine.trim();
-				if(nextLine.length() == 0){
+				thisLine = thisLine.trim();
+				if(thisLine.length() == 0){
 					Log.v(TAG, "Empty line - skip");
 					continue;
 				}
 				
 				Log.v(TAG, "splitting");
-				String[] splitLine = nextLine.split(",");
+				String[] splitLine = thisLine.split(",");
 				
 				if(splitLine.length == 0){
 					Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
 					continue;
 				}else{
-					correspondingInts = new Integer[splitLine.length];
+					toReturn.data = new int[splitLine.length];
 					for(int i = 0; i < splitLine.length; i++){
 						try {
-							Integer nextInt = Integer.valueOf(splitLine[i]);
-							correspondingInts[i] = nextInt;
+							toReturn.data[i] = Integer.valueOf(splitLine[i]);
 						} catch (NumberFormatException e) {
 							Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
 							e.printStackTrace();
@@ -145,15 +130,10 @@ Log.d(TAG, "extension = " + ext);
 				}
 			}
 		} catch (IOException e) {
-			Log.d(TAG, "Caught an IO exception in ImportParser::parseSDATA()");
+			Log.d(TAG, "Caught an IO exception in ImportParser::parseCSVTKA()");
 			e.printStackTrace();
 		}
 		Log.v(TAG, "finished parsing");
-		
-		toReturn.data = new int[correspondingInts.length];
-		for(int i = 0; i < correspondingInts.length; i++){
-			toReturn.data[i] = correspondingInts[i].intValue();
-		}
 			
 		return toReturn;
 	}
@@ -175,7 +155,7 @@ Log.d(TAG, "extension = " + ext);
 		String thisLine = null;
 		// TODO - Don't use this intermediate array, just cram everything into toReturn.data since I know
 		// after parsing how long it is.
-		Integer[] correspondingInts = null;
+//		Integer[] correspondingInts = null;
 		int channelcheck = 0;
 		boolean channelchecked = false;
 		
@@ -223,11 +203,13 @@ Log.d(TAG, "extension = " + ext);
 					Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
 					continue;
 				}else{
-					correspondingInts = new Integer[splitLine.length];
+//					correspondingInts = new Integer[splitLine.length];
+					toReturn.data = new int[splitLine.length];
 					for(int i = 0; i < splitLine.length; i++){
 						try {
-							Integer nextInt = Integer.valueOf(splitLine[i]);
-							correspondingInts[i] = nextInt;
+//							Integer nextInt = Integer.valueOf(splitLine[i]);
+//							correspondingInts[i] = nextInt;
+							toReturn.data[i] = Integer.valueOf(splitLine[i]);
 						} catch (NumberFormatException e) {
 							Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
 							e.printStackTrace();
@@ -241,10 +223,10 @@ Log.d(TAG, "extension = " + ext);
 		}
 		Log.v(TAG, "finished parsing");
 		
-		toReturn.data = new int[correspondingInts.length];
-		for(int i = 0; i < correspondingInts.length; i++){
-			toReturn.data[i] = correspondingInts[i].intValue();
-		}
+//		toReturn.data = new int[correspondingInts.length];
+//		for(int i = 0; i < correspondingInts.length; i++){
+//			toReturn.data[i] = correspondingInts[i].intValue();
+//		}
 		
 		if(channelchecked){
 			Log.v(TAG, "Running channel check");
