@@ -3,6 +3,7 @@ package com.research.test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.graphics.Paint;
 import android.util.Log;
@@ -14,7 +15,7 @@ public class EchelonBundle {
 	public static ScreenBundle screenBundle = new ScreenBundle();
 	public static ArrayList<DataBundle> dataBundles = new ArrayList<DataBundle>();
 	public static DataBundle activeDataBundle = null;
-	public static Boolean dataLoaded = Boolean.FALSE;
+	public static AtomicBoolean dataLoaded = new AtomicBoolean(false);
 	
 	public static final String TAG = "EchelonBundle";
 	

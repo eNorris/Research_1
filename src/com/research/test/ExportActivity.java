@@ -192,7 +192,7 @@ public class ExportActivity extends Activity{	//ListActivity{
 				toReturn += "DATASET=" + i + endl();
 				toReturn += "DATASETNAME" + EchelonBundle.dataBundles.get(i).name + endl();
 				toReturn += "CHANNELCOUNT=" + EchelonBundle.dataBundles.get(i).data.length + endl();
-				toReturn += "DRAWABLE=" + (EchelonBundle.dataLoaded ? 1 : 0) + endl();
+				toReturn += "DRAWABLE=" + (EchelonBundle.dataLoaded.get() ? 1 : 0) + endl();
 				for(int j = 0; j < EchelonBundle.dataBundles.get(i).data.length; j++){
 					toReturn += (EchelonBundle.dataBundles.get(i).data[j] + ",");
 				}

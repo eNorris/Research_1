@@ -48,6 +48,8 @@ public class MainActivity extends Activity {
 	public static final int RESULT_IMPORT_OK = 8;
 	public static final int RESULT_ANALYSIS_OK = 9;
 	
+//	public static SpectrumView smallSpectrumView = null;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -64,6 +66,7 @@ public class MainActivity extends Activity {
 		final Button helpButton = (Button) findViewById(R.id.mainHelpButton_id);
 		final Button exitButton = (Button) findViewById(R.id.mainExitButton_id);
 		final SpectrumView smallSpectrumView = (SpectrumView) findViewById(R.id.mainSpectrumSurfaceView_id);
+//		smallSpectrumView = (SpectrumView) findViewById(R.id.mainSpectrumSurfaceView_id);
 		
 		// Add OnClick Listeners
 		try {

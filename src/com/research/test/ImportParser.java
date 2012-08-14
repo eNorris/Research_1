@@ -71,7 +71,12 @@ public class ImportParser {
 		
 		Log.v(TAG, "Got " + newDataBundle.data.length + " data points from file " + file.getName());
 		Log.v(TAG, "Enabling spectrum view");
-		EchelonBundle.dataLoaded = Boolean.TRUE;
+		EchelonBundle.dataLoaded.set(true);
+		// FIXME - This only reassigns! I need to change the value!
+		
+//Log.d(TAG, "After setting dataLoaded to true: Echelon = " + EchelonBundle.dataLoaded.toString() + "     swapper = " + OnBoolClickActivitySwapper.m_bool.toString());
+		
+		
 		
 		// Add the data
 		EchelonBundle.dataBundles.add(newDataBundle);
@@ -202,12 +207,9 @@ public class ImportParser {
 					Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
 					continue;
 				}else{
-//					correspondingInts = new Integer[splitLine.length];
 					toReturn.data = new int[splitLine.length];
 					for(int i = 0; i < splitLine.length; i++){
 						try {
-//							Integer nextInt = Integer.valueOf(splitLine[i]);
-//							correspondingInts[i] = nextInt;
 							toReturn.data[i] = Integer.valueOf(splitLine[i]);
 						} catch (NumberFormatException e) {
 							Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
@@ -222,11 +224,6 @@ public class ImportParser {
 		}
 		Log.v(TAG, "finished parsing");
 		
-//		toReturn.data = new int[correspondingInts.length];
-//		for(int i = 0; i < correspondingInts.length; i++){
-//			toReturn.data[i] = correspondingInts[i].intValue();
-//		}
-		
 		if(channelchecked){
 			Log.v(TAG, "Running channel check");
 			if(toReturn.data.length != channelcheck)
@@ -235,6 +232,37 @@ public class ImportParser {
 				Log.v(TAG, "Channel check passed");
 		}
 			
+		return toReturn;
+	}
+	
+	DataBundle parseCNF(File file){
+		
+		DataBundle toReturn = new DataBundle();
+		
+		FileReader fileReader = null;
+		try {
+			fileReader = new FileReader(file.toString());
+		} catch (FileNotFoundException e) {
+			Log.d(TAG, "Failed to bind FileReader to " + file.toString());
+			e.printStackTrace();
+			return null;
+		}
+		
+		char[] charbuffer = null;
+		int offset = 0;
+		int length = 0;
+		
+		try {
+			if(fileReader.read(charbuffer, offset, length) == -1){
+				Log.v(TAG, "Reached the end of the file unexpectedly");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// FIXME - finish this later
+		
 		return toReturn;
 	}
 	
