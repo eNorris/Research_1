@@ -5,32 +5,33 @@
     android:orientation="vertical" >
 
     <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-         android:id="@android:id/tabhost"
-         android:layout_width="fill_parent"
-         android:layout_height="fill_parent">
-  <LinearLayout android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-    <HorizontalScrollView android:layout_width="fill_parent"
-                          android:layout_height="wrap_content"
-                          android:fillViewport="true"
-                          android:scrollbars="none">
-      <TabWidget android:id="@android:id/tabs"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"/>
-    </HorizontalScrollView>
-    <FrameLayout android:id="@android:id/tabcontent"
-                 android:layout_width="fill_parent"
-                 android:layout_height="fill_parent" />
-  </LinearLayout>
-  
-  <Button
-        android:id="@+id/analysisDoneButton_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/coreDoneButton_str" />
-  
-</TabHost>
+		android:id="@android:id/tabhost"
+		android:layout_width="fill_parent"
+		android:layout_height="0dip"
+		android:layout_weight="1">
+		<LinearLayout 
+		    android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<HorizontalScrollView 
+			    android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:fillViewport="true"
+				android:scrollbars="none"
+				android:padding="20dp">
+				<TabWidget android:id="@android:id/tabs"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"/>
+			</HorizontalScrollView>
+			<FrameLayout android:id="@android:id/tabcontent"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent" />
+		</LinearLayout>
+	</TabHost>	<Button
+		android:id="@+id/analysisDoneButton_id"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/coreDoneButton_str"
+		android:layout_gravity="right" />
     
-
 </LinearLayout>
