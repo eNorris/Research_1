@@ -2,17 +2,27 @@ package com.research.test;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.StateSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
@@ -21,6 +31,8 @@ import android.widget.TextView;
 public class AnalysisActivity extends Activity{
 	
 	public static final String TAG = "AnalysisActivity";
+	private static GradientDrawable m_selectedTab = null;
+	private static GradientDrawable m_unselectedTab = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,11 +43,20 @@ public class AnalysisActivity extends Activity{
 		setContentView(R.layout.analysis);
 		
 		// Realize layout
-		Button doneButton = (Button) findViewById(R.id.analysisDoneButton_id);
-		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+		final Button doneButton = (Button) findViewById(R.id.analysisDoneButton_id);
+		final TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		
 		// Initialize the TabHost
 		tabHost.setup();
+		
+		// Build the gradients the tabs will use
+		m_selectedTab = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{Color.RED, Color.GRAY});
+		m_selectedTab.setShape(GradientDrawable.RECTANGLE);
+		m_selectedTab.setCornerRadius(10);
+		
+		m_unselectedTab = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{Color.BLACK, Color.GRAY});
+		m_unselectedTab.setShape(GradientDrawable.RECTANGLE);
+		m_unselectedTab.setCornerRadius(10);
 		
 		// Build tabs
 		TabSpec tabSpec = tabHost.newTabSpec("tab1");
@@ -49,33 +70,24 @@ public class AnalysisActivity extends Activity{
 		TabSpec tabSpec9 = tabHost.newTabSpec("tab9");
 		
 		// Set Indicators (The label on the tab itself)
-		tabSpec.setIndicator("hi", this.getResources().getDrawable(R.drawable.placeholder));
-		tabSpec2.setIndicator("tab2");
-		tabSpec3.setIndicator("", getResources().getDrawable(R.drawable.logo1));
-		tabSpec4.setIndicator("tab4");
-		tabSpec5.setIndicator("tab5");
-		tabSpec6.setIndicator("tab6");
-		
-		
-		
-		
-//		tabSpec7.setIndicator("tab7");
-		
-		TextView tmp = new TextView(this);
-		tmp.setText("tab7");
-		tmp.setPadding(10, 10, 10, 10);
-		Drawable bitmap = getResources().getDrawable(R.drawable.logo3);
-		bitmap.setBounds(0, 20, 30, 0);
-		tmp.setCompoundDrawablesWithIntrinsicBounds(bitmap, null, null, null);
-		tmp.setGravity(Gravity.CENTER);
-		
-		tabSpec7.setIndicator(tmp);
-		
-		
-		
-		
-		tabSpec8.setIndicator("tab8");
-		tabSpec9.setIndicator("tab9");
+//		tabSpec.setIndicator("hi", this.getResources().getDrawable(R.drawable.placeholder));
+//		tabSpec2.setIndicator("tab2");
+//		tabSpec3.setIndicator("", getResources().getDrawable(R.drawable.logo1));
+//		tabSpec4.setIndicator("tab4");
+//		tabSpec5.setIndicator("tab5");
+//		tabSpec6.setIndicator("tab6");
+//		tabSpec7.setIndicator(new TabTextView(this, "tab7", R.drawable.logo3));
+//		tabSpec8.setIndicator("tab8");
+//		tabSpec9.setIndicator("tab9");
+		tabSpec.setIndicator(new TabTextView(this, "Main", R.drawable.logo3));
+		tabSpec2.setIndicator(new TabTextView(this, "Peak Analysis"));
+		tabSpec3.setIndicator(new TabTextView(this, "Isotope Identification"));
+		tabSpec4.setIndicator(new TabTextView(this, "Energy Calibration"));
+		tabSpec5.setIndicator(new TabTextView(this, "Not Used"));
+		tabSpec6.setIndicator(new TabTextView(this, "Not Used"));
+		tabSpec7.setIndicator(new TabTextView(this, "Not Used"));
+		tabSpec8.setIndicator(new TabTextView(this, "Not Used"));
+		tabSpec9.setIndicator(new TabTextView(this, "Under Construction"));
 		
 		
 		// Build the views from factories
@@ -89,9 +101,21 @@ public class AnalysisActivity extends Activity{
 		
 		TabContentContextFactory tabContentFactory2 = new TabContentContextFactory(this){
 			public View createTabContent(String tag) {
+				
+				LinearLayout ll = new LinearLayout(m_context);
+				ll.setOrientation(LinearLayout.VERTICAL);
+				
+	//			View view = new View(m_context);
+				
 				TextView textView = new TextView(m_context);
 				textView.setText("that is text!");
-				return textView;
+				ll.addView(textView);
+				
+				Button button = new Button(m_context);
+				button.setText("button");
+				ll.addView(button);
+				
+				return ll;
 			}
 		};
 		
@@ -145,11 +169,91 @@ public class AnalysisActivity extends Activity{
 	 *
 	 */
 	private abstract class TabContentContextFactory implements TabContentFactory{
+		
 		protected Context m_context;
+		
 		TabContentContextFactory(Context context){
 			m_context = context;
 		}
 
 		public abstract View createTabContent(String tag);
 	}
+	
+	/**
+	 * Exteds the TextView class.
+	 * 
+	 * Adds a StateListDrawable linked to two gradients that change based on the state of the TextView.
+	 * Also adds a drawable to the left of the text if an id for a drawable is sent
+	 * 
+	 * @author Edward
+	 *
+	 */
+	private class TabTextView extends TextView{
+		
+		public TabTextView(Context context, String tabTitle){
+			this(context, tabTitle, 0);
+		}
+
+		public TabTextView(Context context, String tabTitle, int drawableResId) {
+			super(context);
+			
+			// Set the TextView general information
+			setText(tabTitle);
+			setPadding(10,0,10,0);
+			setGravity(Gravity.CENTER);
+			
+			int[][] textStates = new int[][]{
+					new int[]{android.R.attr.state_pressed}, 
+					new int[]{android.R.attr.state_selected},
+					StateSet.WILD_CARD
+			};
+			int[] textColors = new int[]{
+					Color.argb(255, 128, 128, 255),
+					Color.argb(255, 128, 128, 255),
+					Color.WHITE
+			};
+			this.setTextColor(new ColorStateList(textStates, textColors));
+//			this.set
+			
+			// Build the needed gradients
+			GradientDrawable emptyGradient = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{Color.BLACK, Color.DKGRAY});
+			emptyGradient.setShape(GradientDrawable.RECTANGLE);
+			emptyGradient.setCornerRadii(new float[]{10,10,10,10,0,0,0,0});
+	//		emptyGradient.setCornerRadius(10);
+			
+			GradientDrawable selectedGradient = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{Color.BLACK, Color.GRAY});
+			selectedGradient.setShape(GradientDrawable.RECTANGLE);
+			selectedGradient.setCornerRadii(new float[]{10,10,10,10,0,0,0,0});
+//			selectedGradient.setCornerRadius(10);
+			
+			// Set the tab states to the necessary gradients
+			StateListDrawable tabBackgroundDrawable = new StateListDrawable();
+			tabBackgroundDrawable.addState(new int[]{android.R.attr.state_pressed}, selectedGradient);
+			tabBackgroundDrawable.addState(new int[]{android.R.attr.state_selected}, selectedGradient);
+			tabBackgroundDrawable.addState(StateSet.WILD_CARD, emptyGradient);
+			setBackgroundDrawable(tabBackgroundDrawable);
+			
+			// Add the bitmap if one was sent
+			if(drawableResId != 0){
+				BitmapDrawable bitmap = (BitmapDrawable) getResources().getDrawable(drawableResId);
+				bitmap.setTargetDensity(DisplayMetrics.DENSITY_LOW);
+				setCompoundDrawablesWithIntrinsicBounds(bitmap, null, null, null);
+			}
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
