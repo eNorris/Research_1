@@ -1,9 +1,15 @@
 package com.research.test;
 
-import android.app.Activity;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.ActivityGroup;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,8 +25,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
@@ -28,7 +37,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-public class AnalysisActivity extends Activity{
+public class AnalysisActivity extends ActivityGroup{
 	
 	public static final String TAG = "AnalysisActivity";
 	private static GradientDrawable m_selectedTab = null;
@@ -47,7 +56,8 @@ public class AnalysisActivity extends Activity{
 		final TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		
 		// Initialize the TabHost
-		tabHost.setup();
+//		tabHost.setup(this.getLocalActivityManager());
+		tabHost.setup(getLocalActivityManager());
 		
 		// Build the gradients the tabs will use
 		m_selectedTab = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{Color.RED, Color.GRAY});
@@ -102,18 +112,42 @@ public class AnalysisActivity extends Activity{
 		TabContentContextFactory tabContentFactory2 = new TabContentContextFactory(this){
 			public View createTabContent(String tag) {
 				
+Log.d(TAG, "crateTabContent()");
+				
+				// Set the layout
 				LinearLayout ll = new LinearLayout(m_context);
 				ll.setOrientation(LinearLayout.VERTICAL);
 				
-	//			View view = new View(m_context);
+				// Build the spinner
+				Spinner spinner = new Spinner(m_context);
 				
-				TextView textView = new TextView(m_context);
-				textView.setText("that is text!");
-				ll.addView(textView);
+				ArrayList<String> stringers = new ArrayList<String>();
+				stringers.add("one");
+				stringers.add("two");
+				stringers.add("three");
 				
-				Button button = new Button(m_context);
-				button.setText("button");
-				ll.addView(button);
+				ArrayList<Drawable> drawers = new ArrayList<Drawable>();
+				drawers.add(this.m_context.getResources().getDrawable(R.drawable.ic_launcher));
+				drawers.add(null);
+				drawers.add(this.m_context.getResources().getDrawable(R.drawable.broken));
+				
+				IconArrayAdapter adapter = new IconArrayAdapter(m_context, stringers, drawers);
+				adapter.setDropDownViewResource(R.layout.component_iconarrayadapter);
+				
+				
+//				adapter.setDropDownViewResource(R.layout.component_iconarrayadapter);
+//				ArrayAdapter adapter = new ArrayAdapter()
+				Log.d(TAG, "enabled: " + spinner.isEnabled());
+				Log.d(TAG, "focused: " + spinner.isFocused());
+				Log.d(TAG, "shown: " + spinner.isShown());
+				Log.d(TAG, "selected: " + spinner.isSelected());
+				
+				spinner.setAdapter(adapter);
+				
+				ll.addView(spinner);
+				
+				View v = null;
+				ll.addView(spinner.getAdapter().getView(0, v, ll));
 				
 				return ll;
 			}
@@ -129,7 +163,10 @@ public class AnalysisActivity extends Activity{
 		
 		// Set the tab content
 		tabSpec.setContent(tabContentFactory);
-		tabSpec2.setContent(tabContentFactory2);
+//		tabSpec2.setContent(tabContentFactory2);
+		
+		tabSpec2.setContent(new Intent(this, PeakAnalysisActivity.class));
+		
 		tabSpec3.setContent(tabContentFactory3);
 		tabSpec4.setContent(tabContentFactory);
 		tabSpec5.setContent(tabContentFactory2);
@@ -139,6 +176,8 @@ public class AnalysisActivity extends Activity{
 		tabSpec9.setContent(tabContentFactory3);
 		
 		// Add the tabs to the TabHost
+//		tabHost.setup();
+		
 		tabHost.addTab(tabSpec);
 		tabHost.addTab(tabSpec2);
 		tabHost.addTab(tabSpec3);
@@ -219,12 +258,10 @@ public class AnalysisActivity extends Activity{
 			GradientDrawable emptyGradient = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{Color.BLACK, Color.DKGRAY});
 			emptyGradient.setShape(GradientDrawable.RECTANGLE);
 			emptyGradient.setCornerRadii(new float[]{10,10,10,10,0,0,0,0});
-	//		emptyGradient.setCornerRadius(10);
 			
 			GradientDrawable selectedGradient = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{Color.BLACK, Color.GRAY});
 			selectedGradient.setShape(GradientDrawable.RECTANGLE);
 			selectedGradient.setCornerRadii(new float[]{10,10,10,10,0,0,0,0});
-//			selectedGradient.setCornerRadius(10);
 			
 			// Set the tab states to the necessary gradients
 			StateListDrawable tabBackgroundDrawable = new StateListDrawable();
@@ -242,10 +279,6 @@ public class AnalysisActivity extends Activity{
 		}
 	}
 }
-
-
-
-
 
 
 

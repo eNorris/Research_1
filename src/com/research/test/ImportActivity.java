@@ -162,29 +162,6 @@ public class ImportActivity extends Activity {
 			}
 	 	}
 		
-//		for(int i = 0; i < EchelonBundle.importBundle.items.size(); i++){
-//			if(EchelonBundle.importBundle.items.get(i) == null)
-//				Log.d(TAG, "item " + i + " is null!");
-//			else
-//				Log.v(TAG, "Got: " + EchelonBundle.importBundle.items.get(i));
-//		}
-
-		
-		// Commented out for testing
-//		ArrayAdapter<String> fileList = new ArrayAdapter<String>(
-//				this, 
-//				android.R.layout.simple_list_item_1,
-//				android.R.id.text1, 
-//				EchelonBundle.importBundle.items);
-		
-		//ArrayAdapter<String> fileList = new ArrayAdapter<String>(
-//		FileAdapter fileList = new FileAdapter(
-//				this,
-//				R.layout.importlistitems,
-////				android.R.layout.simple_list_item_1,
-////				android.R.id.text1, 
-//				EchelonBundle.importBundle.items);
-		
 		FileAdapter fileList = new FileAdapter(
 				this,
 				R.layout.importlistitems,
@@ -192,8 +169,6 @@ public class ImportActivity extends Activity {
 		
 		importListView.setAdapter(fileList);
 		importListView.setBackgroundColor(Color.BLACK);
-		
-//		Log.d(TAG, "list size: "+ importListView.getCount());
 	}
 }
 

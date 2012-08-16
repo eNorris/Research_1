@@ -60,6 +60,10 @@
             android:icon="@drawable/ic_launcher"
             android:label="@string/globalAppName"
             android:name=".HelpActivity" />
+        <activity
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/globalAppName"
+            android:name=".PeakAnalysisActivity" />
     </application>
 
 </manifest>
