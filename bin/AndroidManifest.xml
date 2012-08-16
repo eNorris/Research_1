@@ -28,7 +28,7 @@
         android:icon="@drawable/logo1"
         android:label="@string/globalAppName" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.research.Activities.MainActivity"
             android:label="@string/globalAppName" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,31 +39,31 @@
         <activity
             android:icon="@drawable/ic_launcher"
             android:label="@string/globalAppName"
-            android:name=".SpectrumActivity" />
+            android:name="com.research.Activities.SpectrumActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
             android:label="@string/globalAppName"
-            android:name=".ConfigActivity" />
+            android:name="com.research.Activities.ConfigActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
             android:label="@string/globalAppName"
-            android:name=".AnalysisActivity" />
+            android:name="com.research.Activities.AnalysisActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
             android:label="@string/globalAppName"
-            android:name=".ImportActivity" />
+            android:name="com.research.Activities.ImportActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
             android:label="@string/globalAppName"
-            android:name=".ExportActivity" />
+            android:name="com.research.Activities.ExportActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
             android:label="@string/globalAppName"
-            android:name=".HelpActivity" />
+            android:name="com.research.Activities.HelpActivity" />
         <activity
             android:icon="@drawable/ic_launcher"
             android:label="@string/globalAppName"
-            android:name=".PeakAnalysisActivity" />
+            android:name="com.research.AnalysisActivities.PeakAnalysisActivity" />
     </application>
 
 </manifest>
