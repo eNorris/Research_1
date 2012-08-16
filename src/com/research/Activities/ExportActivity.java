@@ -4,37 +4,27 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.research.Bundles.EchelonBundle;
 import com.research.Bundles.ExportBundle;
 import com.research.Bundles.ExportBundle.FileExtension;
 import com.research.test.R;
-import com.research.test.R.id;
-import com.research.test.R.layout;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.Time;
 import android.util.Log;
-//import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-//import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 public class ExportActivity extends Activity{	//ListActivity{

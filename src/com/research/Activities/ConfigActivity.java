@@ -2,9 +2,6 @@ package com.research.Activities;
 
 import com.research.Bundles.EchelonBundle;
 import com.research.test.R;
-import com.research.test.R.array;
-import com.research.test.R.id;
-import com.research.test.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

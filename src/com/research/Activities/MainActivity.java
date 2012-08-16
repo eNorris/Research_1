@@ -5,8 +5,6 @@ import com.research.Utilities.OnBoolClickActivitySwapper;
 import com.research.Utilities.OnClickActivitySwapper;
 import com.research.Utilities.SpectrumView;
 import com.research.test.R;
-import com.research.test.R.id;
-import com.research.test.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;

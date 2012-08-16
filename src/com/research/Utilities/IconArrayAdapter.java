@@ -3,8 +3,6 @@ package com.research.Utilities;
 import java.util.ArrayList;
 
 import com.research.test.R;
-import com.research.test.R.id;
-import com.research.test.R.layout;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;

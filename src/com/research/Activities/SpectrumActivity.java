@@ -3,19 +3,14 @@ package com.research.Activities;
 import com.research.Bundles.EchelonBundle;
 import com.research.Utilities.SpectrumView;
 import com.research.test.R;
-import com.research.test.R.id;
-import com.research.test.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-//import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-//import android.view.View.OnDragListener;
 import android.widget.Button;
-//import android.widget.SeekBar;
 import android.widget.Spinner;
 
 public class SpectrumActivity extends Activity {

@@ -8,9 +8,6 @@ import com.research.Bundles.EchelonBundle;
 import com.research.Utilities.ImportParser;
 import com.research.Utilities.Util;
 import com.research.test.R;
-import com.research.test.R.drawable;
-import com.research.test.R.id;
-import com.research.test.R.layout;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,7 +17,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;

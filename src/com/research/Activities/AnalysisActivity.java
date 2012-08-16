@@ -1,27 +1,19 @@
 package com.research.Activities;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.research.AnalysisActivities.PeakAnalysisActivity;
 import com.research.Utilities.IconArrayAdapter;
 import com.research.test.R;
-import com.research.test.R.drawable;
-import com.research.test.R.id;
-import com.research.test.R.layout;
 
 import android.app.ActivityGroup;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -31,17 +23,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TabHost;
-import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
-import android.widget.TabWidget;
 import android.widget.TextView;
 
 public class AnalysisActivity extends ActivityGroup{

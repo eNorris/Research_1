@@ -21,6 +21,7 @@ public class EchelonBundle {
 	private EchelonBundle(){}
 	
 	public static void clearAll(){
+		Log.v(TAG, "Clearing EchelonBundle");
 		configBundle = new ConfigBundle();
 		exportBundle = new ExportBundle();
 		importBundle = new ImportBundle();
