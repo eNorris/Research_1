@@ -6,6 +6,7 @@ import com.research.test.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -15,7 +16,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class ConfigActivity extends Activity {
 	
@@ -32,6 +36,7 @@ public class ConfigActivity extends Activity {
 		final Button manualDetectButton = (Button) findViewById(R.id.configManualDetectButton_id);
 //		final TextView NumBinsTextView = (TextView) findViewById(R.id.configNumBinsTextView_id);
 		final Button doneButton = (Button) findViewById(R.id.configDoneButton_id);
+		final EditText scaleEditText = (EditText) findViewById(R.id.configScalingFactorEditText_id);
 		final Spinner binSelectSpinner = (Spinner) findViewById(R.id.configBinSelectorSpinner_id);
 		final Spinner autoResizeSelectSpinner = (Spinner) findViewById(R.id.configAutoResizeSpinner_id);
 		final Spinner recordUntilSpinner = (Spinner) findViewById(R.id.configRecordUntilSpinner_id);
@@ -70,6 +75,15 @@ public class ConfigActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			}
+		});
+		
+		scaleEditText.setOnEditorActionListener(new OnEditorActionListener(){
+
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				EchelonBundle.configBundle.tickY = Integer.parseInt(v.getText().toString());
+				return false;
+			}
+			
 		});
 		
 		// Implement the spinner listener

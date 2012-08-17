@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.research.Bundles.DataBundle;
 import com.research.Bundles.EchelonBundle;
@@ -93,6 +94,9 @@ public class ImportParser {
 	
 	// TODO - Based on SDATA - needs some stuff taken out should blindly seek out commas for splitting
 	static DataBundle parseCSVTKA(File file){
+		
+		Log.v(TAG, "Launching CSV/TKA parser");
+		
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file.toString()));
@@ -105,27 +109,37 @@ public class ImportParser {
 		toReturn.isDrawable = true;
 		String thisLine = null;
 		
-		Log.v(TAG, "Begin line by line parsing");
+		ArrayList<Integer> intList = new ArrayList<Integer>();
+		
+//		Log.v(TAG, "Begin line by line parsing");
 		try {
+//Log.d(TAG, "Begining line by line parsing");
 			while((thisLine = reader.readLine()) != null){
-				Log.v(TAG, "accepted a line");
+//				Log.v(TAG, "accepted a line");
 				thisLine = thisLine.trim();
 				if(thisLine.length() == 0){
-					Log.v(TAG, "Empty line - skip");
+//					Log.v(TAG, "Empty line - skip");
 					continue;
 				}
 				
-				Log.v(TAG, "splitting");
+//				Log.v(TAG, "splitting");
 				String[] splitLine = thisLine.split(",");
 				
 				if(splitLine.length == 0){
 					Log.d(TAG, "Error parsing " + file.getName()  +"couldn't split line");
 					continue;
 				}else{
-					toReturn.data = new int[splitLine.length];
+					
+//Log.d(TAG, "split line into " + splitLine.length + " parts");
+					
+//					toReturn.data = new int[splitLine.length];
 					for(int i = 0; i < splitLine.length; i++){
 						try {
-							toReturn.data[i] = Integer.valueOf(splitLine[i]);
+//							toReturn.data[i] = Integer.valueOf(splitLine[i]);
+							intList.add(Integer.valueOf(splitLine[i]));
+							
+//Log.d(TAG, "added: " + toReturn.data[i] + "  to the queue that will be pushed into Echelon");
+							
 						} catch (NumberFormatException e) {
 							Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
 							e.printStackTrace();
@@ -138,6 +152,14 @@ public class ImportParser {
 			e.printStackTrace();
 		}
 		Log.v(TAG, "finished parsing");
+		
+		toReturn.data = new int[intList.size()];
+		
+		for(int i = 0; i < intList.size(); i++){
+			toReturn.data[i] = intList.get(i);
+		}
+		
+//Log.d(TAG, "@ Return: size = " + toReturn.data.length);
 			
 		return toReturn;
 	}
@@ -156,9 +178,7 @@ public class ImportParser {
 		toReturn.isDrawable = true;
 		
 		String thisLine = null;
-		// TODO - Don't use this intermediate array, just cram everything into toReturn.data since I know
-		// after parsing how long it is.
-//		Integer[] correspondingInts = null;
+
 		int channelcheck = 0;
 		boolean channelchecked = false;
 		

@@ -32,6 +32,10 @@ import android.widget.Button;
  *    Multiple spectrums viewed simultaneously - choose spectrum
  *    autofit algorithm
  *    Always show axes
+ *    
+ *    Prompt before clearing all data
+ *    
+ *    Create new folders if needed on first startup - then set this as the default location
 */
 
 
