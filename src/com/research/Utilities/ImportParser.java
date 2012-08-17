@@ -73,10 +73,14 @@ public class ImportParser {
 		Log.v(TAG, "Enabling spectrum view");
 		EchelonBundle.dataLoaded.set(true);
 		// FIXME - This only reassigns! I need to change the value!
+	
+		// Set the color
+		int newColor = Util.randomHue();
+		newDataBundle.paint.setColor(newColor);
+		newDataBundle.linePaint.setColor(Util.lightenHue(newColor, .6));
 		
-//Log.d(TAG, "After setting dataLoaded to true: Echelon = " + EchelonBundle.dataLoaded.toString() + "     swapper = " + OnBoolClickActivitySwapper.m_bool.toString());
-		
-		
+		// Set the new spectrum's name for display
+		newDataBundle.name = file.getName();
 		
 		// Add the data
 		EchelonBundle.dataBundles.add(newDataBundle);

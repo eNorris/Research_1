@@ -122,7 +122,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			float left = i*width+EchelonBundle.screenBundle.oriNu;
 			float right = (i+1)*width + EchelonBundle.screenBundle.oriNu;
 			float top = Util.adaToY(bundle.data[i]*heightmod);
-			canvas.drawRect(left, top, right, bottom, spectrumPaint);
+//			canvas.drawRect(left, top, right, bottom, spectrumPaint);
+			canvas.drawRect(left, top, right, bottom, bundle.paint);
 		}
 	}
 	
@@ -138,10 +139,14 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		for(int i = 0; i < bundle.data.length - 1; i++){
 			float left = i*width+EchelonBundle.screenBundle.oriNu;
 			float right = (i+1)*width + EchelonBundle.screenBundle.oriNu;
+//			canvas.drawLine(left, Util.adaToY(bundle.data[i]*heightmod),
+//					right, Util.adaToY(bundle.data[i+1]*heightmod), 
+//					spectrumLinePaint
+//			);
 			canvas.drawLine(left, Util.adaToY(bundle.data[i]*heightmod),
-					right, Util.adaToY(bundle.data[i+1]*heightmod), 
-					spectrumLinePaint
-			);
+			right, Util.adaToY(bundle.data[i+1]*heightmod), 
+			bundle.linePaint
+	);
 		}
 	}
 	

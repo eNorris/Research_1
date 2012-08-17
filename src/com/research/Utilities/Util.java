@@ -4,10 +4,13 @@ import java.io.File;
 import java.util.Random;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.research.Bundles.EchelonBundle;
 
 public class Util {
+	
+	public static final String TAG = "Util";
 	
 	public static Random rand = new Random();
 	
@@ -53,6 +56,10 @@ public class Util {
 		return file.getName().substring(file.getName().lastIndexOf('.') + 1).toLowerCase();
 	}
 	
+	static public String removeFileExtension(File file){
+		return file.getName().substring(0, file.getName().lastIndexOf('.'));
+	}
+	
 	static public int randomHue(){
 		return Color.HSVToColor(new float[]{rand.nextInt(361),1,1});
 	}
@@ -67,13 +74,30 @@ public class Util {
 		nextRed += (255 - nextRed) * amount;
 		nextBlue += (255 - nextBlue) * amount;
 		
-		return (int) (0xff000000 + nextRed*0x00ff0000 + nextGreen*0x0000ff00 + nextBlue*0x000000ff);
+		Log.d(TAG, "nextGreen = " + nextGreen);
+		Log.d(TAG, "nextRed = " + nextRed);
+		Log.d(TAG, "nextBlue = " + nextBlue);
 		
-//		float[] hsv = new float[3];
-//		Color.colorToHSV(hue, hsv);
-//		
-//		float green = Color.green((int) hsv[0]);
-//		
-//		return 1;
+		int finalRed = (int)nextRed << 16;
+		int finalGreen = (int)nextGreen << 8;
+		int finalBlue = (int)nextBlue;
+		
+		Log.d(TAG, "final color: " + Integer.toHexString(0xff000000 + finalRed + finalGreen + finalBlue));
+		
+		return (0xff000000 + finalRed + finalGreen + finalBlue);
+	}
+	
+	static public int setTransparancy(int hue, float alpha){
+		int  newalpha = (int) alpha*255 << 24;
+		return hue << 8 >> 8 + newalpha;
 	}
 }
+
+
+
+
+
+
+
+
+

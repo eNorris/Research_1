@@ -13,6 +13,6 @@ public class ImportBundle{
 	public List<String> importFilePath = new ArrayList<String>();
 	public List<File> files = new ArrayList<File>();
 	
-	public int lastImportedColor = Color.BLUE;
+//	public int lastImportedColor = Color.BLUE;
 	
 }

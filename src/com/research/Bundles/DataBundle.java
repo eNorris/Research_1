@@ -1,6 +1,9 @@
 package com.research.Bundles;
 
+import java.util.ArrayList;
+
 import android.graphics.Color;
+import android.graphics.Paint;
 
 public class DataBundle{
 	public int[] data = null;
@@ -8,15 +11,28 @@ public class DataBundle{
 	public double resolution = 1.0;
 	public boolean isDrawable = false;
 	public String name = "Data Set Name";
-	public int color = Color.BLUE;
+	public Paint paint = new Paint();
+	public Paint linePaint = new Paint();
+	public ArrayList<DataBundleRoi> rois = new ArrayList<DataBundleRoi>();
 	
 	public DataBundle(){
-		// Do Nothing
+		paint.setColor(Color.BLUE);
+		paint.setColor(Color.YELLOW);
 	}
 	
 	public void clearData(){
 		if(data != null && data.length > 0)
 			data = new int[data.length];
+		rois.clear();
 	}
+}
 
+class DataBundleRoi{
+	int startChannel = 0;
+	int stopChannel = 0;
+	public Paint paint = new Paint();
+	
+	public DataBundleRoi(){
+		paint.setColor(Color.RED);
+	}
 }
