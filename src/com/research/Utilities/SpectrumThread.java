@@ -1,6 +1,8 @@
 package com.research.Utilities;
 
 
+import com.research.test.SpectrumView;
+
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 

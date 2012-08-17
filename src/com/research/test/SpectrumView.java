@@ -1,7 +1,9 @@
-package com.research.Utilities;
+package com.research.test;
 
 import com.research.Bundles.DataBundle;
 import com.research.Bundles.EchelonBundle;
+import com.research.Utilities.SpectrumThread;
+import com.research.Utilities.Util;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -94,10 +96,6 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				// Reset the canvas to solid black
 			canvas.drawColor(Color.BLACK);
 				// If there is nothin to draw, skip this phase
-//			if(EchelonBundle.dataBundles != null && EchelonBundle.dataBundles.size() != 0){
-//				drawSpectrum(canvas);
-//				drawLineSpectrum(canvas);
-//			}
 			if(EchelonBundle.dataBundles != null){
 				for(int i = 0; i < EchelonBundle.dataBundles.size(); i++){
 					if(EchelonBundle.dataBundles.get(i).isDrawable){
@@ -118,7 +116,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				max = bundle.data[i];
 		float heightmod = canvas.getHeight() / max;
 		
-			// Draw the bar graph
+			// Draw the spectrum
 		float bottom = Util.adaToY(0);
 		for(int i = 0; i < bundle.data.length; i++){
 			float left = i*width+EchelonBundle.screenBundle.oriNu;

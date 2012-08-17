@@ -3,8 +3,8 @@ package com.research.Activities;
 import com.research.Bundles.EchelonBundle;
 import com.research.Utilities.OnBoolClickActivitySwapper;
 import com.research.Utilities.OnClickActivitySwapper;
-import com.research.Utilities.SpectrumView;
 import com.research.test.R;
+import com.research.test.SpectrumView;
 
 import android.app.Activity;
 import android.content.Intent;

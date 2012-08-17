@@ -2,7 +2,12 @@ package com.research.Activities;
 
 import java.util.ArrayList;
 
+import com.research.AnalysisActivities.AnalysisCommandActivity;
+import com.research.AnalysisActivities.EnergyCalActivity;
+import com.research.AnalysisActivities.IsotopeIdActivity;
+import com.research.AnalysisActivities.NoContentActivity;
 import com.research.AnalysisActivities.PeakAnalysisActivity;
+import com.research.Bundles.EchelonBundle;
 import com.research.Utilities.IconArrayAdapter;
 import com.research.test.R;
 
@@ -24,6 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
@@ -61,115 +67,120 @@ public class AnalysisActivity extends ActivityGroup{
 		m_unselectedTab.setCornerRadius(10);
 		
 		// Build tabs
-		TabSpec tabSpec = tabHost.newTabSpec("tab1");
-		TabSpec tabSpec2 = tabHost.newTabSpec("tab2");
-		TabSpec tabSpec3 = tabHost.newTabSpec("tab3");
-		TabSpec tabSpec4 = tabHost.newTabSpec("tab4");
-		TabSpec tabSpec5 = tabHost.newTabSpec("tab5");
+		TabSpec mainTab = tabHost.newTabSpec("tab1");
+		TabSpec peakAnalysisTab = tabHost.newTabSpec("tab2");
+		TabSpec isotopeIdTab = tabHost.newTabSpec("tab3");
+		TabSpec energyCalTab = tabHost.newTabSpec("tab4");
+		TabSpec comparisonTab = tabHost.newTabSpec("tab5");
 		TabSpec tabSpec6 = tabHost.newTabSpec("tab6");
 		TabSpec tabSpec7 = tabHost.newTabSpec("tab7");
 		TabSpec tabSpec8 = tabHost.newTabSpec("tab8");
 		TabSpec tabSpec9 = tabHost.newTabSpec("tab9");
 		
 		// Set Indicators (The label on the tab itself)
-		tabSpec.setIndicator(new TabTextView(this, "Main", R.drawable.logo3));
-		tabSpec2.setIndicator(new TabTextView(this, "Peak Analysis"));
-		tabSpec3.setIndicator(new TabTextView(this, "Isotope Identification"));
-		tabSpec4.setIndicator(new TabTextView(this, "Energy Calibration"));
-		tabSpec5.setIndicator(new TabTextView(this, "Not Used"));
+		mainTab.setIndicator(new TabTextView(this, "Main", R.drawable.logo3));
+		peakAnalysisTab.setIndicator(new TabTextView(this, "Peak Analysis"));
+		isotopeIdTab.setIndicator(new TabTextView(this, "Isotope Identification"));
+		energyCalTab.setIndicator(new TabTextView(this, "Energy Calibration"));
+		comparisonTab.setIndicator(new TabTextView(this, "Spectrum Comparison"));
 		tabSpec6.setIndicator(new TabTextView(this, "Not Used"));
 		tabSpec7.setIndicator(new TabTextView(this, "Not Used"));
 		tabSpec8.setIndicator(new TabTextView(this, "Not Used"));
 		tabSpec9.setIndicator(new TabTextView(this, "Under Construction"));
 		
 		
-		// Build the views from factories
-		TabContentContextFactory tabContentFactory = new TabContentContextFactory(this){
-			public View createTabContent(String tag) {
-				TextView textView = new TextView(m_context);
-				textView.setText("this is text!");
-				return textView;
-			}
-		};
-		
-		TabContentContextFactory tabContentFactory2 = new TabContentContextFactory(this){
-			public View createTabContent(String tag) {
-				
-Log.d(TAG, "crateTabContent()");
-				
-				// Set the layout
-				LinearLayout ll = new LinearLayout(m_context);
-				ll.setOrientation(LinearLayout.VERTICAL);
-				
-				// Build the spinner
-				Spinner spinner = new Spinner(m_context);
-				
-				ArrayList<String> stringers = new ArrayList<String>();
-				stringers.add("one");
-				stringers.add("two");
-				stringers.add("three");
-				
-				ArrayList<Drawable> drawers = new ArrayList<Drawable>();
-				drawers.add(this.m_context.getResources().getDrawable(R.drawable.ic_launcher));
-				drawers.add(null);
-				drawers.add(this.m_context.getResources().getDrawable(R.drawable.broken));
-				
-				IconArrayAdapter adapter = new IconArrayAdapter(m_context, stringers, drawers);
-				adapter.setDropDownViewResource(R.layout.component_iconarrayadapter);
-				
-				
-//				adapter.setDropDownViewResource(R.layout.component_iconarrayadapter);
-//				ArrayAdapter adapter = new ArrayAdapter()
-				Log.d(TAG, "enabled: " + spinner.isEnabled());
-				Log.d(TAG, "focused: " + spinner.isFocused());
-				Log.d(TAG, "shown: " + spinner.isShown());
-				Log.d(TAG, "selected: " + spinner.isSelected());
-				
-				spinner.setAdapter(adapter);
-				
-				ll.addView(spinner);
-				
-				View v = null;
-				ll.addView(spinner.getAdapter().getView(0, v, ll));
-				
-				return ll;
-			}
-		};
-		
-		TabContentContextFactory tabContentFactory3 = new TabContentContextFactory(this){
-			public View createTabContent(String tag) {
-				TextView textView = new TextView(m_context);
-				textView.setText("this isn't text!");
-				return textView;
-			}
-		};
+//		// Build the views from factories
+//		TabContentContextFactory tabContentFactory = new TabContentContextFactory(this){
+//			public View createTabContent(String tag) {
+//				TextView textView = new TextView(m_context);
+//				textView.setText("this is text!");
+//				return textView;
+//			}
+//		};
+//		
+//		TabContentContextFactory tabContentFactory2 = new TabContentContextFactory(this){
+//			public View createTabContent(String tag) {
+//				return new TextView(m_context);
+//			}
+//		};
+//		
+//		TabContentContextFactory tabContentFactory3 = new TabContentContextFactory(this){
+//			public View createTabContent(String tag) {
+//				TextView textView = new TextView(m_context);
+//				textView.setText("this isn't text!");
+//				return textView;
+//			}
+//		};
 		
 		// Set the tab content
-		tabSpec.setContent(tabContentFactory);
-//		tabSpec2.setContent(tabContentFactory2);
+//		mainTab.setContent(tabContentFactory);
+////		tabSpec2.setContent(tabContentFactory2);
+//		
+//		peakAnalysisTab.setContent(new Intent(this, PeakAnalysisActivity.class));
+//		
+//		isotopeIdTab.setContent(tabContentFactory3);
+//		energyCalTab.setContent(tabContentFactory);
+//		comparisonTab.setContent(tabContentFactory2);
+//		tabSpec6.setContent(tabContentFactory3);
+//		tabSpec7.setContent(tabContentFactory);
+//		tabSpec8.setContent(tabContentFactory2);
+//		tabSpec9.setContent(tabContentFactory3);
 		
-		tabSpec2.setContent(new Intent(this, PeakAnalysisActivity.class));
+		// Set the tab content
+		if(EchelonBundle.dataBundles.size() == 0){
+			mainTab.setContent(new Intent(this, NoContentActivity.class));
+			peakAnalysisTab.setContent(new Intent(this, NoContentActivity.class));
+			isotopeIdTab.setContent(new Intent(this, NoContentActivity.class));
+			energyCalTab.setContent(new Intent(this, NoContentActivity.class));
+			comparisonTab.setContent(new Intent(this, NoContentActivity.class));
+			tabSpec6.setContent(new Intent(this, NoContentActivity.class));
+			tabSpec7.setContent(new Intent(this, NoContentActivity.class));
+			tabSpec8.setContent(new Intent(this, NoContentActivity.class));
+			tabSpec9.setContent(new Intent(this, NoContentActivity.class));
+		}else{
+			mainTab.setContent(new Intent(this, AnalysisCommandActivity.class));
+			peakAnalysisTab.setContent(new Intent(this, PeakAnalysisActivity.class));
+			isotopeIdTab.setContent(new Intent(this, IsotopeIdActivity.class));
+			energyCalTab.setContent(new Intent(this, EnergyCalActivity.class));
+			comparisonTab.setContent(new Intent(this, PeakAnalysisActivity.class));
+			tabSpec6.setContent(new Intent(this, NoContentActivity.class));
+			tabSpec7.setContent(new Intent(this, NoContentActivity.class));
+			tabSpec8.setContent(new Intent(this, NoContentActivity.class));
+			tabSpec9.setContent(new Intent(this, NoContentActivity.class));
+		}
 		
-		tabSpec3.setContent(tabContentFactory3);
-		tabSpec4.setContent(tabContentFactory);
-		tabSpec5.setContent(tabContentFactory2);
-		tabSpec6.setContent(tabContentFactory3);
-		tabSpec7.setContent(tabContentFactory);
-		tabSpec8.setContent(tabContentFactory2);
-		tabSpec9.setContent(tabContentFactory3);
-		
-		// Add the tabs to the TabHost
-//		tabHost.setup();
-		
-		tabHost.addTab(tabSpec);
-		tabHost.addTab(tabSpec2);
-		tabHost.addTab(tabSpec3);
-		tabHost.addTab(tabSpec4);
-		tabHost.addTab(tabSpec5);
+		tabHost.addTab(mainTab);
+		tabHost.addTab(peakAnalysisTab);
+		tabHost.addTab(isotopeIdTab);
+		tabHost.addTab(energyCalTab);
+		tabHost.addTab(comparisonTab);
 		tabHost.addTab(tabSpec6);
 		tabHost.addTab(tabSpec7);
 		tabHost.addTab(tabSpec8);
 		tabHost.addTab(tabSpec9);
+		
+		
+		
+		for(int i = 0; i < tabHost.getTabWidget().getChildCount(); i++){
+		//	tabHost.getChildAt(i).getLayoutParams().
+//			View currentView = tabHost.getTabWidget().getChildAt(i);
+//			LinearLayout.LayoutParams currentLayout = (LayoutParams) currentView.getLayoutParams();
+//			currentLayout.setMargins(0, 5, 5, 0);
+			
+			((LinearLayout.LayoutParams) tabHost.getTabWidget().getChildAt(i).getLayoutParams()).setMargins(1, 5, 1, 0);
+		}
+		tabHost.getTabWidget().requestLayout();
+		
+//		for (int i = 0; i < tabChildrenCount; i++) {
+//		    currentView = tabWidget.getChildAt(i);
+//		    LinearLayout.LayoutParams currentLayout =
+//		        (LinearLayout.LayoutParams) currentView.getLayoutParams();
+//		    currentLayout.setMargins(0, 5, 5, 0);
+//		}
+//		tabWidget.requestLayout();
+
+		
+		
 		
 		// Set the listener for the done button
 		doneButton.setOnClickListener(new OnClickListener(){
@@ -180,26 +191,26 @@ Log.d(TAG, "crateTabContent()");
 		});
 	}
 	
-	/**
-	 * Implements the TabContentFactory interface and adds a protected element named m_context of type Context.
-	 * This allows views crated in the TabContentContextFactory's createTabContent() function to be able to
-	 * be constructed with m_context as an argument since the TabContentFactory was origionally intended to work
-	 * with the TabActivity class, allowing access to the current context via the activity. This class allows
-	 * access when a TabHost is being used outside a TabActivity.
-	 * 
-	 * @author Edward Norris (etnc6d)
-	 *
-	 */
-	private abstract class TabContentContextFactory implements TabContentFactory{
-		
-		protected Context m_context;
-		
-		TabContentContextFactory(Context context){
-			m_context = context;
-		}
-
-		public abstract View createTabContent(String tag);
-	}
+//	/**
+//	 * Implements the TabContentFactory interface and adds a protected element named m_context of type Context.
+//	 * This allows views crated in the TabContentContextFactory's createTabContent() function to be able to
+//	 * be constructed with m_context as an argument since the TabContentFactory was origionally intended to work
+//	 * with the TabActivity class, allowing access to the current context via the activity. This class allows
+//	 * access when a TabHost is being used outside a TabActivity.
+//	 * 
+//	 * @author Edward Norris (etnc6d)
+//	 *
+//	 */
+//	private abstract class TabContentContextFactory implements TabContentFactory{
+//		
+//		protected Context m_context;
+//		
+//		TabContentContextFactory(Context context){
+//			m_context = context;
+//		}
+//
+//		public abstract View createTabContent(String tag);
+//	}
 	
 	/**
 	 * Exteds the TextView class.

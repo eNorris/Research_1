@@ -64,6 +64,22 @@
             android:icon="@drawable/ic_launcher"
             android:label="@string/globalAppName"
             android:name="com.research.AnalysisActivities.PeakAnalysisActivity" />
+        <activity
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/globalAppName"
+            android:name="com.research.AnalysisActivities.NoContentActivity" />
+        <activity
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/globalAppName"
+            android:name="com.research.AnalysisActivities.IsotopeIdActivity" />
+        <activity
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/globalAppName"
+            android:name="com.research.AnalysisActivities.EnergyCalActivity" />
+        <activity
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/globalAppName"
+            android:name="com.research.AnalysisActivities.AnalysisCommandActivity" />
     </application>
 
 </manifest>

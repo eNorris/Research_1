@@ -73,5 +73,6 @@
 	<!-- Core Resources -->
 	<string name="coreDoneButton_str">Done</string>
 	<string name="coreSelectSpinnerDefault">No Spectrum</string>
+	<string name="noresourcesTextView_str">Sorry, no resources have been loaded yet :(</string>
 
 </resources>

@@ -5,73 +5,135 @@ import java.util.ArrayList;
 import com.research.test.R;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class IconArrayAdapter extends ArrayAdapter<String>{
 	public static final String TAG = "IconArrayAdapter";
 	private Context context = null;
-	private ArrayList<String> labels = null;
-	private ArrayList<Drawable> drawables = null;
 	
-	// TODO - see if you can do this with componentglobalTextview instead of needing a whole XML for a slingle Textview
-	public IconArrayAdapter(Context context, ArrayList<String> labels, ArrayList<Drawable> drawables){
-		super(context, R.id.component_iconarrayadapterTextView);
+	public IconArrayAdapter(Context context, int textViewResourceId, ArrayList<String> strings){
+		super(context, textViewResourceId, strings);
 		this.context = context;
-		this.labels = labels;
-		this.drawables = drawables;
-Log.d(TAG, "Entered constructor1");
 	}
 	
-	public IconArrayAdapter(Context context, ArrayList<String> labels, int[] drawables){
-		super(context, R.id.component_iconarrayadapterTextView);
-		this.context = context;
-		this.labels = labels;
-		
-		this.drawables = new ArrayList<Drawable>();
-		for(int i = 0; i < drawables.length; i++){
-			if(drawables[i] != 0){
-				BitmapDrawable bitmap = (BitmapDrawable) context.getResources().getDrawable(drawables[i]);
-				this.drawables.add(bitmap);
-			}else{
-				this.drawables.add(null);
-			}
-		}
-Log.d(TAG, "finished constructor2");
+	@Override
+	public View getDropDownView(int position, View convertView, ViewGroup parent) {
+		return getCustomView(position, convertView, parent);
 	}
 	
-	public View getView(int pos, View view, ViewGroup parent){
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		return getCustomView(position, convertView, parent);
+	}
+	
+	public View getCustomView(int position, View convertView, ViewGroup parent) {
 		
-Log.d(TAG, "getView");
+		View row = convertView;
 		
-		View toReturn = view;
-		
-		// Inflate the View
-		if(toReturn == null){
-			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			toReturn = inflater.inflate(R.layout.component_iconarrayadapter, parent, false);
+		if(row == null){
+			LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);//getLayoutInflater();
+			row = inflater.inflate(R.layout.component_iconarrayadapter, parent, false);
 		}
 		
-		final TextView textView = (TextView) toReturn.findViewById(R.id.component_iconarrayadapterTextView);
+		TextView label=(TextView)row.findViewById(R.id.component_iconarrayadapterTextView);
+		label.setText("hi there");
+		label.setCompoundDrawables(context.getResources().getDrawable(R.drawable.logo3), null, null, null);
 		
-		textView.setText(labels.get(pos));
-		textView.setGravity(Gravity.CENTER_VERTICAL);
+		// Get the color box working later
+//		ImageView icon = (ImageView) row.findViewById(R.id.component_iconarrayadapterImageview);
+//		PaintDrawable p = new PaintDrawable(Color.RED);
+//		p.setBounds(new Rect(0, 0, 20, 20));
+//		ColorDrawable c = new ColorDrawable(Color.RED);
+//		icon.setImageDrawable(c);
 		
-		if(drawables.get(pos) != null){
-			textView.setCompoundDrawablesWithIntrinsicBounds(drawables.get(pos), null, null, null);
-		}
-
-//		rowText.setText(EchelonBundle.importBundle.items.get(pos));
-//		rowText.setBackgroundColor(Color.BLACK);
-//		toReturn.setBackgroundColor(Color.BLACK);
-		
-		return toReturn;
+		return row;
 	}
 }
+
+
+
+/*
+public class MyCustomAdapter extends ArrayAdapter<String>{
+
+	public MyCustomAdapter(Context context, int textViewResourceId,
+	String[] objects) {
+		super(context, textViewResourceId, objects);
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public View getDropDownView(int position, View convertView,
+		ViewGroup parent) {
+		// TODO Auto-generated method stub
+		return getCustomView(position, convertView, parent);
+	}
+	
+	@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		return getCustomView(position, convertView, parent);
+	}
+	
+	public View getCustomView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		//return super.getView(position, convertView, parent);
+		
+		LayoutInflater inflater=getLayoutInflater();
+		View row=inflater.inflate(R.layout.row, parent, false);
+		TextView label=(TextView)row.findViewById(R.id.weekofday);
+		label.setText(DayOfWeek[position]);
+		
+		ImageView icon=(ImageView)row.findViewById(R.id.icon);
+		
+		if (DayOfWeek[position]=="Sunday"){
+		icon.setImageResource(R.drawable.icon);
+		}
+		else{
+		icon.setImageResource(R.drawable.icongray);
+		}
+		
+		return row;
+	}
+}
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
