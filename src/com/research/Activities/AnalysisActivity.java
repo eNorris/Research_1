@@ -78,53 +78,15 @@ public class AnalysisActivity extends ActivityGroup{
 		TabSpec tabSpec9 = tabHost.newTabSpec("tab9");
 		
 		// Set Indicators (The label on the tab itself)
-		mainTab.setIndicator(new TabTextView(this, "Main", R.drawable.logo3));
-		peakAnalysisTab.setIndicator(new TabTextView(this, "Peak Analysis"));
-		isotopeIdTab.setIndicator(new TabTextView(this, "Isotope Identification"));
-		energyCalTab.setIndicator(new TabTextView(this, "Energy Calibration"));
-		comparisonTab.setIndicator(new TabTextView(this, "Spectrum Comparison"));
+		mainTab.setIndicator(new TabTextView(this, "Main", R.drawable.analysisenmain));
+		peakAnalysisTab.setIndicator(new TabTextView(this, "Peak Analysis", R.drawable.analysisenpeakid));
+		isotopeIdTab.setIndicator(new TabTextView(this, "Isotope Identification", R.drawable.analysisencisotopeid));
+		energyCalTab.setIndicator(new TabTextView(this, "Energy Calibration", R.drawable.analysisenergycal));
+		comparisonTab.setIndicator(new TabTextView(this, "Spectrum Comparison", R.drawable.analysisencomparison));
 		tabSpec6.setIndicator(new TabTextView(this, "Not Used"));
 		tabSpec7.setIndicator(new TabTextView(this, "Not Used"));
 		tabSpec8.setIndicator(new TabTextView(this, "Not Used"));
 		tabSpec9.setIndicator(new TabTextView(this, "Under Construction"));
-		
-		
-//		// Build the views from factories
-//		TabContentContextFactory tabContentFactory = new TabContentContextFactory(this){
-//			public View createTabContent(String tag) {
-//				TextView textView = new TextView(m_context);
-//				textView.setText("this is text!");
-//				return textView;
-//			}
-//		};
-//		
-//		TabContentContextFactory tabContentFactory2 = new TabContentContextFactory(this){
-//			public View createTabContent(String tag) {
-//				return new TextView(m_context);
-//			}
-//		};
-//		
-//		TabContentContextFactory tabContentFactory3 = new TabContentContextFactory(this){
-//			public View createTabContent(String tag) {
-//				TextView textView = new TextView(m_context);
-//				textView.setText("this isn't text!");
-//				return textView;
-//			}
-//		};
-		
-		// Set the tab content
-//		mainTab.setContent(tabContentFactory);
-////		tabSpec2.setContent(tabContentFactory2);
-//		
-//		peakAnalysisTab.setContent(new Intent(this, PeakAnalysisActivity.class));
-//		
-//		isotopeIdTab.setContent(tabContentFactory3);
-//		energyCalTab.setContent(tabContentFactory);
-//		comparisonTab.setContent(tabContentFactory2);
-//		tabSpec6.setContent(tabContentFactory3);
-//		tabSpec7.setContent(tabContentFactory);
-//		tabSpec8.setContent(tabContentFactory2);
-//		tabSpec9.setContent(tabContentFactory3);
 		
 		// Set the tab content
 		if(EchelonBundle.dataBundles.size() == 0){
@@ -162,25 +124,9 @@ public class AnalysisActivity extends ActivityGroup{
 		
 		
 		for(int i = 0; i < tabHost.getTabWidget().getChildCount(); i++){
-		//	tabHost.getChildAt(i).getLayoutParams().
-//			View currentView = tabHost.getTabWidget().getChildAt(i);
-//			LinearLayout.LayoutParams currentLayout = (LayoutParams) currentView.getLayoutParams();
-//			currentLayout.setMargins(0, 5, 5, 0);
-			
 			((LinearLayout.LayoutParams) tabHost.getTabWidget().getChildAt(i).getLayoutParams()).setMargins(1, 5, 1, 0);
 		}
 		tabHost.getTabWidget().requestLayout();
-		
-//		for (int i = 0; i < tabChildrenCount; i++) {
-//		    currentView = tabWidget.getChildAt(i);
-//		    LinearLayout.LayoutParams currentLayout =
-//		        (LinearLayout.LayoutParams) currentView.getLayoutParams();
-//		    currentLayout.setMargins(0, 5, 5, 0);
-//		}
-//		tabWidget.requestLayout();
-
-		
-		
 		
 		// Set the listener for the done button
 		doneButton.setOnClickListener(new OnClickListener(){
