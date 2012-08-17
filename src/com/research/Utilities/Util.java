@@ -3,6 +3,8 @@ package com.research.Utilities;
 import java.io.File;
 import java.util.Random;
 
+import android.graphics.Color;
+
 import com.research.Bundles.EchelonBundle;
 
 public class Util {
@@ -51,11 +53,27 @@ public class Util {
 		return file.getName().substring(file.getName().lastIndexOf('.') + 1).toLowerCase();
 	}
 	
-	// shortcuts to nu and ada
-//	static public float nu(){
-//		return EchelonBundle.screenBundle.oriNu;
-//	}
-//	static public float ada(){
-//		return EchelonBundle.screenBundle.oriAda;
-//	}
+	static public int randomHue(){
+		return Color.HSVToColor(new float[]{rand.nextInt(361),1,1});
+	}
+	
+	static public int lightenHue(int hue, double amount){
+		
+		float nextGreen = Color.green(hue);
+		float nextRed = Color.red(hue);
+		float nextBlue = Color.blue(hue);
+		
+		nextGreen += (255 - nextGreen) * amount;
+		nextRed += (255 - nextRed) * amount;
+		nextBlue += (255 - nextBlue) * amount;
+		
+		return (int) (0xff000000 + nextRed*0x00ff0000 + nextGreen*0x0000ff00 + nextBlue*0x000000ff);
+		
+//		float[] hsv = new float[3];
+//		Color.colorToHSV(hue, hsv);
+//		
+//		float green = Color.green((int) hsv[0]);
+//		
+//		return 1;
+	}
 }
