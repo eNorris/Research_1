@@ -10,7 +10,7 @@ public class Analyst {
 		CS137,CO60
 	}
 
-	public static float averageOfData(int index){
+	public static double averageOfData(int index){
 		if(index >= EchelonBundle.dataBundles.size())
 			return Float.NaN;
 		float toReturn = 0.0f;
@@ -37,6 +37,19 @@ public class Analyst {
 			if(EchelonBundle.dataBundles.get(dataset).data[i] > EchelonBundle.dataBundles.get(dataset).data[i-5] + 50){
 				toReturn.add(i);
 				toReturn.remove(i-5);
+			}
+		}
+		
+		return toReturn;
+	}
+	
+	public static ArrayList<Integer> autoPeakDetectThreshold(int dataset, int thresholdCounts){
+		ArrayList<Integer> toReturn = autoPeakDetect(dataset);
+		
+		for(int i = 0; i < toReturn.size(); i++){
+			if(EchelonBundle.dataBundles.get(dataset).data[toReturn.get(i)] < thresholdCounts){
+				toReturn.remove(i);
+				i--;
 			}
 		}
 		

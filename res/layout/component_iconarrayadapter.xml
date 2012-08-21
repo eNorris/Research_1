@@ -8,7 +8,8 @@
         android:id="@+id/component_iconarrayadapterImageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Desc"/>
+        android:contentDescription="Desc"
+        android:src="@drawable/box"/>
     
 	<TextView
 		android:id="@+id/component_iconarrayadapterTextView" 

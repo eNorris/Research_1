@@ -80,7 +80,7 @@ public class ImportParser {
 		newDataBundle.linePaint.setColor(Util.lightenHue(newColor, .6));
 		
 		// Set the new spectrum's name for display
-		newDataBundle.name = file.getName();
+		newDataBundle.name = Util.removeFilenameWithoutExtension(file);
 		
 		// Add the data
 		EchelonBundle.dataBundles.add(newDataBundle);

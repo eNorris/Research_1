@@ -43,8 +43,6 @@ public class PeakAnalysisActivity extends Activity{
 			spectrumColors.add(p);
 		}
 		
-		
-		
 		IconArrayAdapter adapter = new IconArrayAdapter(this, R.layout.component_iconarrayadapter, spectrumNames);
 		adapter.setDropDownViewResource(R.layout.component_iconarrayadapter);
 		spinner.setAdapter(adapter);

@@ -10,7 +10,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.PaintDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,9 +26,11 @@ import android.widget.TextView;
 public class IconArrayAdapter extends ArrayAdapter<String>{
 	public static final String TAG = "IconArrayAdapter";
 	private Context context = null;
+	private ArrayList<String> m_labels = null;
 	
 	public IconArrayAdapter(Context context, int textViewResourceId, ArrayList<String> strings){
 		super(context, textViewResourceId, strings);
+		m_labels = strings;
 		this.context = context;
 	}
 	
@@ -50,15 +54,28 @@ public class IconArrayAdapter extends ArrayAdapter<String>{
 		}
 		
 		TextView label=(TextView)row.findViewById(R.id.component_iconarrayadapterTextView);
-		label.setText("hi there");
-		label.setCompoundDrawables(context.getResources().getDrawable(R.drawable.logo3), null, null, null);
+		label.setText(m_labels.get(position));
+//		label.setCompoundDrawables(context.getResources().getDrawable(R.drawable.logo3), null, null, null);
+		label.setPadding(5, 5, 5, 5);
+		label.setTextColor(Color.RED);
 		
 		// Get the color box working later
-//		ImageView icon = (ImageView) row.findViewById(R.id.component_iconarrayadapterImageview);
-//		PaintDrawable p = new PaintDrawable(Color.RED);
-//		p.setBounds(new Rect(0, 0, 20, 20));
-//		ColorDrawable c = new ColorDrawable(Color.RED);
-//		icon.setImageDrawable(c);
+		ImageView icon = (ImageView) row.findViewById(R.id.component_iconarrayadapterImageview);
+		PaintDrawable p = new PaintDrawable(Color.RED);
+		p.setBounds(new Rect(0, 0, 20, 20));
+		ColorDrawable c = new ColorDrawable(Color.RED);
+		GradientDrawable g = new GradientDrawable();
+		g.setColor(Color.RED);
+		ShapeDrawable s = new ShapeDrawable();
+		g = (GradientDrawable) context.getResources().getDrawable(R.drawable.box);
+		Drawable draw = context.getResources().getDrawable(R.drawable.broken);
+	
+	
+		
+//		icon.setImageDrawable(context.getResources().getDrawable(R.drawable.logo1));
+//		icon.setImageDrawable(g);
+		icon.setImageDrawable(draw);
+		
 		
 		return row;
 	}

@@ -56,7 +56,7 @@ public class Util {
 		return file.getName().substring(file.getName().lastIndexOf('.') + 1).toLowerCase();
 	}
 	
-	static public String removeFileExtension(File file){
+	static public String removeFilenameWithoutExtension(File file){
 		return file.getName().substring(0, file.getName().lastIndexOf('.'));
 	}
 	
@@ -74,15 +74,15 @@ public class Util {
 		nextRed += (255 - nextRed) * amount;
 		nextBlue += (255 - nextBlue) * amount;
 		
-		Log.d(TAG, "nextGreen = " + nextGreen);
-		Log.d(TAG, "nextRed = " + nextRed);
-		Log.d(TAG, "nextBlue = " + nextBlue);
+//		Log.d(TAG, "nextGreen = " + nextGreen);
+//		Log.d(TAG, "nextRed = " + nextRed);
+//		Log.d(TAG, "nextBlue = " + nextBlue);
 		
-		int finalRed = (int)nextRed << 16;
-		int finalGreen = (int)nextGreen << 8;
-		int finalBlue = (int)nextBlue;
+		int finalRed = ((int)nextRed) << 16;
+		int finalGreen = ((int)nextGreen) << 8;
+		int finalBlue = ((int)nextBlue);
 		
-		Log.d(TAG, "final color: " + Integer.toHexString(0xff000000 + finalRed + finalGreen + finalBlue));
+//		Log.d(TAG, "final color: " + Integer.toHexString(0xff000000 + finalRed + finalGreen + finalBlue));
 		
 		return (0xff000000 + finalRed + finalGreen + finalBlue);
 	}
