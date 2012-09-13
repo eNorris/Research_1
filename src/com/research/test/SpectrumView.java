@@ -151,14 +151,10 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	}
 	
 	public void drawAxisSystem(Canvas canvas){
-		
-		// FIXME - Right here, if return, y axis is never drawn buy x is!
 		if(EchelonBundle.dataBundles.size() == 0 || EchelonBundle.dataBundles.get(0).data == null || EchelonBundle.dataBundles.get(0).data.length == 0)
 			return;
 
 		if(EchelonBundle.configBundle.xAxisOn){
-//Log.d(TAG, "1");
-				// Draw the main x-axis
 			canvas.drawLine(
 					0, Util.adaToY(0),
 					EchelonBundle.screenBundle.width, Util.adaToY(0),
@@ -172,8 +168,6 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				// Draw tick marks to left of origin
 			float drawingPoint = EchelonBundle.screenBundle.oriNu;
 			int tickValue = 1;
-			
-//Log.d(TAG, "2");
 			
 			while(Util.nuToX(drawingPoint) > 0){
 				canvas.drawLine(
@@ -190,7 +184,6 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				);
 				tickValue += 1;
 			}
-//Log.d(TAG, "3");
 			
 				// Draw tick marks to right of origin
 			drawingPoint = EchelonBundle.screenBundle.oriNu;
@@ -210,24 +203,13 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				);
 				tickValue += 1;
 			}
-//Log.d(TAG, "4");
 		}
-		
-//		Log.d(TAG, "Here!");
-		
-//		if(EchelonBundle.configBundle.yAxisOn){
-//			Log.d(TAG, "yaxis is on");
-//		}else{
-//			Log.d(TAG, "y axis is off");
-//		}
-		
 		
 			// Draw main Y axis
 		if(EchelonBundle.configBundle.yAxisOn){
-//			Log.d(TAG, "drawing y axis");
 			canvas.drawLine(
-					Util.nuToX(0), Util.adaTop(),
-					Util.nuToX(0), Util.adaBottom(),//EchelonBundle.screenBundle.height,
+					Util.nuToX(0), Util.adaToY(Util.adaTop()),//Util.adaTop(),
+					Util.nuToX(0), Util.adaToY(Util.adaBottom()),//Util.adaBottom(),//EchelonBundle.screenBundle.height,
 					EchelonBundle.configBundle.axisPaint
 			);
 			

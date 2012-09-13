@@ -20,9 +20,12 @@ public class HelpActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
 		
+		Log.v(TAG, "calling onCreate()");
+		
 		// Realize Layout
 		final Button doneButton = (Button) findViewById(R.id.helpDoneButton_id);
 		final Button aboutButton = (Button) findViewById(R.id.helpAboutButton_id);
+		final Button infoButton = (Button) findViewById(R.id.helpGeneralInfoButton_id);
 		
 		// Set OnClickListeners
 		
@@ -35,6 +38,19 @@ public class HelpActivity extends Activity {
 						"Missouri University of Science and Technology, " +
 						"Department of Mining and Nuclear Engineering \n\n" +
 						"Developed For the American Nuclear Society Winter Meeting 2012").setPositiveButton("OK", 
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {}
+						}).show();
+			}
+			
+		});
+		
+		infoButton.setOnClickListener(new OnClickListener(){
+			
+			public void onClick(View v) {
+				new AlertDialog.Builder(HelpActivity.this).setIcon(R.drawable.logo1).setTitle("About").
+				setMessage("This software is designed to work with \n\n" +
+						"the AmpTek MCA8000A multichannel analyzer").setPositiveButton("OK", 
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {}
 						}).show();

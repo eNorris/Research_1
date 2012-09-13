@@ -7,15 +7,9 @@ import com.research.test.R;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.PaintDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.Shape;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,10 +57,10 @@ public class IconArrayAdapter extends ArrayAdapter<String>{
 		ImageView icon = (ImageView) row.findViewById(R.id.component_iconarrayadapterImageview);
 		PaintDrawable p = new PaintDrawable(Color.RED);
 		p.setBounds(new Rect(0, 0, 20, 20));
-		ColorDrawable c = new ColorDrawable(Color.RED);
+//		ColorDrawable c = new ColorDrawable(Color.RED);
 		GradientDrawable g = new GradientDrawable();
 		g.setColor(Color.RED);
-		ShapeDrawable s = new ShapeDrawable();
+//		ShapeDrawable s = new ShapeDrawable();
 		g = (GradientDrawable) context.getResources().getDrawable(R.drawable.box);
 		Drawable draw = context.getResources().getDrawable(R.drawable.broken);
 	

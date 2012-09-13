@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Random;
 
 import android.graphics.Color;
-import android.util.Log;
+//import android.util.Log;
 
 import com.research.Bundles.EchelonBundle;
 
@@ -74,16 +74,10 @@ public class Util {
 		nextRed += (255 - nextRed) * amount;
 		nextBlue += (255 - nextBlue) * amount;
 		
-//		Log.d(TAG, "nextGreen = " + nextGreen);
-//		Log.d(TAG, "nextRed = " + nextRed);
-//		Log.d(TAG, "nextBlue = " + nextBlue);
-		
 		int finalRed = ((int)nextRed) << 16;
 		int finalGreen = ((int)nextGreen) << 8;
 		int finalBlue = ((int)nextBlue);
-		
-//		Log.d(TAG, "final color: " + Integer.toHexString(0xff000000 + finalRed + finalGreen + finalBlue));
-		
+	
 		return (0xff000000 + finalRed + finalGreen + finalBlue);
 	}
 	

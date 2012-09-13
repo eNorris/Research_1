@@ -75,5 +75,6 @@
 	<string name="coreSelectSpinnerDefault">No Spectrum</string>
 	<string name="noresourcesTextView_str">Sorry, no resources have been loaded yet :(</string>
 	<string name="helpAboutButton_str">About\u2026</string>
+	<string name="helpGeneralInfo_str">General Information</string>
 
 </resources>

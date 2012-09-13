@@ -1,14 +1,11 @@
 package com.research.Activities;
 
-import java.util.ArrayList;
-
 import com.research.AnalysisActivities.AnalysisCommandActivity;
 import com.research.AnalysisActivities.EnergyCalActivity;
 import com.research.AnalysisActivities.IsotopeIdActivity;
 import com.research.AnalysisActivities.NoContentActivity;
 import com.research.AnalysisActivities.PeakAnalysisActivity;
 import com.research.Bundles.EchelonBundle;
-import com.research.Utilities.IconArrayAdapter;
 import com.research.test.R;
 
 import android.app.ActivityGroup;
@@ -17,7 +14,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
@@ -29,10 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.Spinner;
 import android.widget.TabHost;
-import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
