@@ -33,6 +33,7 @@ public class ImportActivity extends Activity {
 	
 	public static final String TAG = "AnalysisActivity";
 	public static final String ROOT = "/";
+	public static final String SPECANALROOT = "/mnt/sdcard/SpectrumAnalysis";
 	public static final String PARENTFOLDER = "../";
 	
 	public static TextView importFilePath = null;
@@ -61,11 +62,12 @@ public class ImportActivity extends Activity {
 
 			public void onItemClick(AdapterView<?> adapter, View view, int pos, long id) {
 				
-				File newFile = new File(EchelonBundle.importBundle.importFilePath.get(pos));
+				// Get what the user selected
+				File newFile = new File(EchelonBundle.importBundle.importPathFileNames.get(pos));
 				
 				if(newFile.isDirectory()){
 					if(newFile.canRead()){
-						loadDirectory(EchelonBundle.importBundle.importFilePath.get(pos));
+						loadDirectory(EchelonBundle.importBundle.importPathFileNames.get(pos));
 					}else{
 						// If the directory is not readable
 						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("[" + newFile.getName() + "] folder can't be read!").setPositiveButton("OK", 
@@ -136,40 +138,43 @@ public class ImportActivity extends Activity {
 	private void loadDirectory(String dirPath)
 	{
 		importFilePath.setText("Location: " + dirPath);
-		EchelonBundle.importBundle.items = new ArrayList<String>();
-		EchelonBundle.importBundle.files = new ArrayList<File>();
-		EchelonBundle.importBundle.importFilePath = new ArrayList<String>();
+		EchelonBundle.importBundle.importPathFiles = new ArrayList<File>();
+		EchelonBundle.importBundle.importPathFileNames = new ArrayList<String>();
 		File f = new File(dirPath);
 		File[] files = f.listFiles();
 		
 		if(!dirPath.equals(ROOT))
 		{
-			EchelonBundle.importBundle.items.add(ROOT);
-			EchelonBundle.importBundle.files.add(new File(ROOT));
-			EchelonBundle.importBundle.importFilePath.add(ROOT);
+			EchelonBundle.importBundle.importPathFiles.add(new File(ROOT));
+			EchelonBundle.importBundle.importPathFileNames.add(ROOT);
 			
-			EchelonBundle.importBundle.items.add(PARENTFOLDER);
-			EchelonBundle.importBundle.files.add(new File(PARENTFOLDER));
-			EchelonBundle.importBundle.importFilePath.add(f.getParent());
+			EchelonBundle.importBundle.importPathFiles.add(new File(PARENTFOLDER));
+			EchelonBundle.importBundle.importPathFileNames.add(f.getParent());
+		}
+		
+		if(!dirPath.equals(SPECANALROOT)){
+			EchelonBundle.importBundle.importPathFiles.add(new File(SPECANALROOT));
+			EchelonBundle.importBundle.importPathFileNames.add(SPECANALROOT);
 		}
 		
 		for(int i=0; i < files.length; i++)
 		{
 			File file = files[i];
-			EchelonBundle.importBundle.importFilePath.add(file.getPath());
-			if(file.isDirectory()){
-				EchelonBundle.importBundle.items.add(file.getName() + "/");
-				EchelonBundle.importBundle.files.add(file);
-			}else{
-				EchelonBundle.importBundle.items.add(file.getName());
-				EchelonBundle.importBundle.files.add(file);
-			}
+			EchelonBundle.importBundle.importPathFileNames.add(file.getPath());
+			EchelonBundle.importBundle.importPathFiles.add(file);
+			
+			
+//			if(file.isDirectory()){
+//				EchelonBundle.importBundle.importPathFiles.add(file);
+//			}else{
+//				EchelonBundle.importBundle.importPathFiles.add(file);
+//			}
 	 	}
 		
 		FileAdapter fileList = new FileAdapter(
 				this,
 				R.layout.importlistitems,
-				EchelonBundle.importBundle.items);
+				EchelonBundle.importBundle.importPathFileNames);
 		
 		importListView.setAdapter(fileList);
 		importListView.setBackgroundColor(Color.BLACK);
@@ -201,11 +206,14 @@ class FileAdapter extends ArrayAdapter<String>{
 		
 		int imgResource = 0;
 		
-		if(EchelonBundle.importBundle.files.get(pos).isDirectory()){
-			imgResource = R.drawable.folder;
-		}else if(Util.getFileExtension(EchelonBundle.importBundle.files.get(pos)).equals("csv")){
+		if(EchelonBundle.importBundle.importPathFiles.get(pos).isDirectory()){
+			if(EchelonBundle.importBundle.importPathFileNames.get(pos).equals(ImportActivity.SPECANALROOT))
+				imgResource = R.drawable.folderspectrum;
+			else
+				imgResource = R.drawable.folder;
+		}else if(Util.getFileExtension(EchelonBundle.importBundle.importPathFiles.get(pos)).equals("csv")){
 			imgResource = R.drawable.csvfiletype;
-		}else if(Util.getFileExtension(EchelonBundle.importBundle.files.get(pos)).equals("sdata")){
+		}else if(Util.getFileExtension(EchelonBundle.importBundle.importPathFiles.get(pos)).equals("sdata")){
 			imgResource = R.drawable.sdatafiletype;
 		}else{
 			imgResource = R.drawable.unknownfiletype;
@@ -221,7 +229,8 @@ class FileAdapter extends ArrayAdapter<String>{
 // TODO - Find a dynamic way to do this for different screen densities
 		rowImage.setMaxHeight(32);
 		rowImage.setMaxWidth(32);
-		rowText.setText(EchelonBundle.importBundle.items.get(pos));
+//		rowText.setText(EchelonBundle.importBundle.items.get(pos));
+		rowText.setText(EchelonBundle.importBundle.importPathFileNames.get(pos));
 		rowText.setBackgroundColor(Color.BLACK);
 		toReturn.setBackgroundColor(Color.BLACK);
 		

@@ -85,6 +85,14 @@ public class Util {
 		int  newalpha = (int) alpha*255 << 24;
 		return hue << 8 >> 8 + newalpha;
 	}
+	
+	public static String removePathFromFileName(File file){
+		String fullPath = file.getAbsolutePath();
+		String[] filePathParts = fullPath.split("/");
+		if(filePathParts.length == 0)
+			return fullPath;
+		return filePathParts[filePathParts.length-1];
+	}
 }
 
 

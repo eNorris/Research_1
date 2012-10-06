@@ -5,6 +5,7 @@ import com.research.AnalysisActivities.EnergyCalActivity;
 import com.research.AnalysisActivities.IsotopeIdActivity;
 import com.research.AnalysisActivities.NoContentActivity;
 import com.research.AnalysisActivities.PeakAnalysisActivity;
+import com.research.Bundles.ConfigBundle;
 import com.research.Bundles.EchelonBundle;
 import com.research.test.R;
 
@@ -114,8 +115,6 @@ public class AnalysisActivity extends ActivityGroup{
 		tabHost.addTab(tabSpec8);
 		tabHost.addTab(tabSpec9);
 		
-		
-		
 		for(int i = 0; i < tabHost.getTabWidget().getChildCount(); i++){
 			((LinearLayout.LayoutParams) tabHost.getTabWidget().getChildAt(i).getLayoutParams()).setMargins(1, 5, 1, 0);
 		}
@@ -171,21 +170,25 @@ public class AnalysisActivity extends ActivityGroup{
 			
 			// Set the TextView general information
 			setText(tabTitle);
-			setPadding(10,0,10,0);
+			setPadding(10,20,10,20);
 			setGravity(Gravity.CENTER);
 			
+			// Set the tab states
 			int[][] textStates = new int[][]{
 					new int[]{android.R.attr.state_pressed}, 
 					new int[]{android.R.attr.state_selected},
 					StateSet.WILD_CARD
 			};
 			int[] textColors = new int[]{
-					Color.argb(255, 128, 128, 255),
-					Color.argb(255, 128, 128, 255),
+//					Color.argb(255, 128, 128, 255), // <- Old colors
+//					Color.argb(255, 128, 128, 255),
+					Color.argb(255, 65, 190, 210), // <- match new icons
+					Color.argb(255, 65, 190, 210),
 					Color.WHITE
 			};
+			
+			// Set font color to light cyan if selected, whit otherwise
 			this.setTextColor(new ColorStateList(textStates, textColors));
-//			this.set
 			
 			// Build the needed gradients
 			GradientDrawable emptyGradient = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{Color.BLACK, Color.DKGRAY});
@@ -206,7 +209,14 @@ public class AnalysisActivity extends ActivityGroup{
 			// Add the bitmap if one was sent
 			if(drawableResId != 0){
 				BitmapDrawable bitmap = (BitmapDrawable) getResources().getDrawable(drawableResId);
-				bitmap.setTargetDensity(DisplayMetrics.DENSITY_LOW);
+				if(EchelonBundle.configBundle.resolution == ConfigBundle.RESOLUTION_LOW)
+					bitmap.setTargetDensity(DisplayMetrics.DENSITY_LOW);
+				else if(EchelonBundle.configBundle.resolution == ConfigBundle.RESOLUTION_MED)
+					bitmap.setTargetDensity(DisplayMetrics.DENSITY_MEDIUM);
+				else if(EchelonBundle.configBundle.resolution == ConfigBundle.RESOLUTION_HIGH)
+					bitmap.setTargetDensity(DisplayMetrics.DENSITY_HIGH);
+				else if(EchelonBundle.configBundle.resolution == ConfigBundle.RESOLUTION_XHIGH)
+					bitmap.setTargetDensity(DisplayMetrics.DENSITY_XHIGH);
 				setCompoundDrawablesWithIntrinsicBounds(bitmap, null, null, null);
 			}
 		}

@@ -35,7 +35,7 @@ public class ImportParser {
 		if(!file.canRead())
 			return ParseReturnCode.FILE_NOT_READABLE;
 		
-		Log.v(TAG, "first checks passed");
+		Log.v(TAG, "ImportParser::parse(): first checks passed");
 				
 		DataBundle newDataBundle = null;
 		
@@ -51,7 +51,6 @@ public class ImportParser {
 		}else if(ext.equals("tka")){
 			Log.v(TAG, "Parsing TKA file");
 			newDataBundle = parseCSVTKA(file);
-//			newDataBundle = parseTKA(file);
 		}else{
 			Log.d(TAG, "Unknown filetype");
 			return ParseReturnCode.FILE_NOT_PARSABLE;
@@ -89,14 +88,6 @@ public class ImportParser {
 		return ParseReturnCode.OK;
 	}
 	
-//	static DataBundle parseTKA(File file){
-//		
-//		// FIXME - Write this
-//		
-//		return new DataBundle();
-//	}
-	
-	// TODO - Based on SDATA - needs some stuff taken out should blindly seek out commas for splitting
 	static DataBundle parseCSVTKA(File file){
 		
 		Log.v(TAG, "Launching CSV/TKA parser");
@@ -115,18 +106,13 @@ public class ImportParser {
 		
 		ArrayList<Integer> intList = new ArrayList<Integer>();
 		
-//		Log.v(TAG, "Begin line by line parsing");
 		try {
-//Log.d(TAG, "Begining line by line parsing");
 			while((thisLine = reader.readLine()) != null){
-//				Log.v(TAG, "accepted a line");
 				thisLine = thisLine.trim();
 				if(thisLine.length() == 0){
-//					Log.v(TAG, "Empty line - skip");
 					continue;
 				}
 				
-//				Log.v(TAG, "splitting");
 				String[] splitLine = thisLine.split(",");
 				
 				if(splitLine.length == 0){
@@ -134,15 +120,9 @@ public class ImportParser {
 					continue;
 				}else{
 					
-//Log.d(TAG, "split line into " + splitLine.length + " parts");
-					
-//					toReturn.data = new int[splitLine.length];
 					for(int i = 0; i < splitLine.length; i++){
 						try {
-//							toReturn.data[i] = Integer.valueOf(splitLine[i]);
 							intList.add(Integer.valueOf(splitLine[i]));
-							
-//Log.d(TAG, "added: " + toReturn.data[i] + "  to the queue that will be pushed into Echelon");
 							
 						} catch (NumberFormatException e) {
 							Log.d(TAG, "Error, could not convert " + splitLine[i] + "to a number");
@@ -162,8 +142,6 @@ public class ImportParser {
 		for(int i = 0; i < intList.size(); i++){
 			toReturn.data[i] = intList.get(i);
 		}
-		
-//Log.d(TAG, "@ Return: size = " + toReturn.data.length);
 			
 		return toReturn;
 	}
@@ -257,7 +235,9 @@ public class ImportParser {
 			
 		return toReturn;
 	}
-	
+
+	/*
+	 * Dr. Liu says I can't try to parse Canberra's proprietary format... bummer!
 	DataBundle parseCNF(File file){
 		
 		DataBundle toReturn = new DataBundle();
@@ -288,6 +268,7 @@ public class ImportParser {
 		
 		return toReturn;
 	}
+*/
 	
 }
 
