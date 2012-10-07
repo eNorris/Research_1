@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImportBundle{
+	
+	/**
+	 * The initial directory that is loaded at startup - In this case, the root directory
+	 */
 	public String initialLoadFile = "/";
 	
 	/**
@@ -21,12 +25,12 @@ public class ImportBundle{
 	/**
 	 * File containing the current directory
 	 */
-	public File currentDir = null;
+	public File currentDir = new File(initialLoadFile);
 	
 	/**
 	 * File containing the current directory's parent
 	 */
-	public File parentDir = null;
+	public File parentDir = new File(initialLoadFile);
 	
 //	public int lastImportedColor = Color.BLUE;
 	

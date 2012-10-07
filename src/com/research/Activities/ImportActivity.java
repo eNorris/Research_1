@@ -77,6 +77,8 @@ public class ImportActivity extends Activity {
 					if(newFile.canRead()){
 						EchelonBundle.importBundle.parentDir = null;
 //						loadDirectory(EchelonBundle.importBundle.importPathFileNames.get(pos));
+						EchelonBundle.importBundle.parentDir = newFile.getParentFile();
+						EchelonBundle.importBundle.currentDir = newFile;
 						loadDirectory(newFile.toString());
 					}else{
 						// If the directory is not readable
@@ -144,10 +146,13 @@ public class ImportActivity extends Activity {
 		loadDirectory(EchelonBundle.importBundle.initialLoadFile);
 	}
 	
-	
+	/**
+	 * Loads a new directory into the ImportActivity list
+	 * @param dirPath The full path to the directory to be loaded
+	 */
 	private void loadDirectory(String dirPath)
 	{
-		importFilePath.setText("Location: " + dirPath);
+		importFilePath.setText("Location: " + EchelonBundle.importBundle.currentDir.toString());
 		EchelonBundle.importBundle.importPathFiles = new ArrayList<File>();
 		EchelonBundle.importBundle.importPathFileNames = new ArrayList<String>();
 		File f = new File(dirPath);
@@ -159,7 +164,8 @@ public class ImportActivity extends Activity {
 			EchelonBundle.importBundle.importPathFiles.add(new File(ROOT));
 			EchelonBundle.importBundle.importPathFileNames.add(ROOTNMAME);
 			
-			EchelonBundle.importBundle.importPathFiles.add(new File(PARENTFOLDER));
+//			EchelonBundle.importBundle.importPathFiles.add(new File(PARENTFOLDER));
+			EchelonBundle.importBundle.importPathFiles.add(EchelonBundle.importBundle.parentDir);
 			EchelonBundle.importBundle.importPathFileNames.add(PARENTFOLDERNAME);
 		}
 		
