@@ -162,13 +162,6 @@ public class ImportActivity extends Activity {
 			File file = files[i];
 			EchelonBundle.importBundle.importPathFileNames.add(file.getPath());
 			EchelonBundle.importBundle.importPathFiles.add(file);
-			
-			
-//			if(file.isDirectory()){
-//				EchelonBundle.importBundle.importPathFiles.add(file);
-//			}else{
-//				EchelonBundle.importBundle.importPathFiles.add(file);
-//			}
 	 	}
 		
 		FileAdapter fileList = new FileAdapter(
@@ -194,7 +187,6 @@ class FileAdapter extends ArrayAdapter<String>{
 	}
 	
 	public View getView(int pos, View view, ViewGroup parent){
-//		Log.v(TAG, "Building FileAdapter View");
 		
 		View toReturn = view;
 		
@@ -207,16 +199,23 @@ class FileAdapter extends ArrayAdapter<String>{
 		int imgResource = 0;
 		
 		if(EchelonBundle.importBundle.importPathFiles.get(pos).isDirectory()){
-			if(EchelonBundle.importBundle.importPathFileNames.get(pos).equals(ImportActivity.SPECANALROOT))
+			String folderPath = EchelonBundle.importBundle.importPathFileNames.get(pos);
+			if(folderPath.equals(ImportActivity.ROOT))
+				imgResource = R.drawable.folderroot;
+			else if(folderPath.equals(ImportActivity.PARENTFOLDER))
+				imgResource = R.drawable.folderup;
+			else if(folderPath.equals(ImportActivity.SPECANALROOT))
 				imgResource = R.drawable.folderspectrum;
 			else
 				imgResource = R.drawable.folder;
 		}else if(Util.getFileExtension(EchelonBundle.importBundle.importPathFiles.get(pos)).equals("csv")){
-			imgResource = R.drawable.csvfiletype;
+			imgResource = R.drawable.filetypecsv;
+		}else if(Util.getFileExtension(EchelonBundle.importBundle.importPathFiles.get(pos)).equals("tka")){
+			imgResource = R.drawable.filetypetka;
 		}else if(Util.getFileExtension(EchelonBundle.importBundle.importPathFiles.get(pos)).equals("sdata")){
 			imgResource = R.drawable.sdatafiletype;
 		}else{
-			imgResource = R.drawable.unknownfiletype;
+			imgResource = R.drawable.filetypeunknown;
 		}
 		
 		rowImage = (ImageView) toReturn.findViewById(R.id.importIconImageView);
@@ -224,6 +223,8 @@ class FileAdapter extends ArrayAdapter<String>{
 		
 		Bitmap bitmap;
 		bitmap = BitmapFactory.decodeResource(context.getResources(), imgResource);
+		
+//		bitmap.setDensity()
 
 		rowImage.setImageBitmap(bitmap);
 // TODO - Find a dynamic way to do this for different screen densities
@@ -231,7 +232,8 @@ class FileAdapter extends ArrayAdapter<String>{
 		rowImage.setMaxWidth(32);
 //		rowText.setText(EchelonBundle.importBundle.items.get(pos));
 		rowText.setText(EchelonBundle.importBundle.importPathFileNames.get(pos));
-		rowText.setBackgroundColor(Color.BLACK);
+//		rowText.setText(EchelonBundle.importBundle..get(pos));
+//		rowText.setBackgroundColor(Color.BLACK);
 		toReturn.setBackgroundColor(Color.BLACK);
 		
 		return toReturn;

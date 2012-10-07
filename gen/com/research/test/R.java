@@ -25,19 +25,24 @@ public final class R {
         public static final int broken=0x7f020006;
         public static final int brokenmed=0x7f020007;
         public static final int csvfiletype=0x7f020008;
-        public static final int folder=0x7f020009;
-        public static final int folderold=0x7f02000a;
-        public static final int folderspectrum=0x7f02000b;
-        public static final int ic_launcher=0x7f02000c;
-        public static final int logo1=0x7f02000d;
-        public static final int logo1med=0x7f02000e;
-        public static final int logo2=0x7f02000f;
-        public static final int logo2med=0x7f020010;
-        public static final int logo3=0x7f020011;
-        public static final int logo3med=0x7f020012;
-        public static final int placeholder=0x7f020013;
-        public static final int sdatafiletype=0x7f020014;
-        public static final int unknownfiletype=0x7f020015;
+        public static final int filetypecsv=0x7f020009;
+        public static final int filetypetka=0x7f02000a;
+        public static final int filetypeunknown=0x7f02000b;
+        public static final int folder=0x7f02000c;
+        public static final int folderold=0x7f02000d;
+        public static final int folderroot=0x7f02000e;
+        public static final int folderspectrum=0x7f02000f;
+        public static final int folderup=0x7f020010;
+        public static final int ic_launcher=0x7f020011;
+        public static final int logo1=0x7f020012;
+        public static final int logo1med=0x7f020013;
+        public static final int logo2=0x7f020014;
+        public static final int logo2med=0x7f020015;
+        public static final int logo3=0x7f020016;
+        public static final int logo3med=0x7f020017;
+        public static final int placeholder=0x7f020018;
+        public static final int sdatafiletype=0x7f020019;
+        public static final int unknownfiletype=0x7f02001a;
     }
     public static final class id {
         public static final int analysisDoneButton_id=0x7f060000;
