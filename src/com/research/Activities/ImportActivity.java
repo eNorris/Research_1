@@ -17,6 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,12 +36,17 @@ public class ImportActivity extends Activity {
 	public static final String ROOT = "/";
 	public static final String SPECANALROOT = "/mnt/sdcard/SpectrumAnalysis";
 	public static final String PARENTFOLDER = "../";
+	public static final String ROOTNMAME = "ROOT>";
+	public static final String SPECANALROOTNAME = "Spectrum Analysis Root";
+	public static final String PARENTFOLDERNAME = "..";
 	
 	public static TextView importFilePath = null;
 	public static ListView importListView = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
+		Log.v(TAG, "ImportActivity::onCreate()");
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.import_layout);
@@ -63,11 +69,15 @@ public class ImportActivity extends Activity {
 			public void onItemClick(AdapterView<?> adapter, View view, int pos, long id) {
 				
 				// Get what the user selected
-				File newFile = new File(EchelonBundle.importBundle.importPathFileNames.get(pos));
+// FIXME - Made this change, don't know if it was necessary
+			//	File newFile = new File(EchelonBundle.importBundle.importPathFileNames.get(pos));
+				File newFile = new File(EchelonBundle.importBundle.importPathFiles.get(pos).toString());
 				
 				if(newFile.isDirectory()){
 					if(newFile.canRead()){
-						loadDirectory(EchelonBundle.importBundle.importPathFileNames.get(pos));
+						EchelonBundle.importBundle.parentDir = null;
+//						loadDirectory(EchelonBundle.importBundle.importPathFileNames.get(pos));
+						loadDirectory(newFile.toString());
 					}else{
 						// If the directory is not readable
 						new AlertDialog.Builder(ImportActivity.this).setIcon(R.drawable.broken).setTitle("[" + newFile.getName() + "] folder can't be read!").setPositiveButton("OK", 
@@ -130,8 +140,8 @@ public class ImportActivity extends Activity {
 			}
 		});
 		
-		// Set the directory
-		loadDirectory(EchelonBundle.importBundle.inFile);
+		// Set the startup directory
+		loadDirectory(EchelonBundle.importBundle.initialLoadFile);
 	}
 	
 	
@@ -143,24 +153,26 @@ public class ImportActivity extends Activity {
 		File f = new File(dirPath);
 		File[] files = f.listFiles();
 		
+		// If you're not in the root folder, add the root and parent
 		if(!dirPath.equals(ROOT))
 		{
 			EchelonBundle.importBundle.importPathFiles.add(new File(ROOT));
-			EchelonBundle.importBundle.importPathFileNames.add(ROOT);
+			EchelonBundle.importBundle.importPathFileNames.add(ROOTNMAME);
 			
 			EchelonBundle.importBundle.importPathFiles.add(new File(PARENTFOLDER));
-			EchelonBundle.importBundle.importPathFileNames.add(f.getParent());
+			EchelonBundle.importBundle.importPathFileNames.add(PARENTFOLDERNAME);
 		}
 		
+		// If you aren't in the SpectrumAnalysis folder, add it
 		if(!dirPath.equals(SPECANALROOT)){
 			EchelonBundle.importBundle.importPathFiles.add(new File(SPECANALROOT));
-			EchelonBundle.importBundle.importPathFileNames.add(SPECANALROOT);
+			EchelonBundle.importBundle.importPathFileNames.add(SPECANALROOTNAME);
 		}
 		
 		for(int i=0; i < files.length; i++)
 		{
 			File file = files[i];
-			EchelonBundle.importBundle.importPathFileNames.add(file.getPath());
+			EchelonBundle.importBundle.importPathFileNames.add(Util.getFilenameTrimmed(file));
 			EchelonBundle.importBundle.importPathFiles.add(file);
 	 	}
 		
@@ -199,12 +211,20 @@ class FileAdapter extends ArrayAdapter<String>{
 		int imgResource = 0;
 		
 		if(EchelonBundle.importBundle.importPathFiles.get(pos).isDirectory()){
+//			String folderPath = EchelonBundle.importBundle.importPathFiles.get(pos).toString();
+//			if(folderPath.equals(ImportActivity.ROOT))
+//				imgResource = R.drawable.folderroot;
+//			else if(folderPath.equals(ImportActivity.PARENTFOLDER))
+//				imgResource = R.drawable.folderup;
+//			else if(folderPath.equals(ImportActivity.SPECANALROOT))
+//				imgResource = R.drawable.folderspectrum;
+//			else
 			String folderPath = EchelonBundle.importBundle.importPathFileNames.get(pos);
-			if(folderPath.equals(ImportActivity.ROOT))
+			if(folderPath.equals(ImportActivity.ROOTNMAME))
 				imgResource = R.drawable.folderroot;
-			else if(folderPath.equals(ImportActivity.PARENTFOLDER))
+			else if(folderPath.equals(ImportActivity.PARENTFOLDERNAME))
 				imgResource = R.drawable.folderup;
-			else if(folderPath.equals(ImportActivity.SPECANALROOT))
+			else if(folderPath.equals(ImportActivity.SPECANALROOTNAME))
 				imgResource = R.drawable.folderspectrum;
 			else
 				imgResource = R.drawable.folder;

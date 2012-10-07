@@ -60,6 +60,17 @@ public class Util {
 		return file.getName().substring(0, file.getName().lastIndexOf('.'));
 	}
 	
+	static public String getFilenameTrimmed(File file){
+		String filename = file.getPath();
+		String filenameSplit[] = filename.split("/");
+		filename = filenameSplit[filenameSplit.length-1];
+		
+		if(filename.isEmpty())
+			filename = "/";
+		
+		return filename;
+	}
+	
 	static public int randomHue(){
 		return Color.HSVToColor(new float[]{rand.nextInt(361),1,1});
 	}
@@ -86,6 +97,7 @@ public class Util {
 		return hue << 8 >> 8 + newalpha;
 	}
 	
+	//FIXME - this is identical to getFilenameTrimmed()
 	public static String removePathFromFileName(File file){
 		String fullPath = file.getAbsolutePath();
 		String[] filePathParts = fullPath.split("/");
