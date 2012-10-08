@@ -14,6 +14,7 @@ public class EchelonBundle {
 	public static ArrayList<DataBundle> dataBundles = new ArrayList<DataBundle>();
 	public static DataBundle activeDataBundle = null;
 	public static AtomicBoolean dataLoaded = new AtomicBoolean(false);
+	public static ArrayList<IsotopeBundle> isotopes = new ArrayList<IsotopeBundle>();
 	
 	public static final String TAG = "EchelonBundle";
 	
@@ -27,6 +28,13 @@ public class EchelonBundle {
 		importBundle = new ImportBundle();
 		dataBundles.clear();
 		activeDataBundle = null;
+	}
+	
+	public IsotopeBundle getIsotope(String isotopeName){
+		for(IsotopeBundle i : isotopes)
+			if(i.name.equals(isotopeName))
+				return i;
+		return IsotopeBundle.nullIsotope;
 	}
 }
 

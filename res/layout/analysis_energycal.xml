@@ -10,5 +10,35 @@
         android:layout_height="wrap_content"
         android:text="energy calibration activity"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/energyCalConfigure_nid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/energyCalConfigure_str"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/energyCalSpectrumSpinner_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/energyCalForTextView_nid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/energyCalIsotope_str"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/energyCalIsotopeSpinner_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/energyCalCalibrateButton_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/energyCalCalibrate_str" />
 
 </LinearLayout>

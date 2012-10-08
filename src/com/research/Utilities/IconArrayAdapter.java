@@ -77,51 +77,7 @@ public class IconArrayAdapter extends ArrayAdapter<String>{
 
 
 
-/*
-public class MyCustomAdapter extends ArrayAdapter<String>{
 
-	public MyCustomAdapter(Context context, int textViewResourceId,
-	String[] objects) {
-		super(context, textViewResourceId, objects);
-		// TODO Auto-generated constructor stub
-	}
-	
-	@Override
-	public View getDropDownView(int position, View convertView,
-		ViewGroup parent) {
-		// TODO Auto-generated method stub
-		return getCustomView(position, convertView, parent);
-	}
-	
-	@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		return getCustomView(position, convertView, parent);
-	}
-	
-	public View getCustomView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		//return super.getView(position, convertView, parent);
-		
-		LayoutInflater inflater=getLayoutInflater();
-		View row=inflater.inflate(R.layout.row, parent, false);
-		TextView label=(TextView)row.findViewById(R.id.weekofday);
-		label.setText(DayOfWeek[position]);
-		
-		ImageView icon=(ImageView)row.findViewById(R.id.icon);
-		
-		if (DayOfWeek[position]=="Sunday"){
-		icon.setImageResource(R.drawable.icon);
-		}
-		else{
-		icon.setImageResource(R.drawable.icongray);
-		}
-		
-		return row;
-	}
-}
-
-*/
 
 
 

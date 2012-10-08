@@ -69,14 +69,11 @@ public class ImportActivity extends Activity {
 			public void onItemClick(AdapterView<?> adapter, View view, int pos, long id) {
 				
 				// Get what the user selected
-// FIXME - Made this change, don't know if it was necessary
-			//	File newFile = new File(EchelonBundle.importBundle.importPathFileNames.get(pos));
 				File newFile = new File(EchelonBundle.importBundle.importPathFiles.get(pos).toString());
 				
 				if(newFile.isDirectory()){
 					if(newFile.canRead()){
 						EchelonBundle.importBundle.parentDir = null;
-//						loadDirectory(EchelonBundle.importBundle.importPathFileNames.get(pos));
 						EchelonBundle.importBundle.parentDir = newFile.getParentFile();
 						EchelonBundle.importBundle.currentDir = newFile;
 						loadDirectory(newFile.toString());
@@ -217,14 +214,6 @@ class FileAdapter extends ArrayAdapter<String>{
 		int imgResource = 0;
 		
 		if(EchelonBundle.importBundle.importPathFiles.get(pos).isDirectory()){
-//			String folderPath = EchelonBundle.importBundle.importPathFiles.get(pos).toString();
-//			if(folderPath.equals(ImportActivity.ROOT))
-//				imgResource = R.drawable.folderroot;
-//			else if(folderPath.equals(ImportActivity.PARENTFOLDER))
-//				imgResource = R.drawable.folderup;
-//			else if(folderPath.equals(ImportActivity.SPECANALROOT))
-//				imgResource = R.drawable.folderspectrum;
-//			else
 			String folderPath = EchelonBundle.importBundle.importPathFileNames.get(pos);
 			if(folderPath.equals(ImportActivity.ROOTNMAME))
 				imgResource = R.drawable.folderroot;
