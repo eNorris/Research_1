@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -99,8 +100,9 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			if(EchelonBundle.dataBundles != null){
 				for(int i = 0; i < EchelonBundle.dataBundles.size(); i++){
 					if(EchelonBundle.dataBundles.get(i).isDrawable){
-						drawSpectrum(canvas, EchelonBundle.dataBundles.get(i));
-						drawLineSpectrum(canvas, EchelonBundle.dataBundles.get(i));
+//						drawSpectrum(canvas, EchelonBundle.dataBundles.get(i));
+//						drawLineSpectrum(canvas, EchelonBundle.dataBundles.get(i));
+						drawPolygonSpectrum(canvas, EchelonBundle.dataBundles.get(i));
 					}
 				}
 			}
@@ -148,6 +150,45 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			bundle.linePaint
 	);
 		}
+	}
+	
+	public void drawPolygonSpectrum(Canvas canvas, DataBundle bundle){
+		float width = EchelonBundle.screenBundle.width / bundle.data.length * EchelonBundle.screenBundle.scaleNu;
+		float max = 0;
+		for(int i = 0; i < bundle.data.length; i++)
+			if(bundle.data[i] > max)
+				max = bundle.data[i];
+		float heightmod = canvas.getHeight() / max;
+		
+		Path polygon = new Path();
+		
+		float xPos = EchelonBundle.screenBundle.oriNu;
+		float yPos = EchelonBundle.screenBundle.oriAda;
+		
+		polygon.moveTo(xPos, yPos);
+		for(int i = 0; i < bundle.data.length; i++){
+			xPos += width;
+			yPos = Util.adaToY(bundle.data[i]*heightmod);
+			polygon.lineTo(xPos, yPos);
+		}
+		xPos+= width;
+		polygon.lineTo(xPos, EchelonBundle.screenBundle.oriAda);
+		
+//		polygon.lineTo(Util.nuToX(Util.nuRight()), Util.adaToY(Util.adaBottom()));
+		
+		canvas.drawPath(polygon, bundle.paint);
+		
+//		
+//		wallpaint.setColor(Color.GRAY);
+//	      wallpaint.setStyle(Style.FILL);
+//	      wallpath.reset(); // only needed when reusing this path for a new build
+//	      wallpath.moveTo(x[0], y[0]); // used for first point
+//	wallpath.lineTo(x[1], y[1]);
+//	      wallpath.lineTo(x[2], y[2]);
+//	      wallpath.lineTo(x[3], y[3]);
+//	      wallpath.lineTo(x[0], y[0]); // there is a setLastPoint action but i found it not to work as expected
+//	      canvas.drawPath(wallpath, wallpaint);
+
 	}
 	
 	public void drawAxisSystem(Canvas canvas){

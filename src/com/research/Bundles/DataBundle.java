@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 
 public class DataBundle{
 	public int[] data = null;
@@ -18,6 +19,7 @@ public class DataBundle{
 	public DataBundle(){
 		paint.setColor(Color.BLUE);
 		paint.setColor(Color.YELLOW);
+		paint.setStyle(Style.FILL);
 	}
 	
 	public void clearData(){
