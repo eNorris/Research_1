@@ -8,6 +8,7 @@ public class EnergyCalibrationBundle {
 	
 	public double energyCalScale = 0.0;
 	public double energyCalTrans = 0.0;
+	public double rSquared = 0.0;
 	
 	public void addDataPoint(double energyKeV, int channel){
 		expectedEnergyKeV.add(energyKeV);
@@ -33,5 +34,38 @@ public class EnergyCalibrationBundle {
 		
 		energyCalScale = (n*sumXY - sumX*sumY) / (n*sumXpow2 - sumX*sumX);
 		energyCalTrans = (sumY - energyCalScale*sumX) / n;
+		calcRSquared();
+	}
+	
+	public double channelToEnergy(int channelNo){
+		return energyCalScale * (double) channelNo + energyCalTrans;
+	}
+	
+	public double channelFromEnergyD(double energyKeV){
+		return (energyKeV - energyCalTrans) / energyCalScale;
+	}
+	
+	public int channelFromEnergy(double energyKeV){
+		return (int) Math.round(channelFromEnergyD(energyKeV));
+	}
+	
+	private void calcRSquared(){
+		double ssTot = 0.0;
+		double ssErr = 0.0;
+		double yBar = 0.0;
+		
+		for(double d : expectedEnergyKeV)
+			yBar += d;
+		yBar /= (double) expectedEnergyKeV.size();
+		
+		for(int i = 0; i < expectedEnergyKeV.size(); i++){
+			double dd = expectedEnergyKeV.get(i) - yBar;
+			ssTot += dd * dd;
+			
+			double ee = expectedEnergyKeV.get(i) - (energyCalScale * (double)experimentalChannel.get(i) + energyCalTrans);
+			ssErr += ee * ee;
+		}
+		
+		rSquared = 1 - (ssErr / ssTot);
 	}
 }
