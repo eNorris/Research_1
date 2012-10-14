@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import com.research.Bundles.DataBundle;
+import com.research.Bundles.EchelonBundle;
+import com.research.Bundles.IsotopeBundle;
 import com.research.test.R;
 
 public class EnergyCalActivity extends Activity{
@@ -33,10 +36,27 @@ public class EnergyCalActivity extends Activity{
 		ArrayList<String> isotopesArray = new ArrayList<String>();
 		ArrayList<String> spectrumsArray = new ArrayList<String>();
 		
-		isotopesArray.add("iso1");
-		isotopesArray.add("iso2");
-		spectrumsArray.add("spec1");
-		spectrumsArray.add("spec2");
+//		isotopesArray.add("iso1");
+//		isotopesArray.add("iso2");
+//		spectrumsArray.add("spec1");
+//		spectrumsArray.add("spec2");
+		
+		if(EchelonBundle.isotopes.size() == 0){
+			isotopesArray.add("No Isotopes Loaded");
+		}else{
+			for(IsotopeBundle i : EchelonBundle.isotopes){
+				isotopesArray.add(i.name);
+			}
+		}
+		
+		if(EchelonBundle.dataBundles.size() == 0){
+			isotopesArray.add("No Spectrums Loaded");
+		}else{
+			for(DataBundle i : EchelonBundle.dataBundles){
+				spectrumsArray.add(i.name);
+			}
+		}
+		
 		
 //		ArrayAdapter<String> spectrumAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spectrumsArray);
 		ArrayAdapter<String> spectrumAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spectrumsArray);

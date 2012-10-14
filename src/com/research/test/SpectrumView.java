@@ -20,8 +20,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 	private static final String TAG = "GraphView";
 	private SpectrumThread m_graphThread;
 
-	private Paint spectrumPaint = new Paint();
-	private Paint spectrumLinePaint = new Paint();
+//	private Paint spectrumPaint = new Paint();
+//	private Paint spectrumLinePaint = new Paint();
 	
 	public int xMax, xMin, yMin, yMax;
 	
@@ -65,8 +65,8 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		
 		// Set the spectrum color
 		// TODO - This should be user set
-		spectrumPaint.setColor(Color.BLUE);
-		spectrumLinePaint.setColor(Color.YELLOW);
+//		spectrumPaint.setColor(Color.BLUE);
+//		spectrumLinePaint.setColor(Color.YELLOW);
 		EchelonBundle.configBundle.axisPaint.setColor(Color.GREEN);
 		
 		Log.d(TAG, "Caught height = " + EchelonBundle.screenBundle.height);
@@ -101,8 +101,9 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 				for(int i = 0; i < EchelonBundle.dataBundles.size(); i++){
 					if(EchelonBundle.dataBundles.get(i).isDrawable){
 //						drawSpectrum(canvas, EchelonBundle.dataBundles.get(i));
-//						drawLineSpectrum(canvas, EchelonBundle.dataBundles.get(i));
 						drawPolygonSpectrum(canvas, EchelonBundle.dataBundles.get(i));
+//						drawLineSpectrum(canvas, EchelonBundle.dataBundles.get(i));
+						
 					}
 				}
 			}
@@ -124,7 +125,6 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 			float left = i*width+EchelonBundle.screenBundle.oriNu;
 			float right = (i+1)*width + EchelonBundle.screenBundle.oriNu;
 			float top = Util.adaToY(bundle.data[i]*heightmod);
-//			canvas.drawRect(left, top, right, bottom, spectrumPaint);
 			canvas.drawRect(left, top, right, bottom, bundle.paint);
 		}
 	}
@@ -141,14 +141,9 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		for(int i = 0; i < bundle.data.length - 1; i++){
 			float left = i*width+EchelonBundle.screenBundle.oriNu;
 			float right = (i+1)*width + EchelonBundle.screenBundle.oriNu;
-//			canvas.drawLine(left, Util.adaToY(bundle.data[i]*heightmod),
-//					right, Util.adaToY(bundle.data[i+1]*heightmod), 
-//					spectrumLinePaint
-//			);
 			canvas.drawLine(left, Util.adaToY(bundle.data[i]*heightmod),
-			right, Util.adaToY(bundle.data[i+1]*heightmod), 
-			bundle.linePaint
-	);
+					right, Util.adaToY(bundle.data[i+1]*heightmod), 
+					bundle.linePaint);
 		}
 	}
 	
@@ -174,20 +169,7 @@ public class SpectrumView extends SurfaceView implements SurfaceHolder.Callback{
 		xPos+= width;
 		polygon.lineTo(xPos, EchelonBundle.screenBundle.oriAda);
 		
-//		polygon.lineTo(Util.nuToX(Util.nuRight()), Util.adaToY(Util.adaBottom()));
-		
 		canvas.drawPath(polygon, bundle.paint);
-		
-//		
-//		wallpaint.setColor(Color.GRAY);
-//	      wallpaint.setStyle(Style.FILL);
-//	      wallpath.reset(); // only needed when reusing this path for a new build
-//	      wallpath.moveTo(x[0], y[0]); // used for first point
-//	wallpath.lineTo(x[1], y[1]);
-//	      wallpath.lineTo(x[2], y[2]);
-//	      wallpath.lineTo(x[3], y[3]);
-//	      wallpath.lineTo(x[0], y[0]); // there is a setLastPoint action but i found it not to work as expected
-//	      canvas.drawPath(wallpath, wallpaint);
 
 	}
 	
