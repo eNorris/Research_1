@@ -13,4 +13,25 @@ public class EnergyCalibrationBundle {
 		expectedEnergyKeV.add(energyKeV);
 		experimentalChannel.add((double) channel);
 	}
+	
+	public void calculate(){
+
+		double n = (double) expectedEnergyKeV.size();
+		double sumXY = 0.0;
+		double sumX = 0.0;
+		double sumY = 0.0;
+		double sumXpow2 = 0.0;
+		
+		for(int i = 0; i < expectedEnergyKeV.size(); i++){
+			double x = experimentalChannel.get(i);
+			double y = expectedEnergyKeV.get(i);
+			sumX += x;
+			sumY += y;
+			sumXY += x*y;
+			sumXpow2 += x*x;
+		}
+		
+		energyCalScale = (n*sumXY - sumX*sumY) / (n*sumXpow2 - sumX*sumX);
+		energyCalTrans = (sumY - energyCalScale*sumX) / n;
+	}
 }
