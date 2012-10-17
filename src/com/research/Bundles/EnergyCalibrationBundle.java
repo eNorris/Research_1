@@ -15,6 +15,7 @@ public class EnergyCalibrationBundle {
 		experimentalChannel.add((double) channel);
 	}
 	
+	// FIXME - Double check
 	public void calculate(){
 
 		double n = (double) expectedEnergyKeV.size();
@@ -49,6 +50,7 @@ public class EnergyCalibrationBundle {
 		return (int) Math.round(channelFromEnergyD(energyKeV));
 	}
 	
+	// FIXME - Check this 
 	private void calcRSquared(){
 		double ssTot = 0.0;
 		double ssErr = 0.0;

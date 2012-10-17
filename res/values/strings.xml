@@ -81,5 +81,6 @@
 	<string name="energyCalIsotope_str">For:</string>
 	<string name="energyCalCalibrate_str">Calibrate</string>
 	<string name="energyCalConfigure_str">Configure:</string>
+	<string name="energyCalAddPt_str">Add Data Point</string>
 
 </resources>
